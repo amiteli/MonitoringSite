@@ -2,6 +2,7 @@ import { useState } from "react";
 import logo from "./logo.svg";
 import HeaderAppBar from "./components/HeaderAppBar";
 import { Box } from "@mui/material";
+import SideMenu from "./components/SideMenu";
 
 const HeaderData = {
   userName: "עמי ותמי",
@@ -19,7 +20,8 @@ function App() {
         overflow: "hidden",
       }}
     >
-      <HeaderAppBar HeaderData={HeaderData} />
+      <SideMenu />
+      {/* <HeaderAppBar HeaderData={HeaderData} /> */}
     </Box>
   );
 }

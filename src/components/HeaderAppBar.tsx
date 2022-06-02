@@ -17,6 +17,13 @@ import HeaderInfo from "./HeaderInfo";
 
 type IProps = HeaderData;
 
+const HeaderData = {
+  userName: "עמי ותמי",
+  Permissions: "בית המכשפה",
+  lastLogIn: "14:24 - 01/06/2022",
+  pakalMonitored: "b1g d",
+};
+
 type HeaderData = {
   userName: string;
   Permissions: string;
@@ -58,7 +65,16 @@ const HeaderAppBar = (props: IProps) => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "white", color: "black" }}>
+    <AppBar
+      position="fixed"
+      sx={{
+        backgroundColor: "white",
+        height: "70px",
+        color: "black",
+        borderBottom: "2px solid grey",
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Avatar
