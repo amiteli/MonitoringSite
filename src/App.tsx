@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import HeaderAppBar from "./components/HeaderAppBar";
 import { Box } from "@mui/material";
 import SideMenu from "./components/SideMenu";
+import { BrowserRouter } from "react-router-dom";
 
 const HeaderData = {
   userName: "עמי ותמי",
@@ -13,16 +14,18 @@ const HeaderData = {
 
 function App() {
   return (
-    <Box
-      dir="rtl"
-      style={{
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      <SideMenu />
-      {/* <HeaderAppBar HeaderData={HeaderData} /> */}
-    </Box>
+    <BrowserRouter>
+      <Box
+        // dir="rtl"
+        style={{
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <SideMenu />
+        {/* <HeaderAppBar HeaderData={HeaderData} /> */}
+      </Box>
+    </BrowserRouter>
   );
 }
 

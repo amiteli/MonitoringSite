@@ -3,22 +3,34 @@ import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import HeaderAppBar from "./HeaderAppBar";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import GeneralView from "../pages/GeneralView";
+import { useNavigate } from "react-router-dom";
+import {
+  FaMapMarkedAlt,
+  FaLayerGroup,
+  FaChartPie,
+  FaStar,
+} from "react-icons/fa";
+import { RiAccountCircleFill, RiHeartPulseFill } from "react-icons/ri";
+import { BsTable, BsGearFill, BsInfoCircleFill } from "react-icons/bs";
+import About from "../pages/About";
+import FavoriteDevices from "../pages/FavoriteDevices";
+import Pinger from "../pages/Pinger";
+import VersionViewer from "../pages/VersionViewer";
+import UserInfo from "../pages/UserInfo";
+import MapMonitor from "../pages/MapMonitor";
+import StatisticsGraphs from "../pages/StatisticsGraphs";
+import DeviceMonitor from "../pages/DeviceMonitor";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -34,48 +46,48 @@ const HeaderData = {
 const sideBarMenuList = [
   {
     title: "נתוני משתמש וכלים",
-    icon: "david",
-    navigationTo: "/david",
+    icon: <RiAccountCircleFill />,
+    navigationTo: "/user-info",
   },
   {
     title: "מבט על",
-    icon: "david",
-    navigationTo: "/david",
+    icon: <FaLayerGroup />,
+    navigationTo: "/general-view",
   },
   {
     title: "ניטור מפורט",
-    icon: "david",
-    navigationTo: "/david",
+    icon: <BsTable />,
+    navigationTo: "/device-monitor",
   },
   {
     title: "סטיסטיקות",
-    icon: "david",
-    navigationTo: "/david",
+    icon: <FaChartPie />,
+    navigationTo: "/statistics-graphs",
   },
   {
     title: "ניטור מפתי",
-    icon: "david",
-    navigationTo: "/david",
+    icon: <FaMapMarkedAlt />,
+    navigationTo: "/map-monitor",
   },
   {
     title: "בקרת תצוגה",
-    icon: "david",
-    navigationTo: "/david",
+    icon: <BsGearFill />,
+    navigationTo: "/version-viewer",
   },
   {
     title: "פינגר כלים",
-    icon: "david",
-    navigationTo: "/david",
+    icon: <RiHeartPulseFill />,
+    navigationTo: "/pinger",
   },
   {
     title: "ניטור מועדפים",
-    icon: "david",
-    navigationTo: "/david",
+    icon: <FaStar />,
+    navigationTo: "/favorite-devices",
   },
   {
     title: "אודות המערכת",
-    icon: "david",
-    navigationTo: "/david",
+    icon: <BsInfoCircleFill />,
+    navigationTo: "/about",
   },
 ];
 
@@ -123,7 +135,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-
+  zIndex: theme.zIndex.drawer + 10000,
   justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
@@ -159,56 +171,42 @@ export default function SideMenu() {
     setOpen(false);
   };
 
+  const navigate = useNavigate();
+
+  const PageClicked = (page: string) => {
+    navigate(page);
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <HeaderAppBar HeaderData={HeaderData} />
-
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        {/* <AppBar position="fixed" open={open}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{
-                marginRight: 5,
-                ...(open && { display: "none" }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              Mini variant drawer
-            </Typography>
-          </Toolbar>
-        </AppBar> */}
+
         <Drawer variant="permanent" open={open} anchor="right">
           <DrawerHeader></DrawerHeader>
           <Divider />
           <List>
-            {sideBarMenuList.map((text, index) => (
+            {sideBarMenuList.map((page, index) => (
               <ListItem key={index} disablePadding sx={{ display: "block" }}>
                 <ListItemButton
+                  onClick={() => PageClicked(page.navigationTo)}
                   sx={{
                     minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
                     px: 2.5,
                   }}
                 >
                   <ListItemIcon
                     sx={{
                       minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
+                      mr: open ? 1 : "auto",
                     }}
                   >
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    {page.icon}
                   </ListItemIcon>
                   <ListItemText
-                    primary={text.title}
+                    primary={page.title}
                     sx={{ opacity: open ? 1 : 0 }}
                   />
                 </ListItemButton>
@@ -219,36 +217,19 @@ export default function SideMenu() {
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-          <Typography paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-            dolor purus non enim praesent elementum facilisis leo vel. Risus at
-            ultrices mi tempus imperdiet. Semper risus in hendrerit gravida
-            rutrum quisque non tellus. Convallis convallis tellus id interdum
-            velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean
-            sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-            integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-            eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-            quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-            vivamus at augue. At augue eget arcu dictum varius duis at
-            consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-            donec massa sapien faucibus et molestie ac.
-          </Typography>
-          <Typography paragraph>
-            Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-            ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-            elementum integer enim neque volutpat ac tincidunt. Ornare
-            suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-            volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-            Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-            ornare massa eget egestas purus viverra accumsan in. In hendrerit
-            gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-            aliquam sem et tortor. Habitant morbi tristique senectus et.
-            Adipiscing elit duis tristique sollicitudin nibh sit. Ornare aenean
-            euismod elementum nisi quis eleifend. Commodo viverra maecenas
-            accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
-            ultrices sagittis orci a.
-          </Typography>
+
+          <Routes>
+            <Route path="/about" element={<About />} />
+            <Route path="/favorite-devices" element={<FavoriteDevices />} />
+            <Route path="/pinger" element={<Pinger />} />
+            <Route path="/version-viewer" element={<VersionViewer />} />
+            <Route path="/map-monitor" element={<MapMonitor />} />
+            <Route path="/statistics-graphs" element={<StatisticsGraphs />} />
+            <Route path="/device-monitor" element={<DeviceMonitor />} />
+            <Route path="/general-view" element={<GeneralView />} />
+            <Route path="user-info" element={<UserInfo />} />
+            <Route path="*" element={<Navigate to="/user-info" />} />
+          </Routes>
         </Box>
       </Box>
     </Box>
