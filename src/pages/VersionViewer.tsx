@@ -1,3 +1,4 @@
+// עמוד אודות המערכת
 import React from "react";
 
 type Props = {};

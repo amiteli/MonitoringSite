@@ -1,3 +1,4 @@
+// עמוד סטטיסטיקות
 import React from "react";
 
 type Props = {};

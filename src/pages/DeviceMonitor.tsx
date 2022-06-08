@@ -1,3 +1,4 @@
+// עמוד ניטור מפורט
 import React from "react";
 
 type Props = {};

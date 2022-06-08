@@ -1,3 +1,4 @@
+// עמוד ניטור מפתי
 import React from "react";
 
 type Props = {};

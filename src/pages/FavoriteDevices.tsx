@@ -1,3 +1,4 @@
+// עמוד ניטור מועדפים
 import React from "react";
 
 type Props = {};

@@ -1,3 +1,4 @@
+// עמוד מבט על
 import React from "react";
 
 type Props = {};
