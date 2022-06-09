@@ -4,28 +4,36 @@ import HeaderAppBar from "./components/HeaderAppBar";
 import { Box } from "@mui/material";
 import SideMenu from "./components/SideMenu";
 import { BrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
-const HeaderData = {
-  userName: "עמי ותמי",
-  Permissions: "בית המכשפה",
-  lastLogIn: "14:24 - 01/06/2022",
-  pakalMonitored: "b1g d",
-};
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchInterval: 5000,
+    },
+  },
+});
 
 function App() {
+  console.log(import.meta.env.VITE_SERVER_URL);
+
   return (
-    <BrowserRouter>
-      <Box
-        // dir="rtl"
-        style={{
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <SideMenu />
-        {/* <HeaderAppBar HeaderData={HeaderData} /> */}
-      </Box>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Box
+          // dir="rtl"
+          style={{
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <SideMenu />
+          {/* <HeaderAppBar HeaderData={HeaderData} /> */}
+        </Box>
+      </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

@@ -68,6 +68,9 @@ const HeaderAppBar = (props: IProps) => {
     <AppBar
       position="fixed"
       sx={{
+        display: "flex",
+        justifyContent: "space-around",
+        textAlign: "center",
         backgroundColor: "white",
         height: "70px",
         color: "black",
@@ -75,7 +78,12 @@ const HeaderAppBar = (props: IProps) => {
         zIndex: (theme) => theme.zIndex.drawer + 1,
       }}
     >
-      <Container maxWidth="xl">
+      <Container
+        maxWidth="xl"
+        sx={{
+          p: 0,
+        }}
+      >
         <Toolbar disableGutters>
           <Avatar
             alt="screw"
@@ -83,7 +91,7 @@ const HeaderAppBar = (props: IProps) => {
             sx={{
               width: 56,
               height: 56,
-              mr: 2,
+
               display: { xs: "none", md: "flex" },
             }}
           />
@@ -93,9 +101,9 @@ const HeaderAppBar = (props: IProps) => {
             component="a"
             href="/"
             sx={{
-              mr: 5,
+              mx: 5,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
+              fontSize: 40,
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",

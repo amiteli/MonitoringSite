@@ -36,6 +36,8 @@ interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 
+const selectedUnit = "36";
+
 const HeaderData = {
   userName: "עמי ותמי",
   Permissions: "בית המכשפה",
@@ -109,7 +111,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const drawerWidth = 200;
+const drawerWidth = 220;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -160,7 +162,6 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function SideMenu() {
-  const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
@@ -201,13 +202,14 @@ export default function SideMenu() {
                     sx={{
                       minWidth: 0,
                       mr: open ? 1 : "auto",
+                      ml: 3,
                     }}
                   >
                     {page.icon}
                   </ListItemIcon>
                   <ListItemText
                     primary={page.title}
-                    sx={{ opacity: open ? 1 : 0 }}
+                    sx={{ opacity: open ? 1 : 0, textAlign: "start" }}
                   />
                 </ListItemButton>
               </ListItem>
@@ -226,7 +228,10 @@ export default function SideMenu() {
             <Route path="/map-monitor" element={<MapMonitor />} />
             <Route path="/statistics-graphs" element={<StatisticsGraphs />} />
             <Route path="/device-monitor" element={<DeviceMonitor />} />
-            <Route path="/general-view" element={<GeneralView />} />
+            <Route
+              path="/general-view"
+              element={<GeneralView selectedUnit={selectedUnit} />}
+            />
             <Route path="user-info" element={<UserInfo />} />
             <Route path="*" element={<Navigate to="/user-info" />} />
           </Routes>

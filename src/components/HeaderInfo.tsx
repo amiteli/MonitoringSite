@@ -11,34 +11,34 @@ type IProps = {
 const HeaderInfo = (props: IProps) => {
   const { userName, Permissions, lastLogIn, pakalMonitored } = props;
   return (
-    <Box sx={{ justifyContent: "center", alignItems: "center" }}>
+    <Box>
       <Typography
-        textAlign="center"
         variant="h5"
         component="div"
-        sx={{ py: 0.5, pr: 3 }}
+        sx={{ color: "rgba(0, 0, 0, 0.87)", py: 0.5, pr: 3 }}
       >
         <Grid
           container
           spacing={12}
-          alignItems="center"
-          justifyContent="center"
+          sx={{
+            fontSize: 15,
+          }}
         >
           <Grid item>
-            <Box> שם משתמש </Box>
-            <Box sx={{ fontWeight: "bold" }}>{userName}</Box>
+            <Box sx={{ fontWeight: "bold" }}> שם משתמש </Box>
+            <Box>{userName}</Box>
           </Grid>
           <Grid item>
-            <Box> הרשאות ליחידות </Box>
-            <Box sx={{ fontWeight: "bold" }}>{Permissions}</Box>
+            <Box sx={{ fontWeight: "bold" }}> הרשאות ליחידות </Box>
+            <Box>{Permissions}</Box>
           </Grid>
           <Grid item>
-            <Box> התחברות אחרונה </Box>
-            <Box sx={{ fontWeight: "bold" }}>{lastLogIn}</Box>
+            <Box sx={{ fontWeight: "bold" }}> התחברות אחרונה </Box>
+            <Box>{lastLogIn}</Box>
           </Grid>
           <Grid item>
-            <Box> פק''ל מנוטר </Box>
-            <Box sx={{ fontWeight: "bold" }}>{pakalMonitored}</Box>
+            <Box sx={{ fontWeight: "bold" }}> פק''ל מנוטר </Box>
+            <Box>{pakalMonitored}</Box>
           </Grid>
         </Grid>
       </Typography>
