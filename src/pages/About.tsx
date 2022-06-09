@@ -1,3 +1,4 @@
+// עמוד בקרת תצורה
 import React from "react";
 
 type Props = {};

@@ -1,3 +1,4 @@
+// עמוד פינגר
 import React from "react";
 
 type Props = {};
