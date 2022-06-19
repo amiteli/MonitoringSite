@@ -6,6 +6,7 @@ import SideMenu from "./components/SideMenu";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
