@@ -10,3 +10,8 @@ interface IProps {
   accessToken: string;
   selectedUnit: string;
 }
+
+type ControllerHeader = {
+  שם: string;
+  מספר: number;
+};
