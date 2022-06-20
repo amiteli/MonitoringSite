@@ -79,7 +79,7 @@ const UserInfo = (props: Props) => {
                 textColor="secondary"
                 indicatorColor="secondary"
                 aria-label="secondary tabs example"
-                dir="ltr"
+                dir="rtl"
               >
                 <Tab label="הכל" {...a11yProps(0)} />
                 <Tab label="אחרים" {...a11yProps(1)} />
@@ -98,9 +98,9 @@ const UserInfo = (props: Props) => {
                   <TabPanel value={value} index={index}>
                     <Grid container direction="row">
                       <Grid item xs={12}>
-                        <Box dir="ltr">
+                        <Box dir="rtl">
                           {/* <GeneralMachineTable /> */}
-                          blabla jkgjkg hghg jgg
+                          blabla jkgjkחנחנחנg jgg
                         </Box>
                       </Grid>
                     </Grid>

@@ -197,7 +197,7 @@ const HeaderAppBar = (props: IProps) => {
             />
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="להגדרות לחץ כאן">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="name1" src="" />
               </IconButton>
