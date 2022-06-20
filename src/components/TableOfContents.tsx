@@ -43,9 +43,9 @@ const TableOfContents = (props: Props) => {
       <CardContent>
         <Box>
           <Grid container direction="row">
-            {Object.entries(deviceToIcon).map((element) => {
+            {Object.entries(deviceToIcon).map((element, index) => {
               return (
-                <Grid item xs={2} sx={{ mx: 1 }}>
+                <Grid key={index} item xs={2} sx={{ mx: 1 }}>
                   <Grid container direction="row">
                     <Grid item xs={6}>
                       <Box>

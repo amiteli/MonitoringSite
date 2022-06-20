@@ -36,6 +36,8 @@ interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 
+const drawerWidth = 220;
+
 const selectedUnit = "36";
 
 const HeaderData = {
@@ -110,8 +112,6 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
-
-const drawerWidth = 220;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
