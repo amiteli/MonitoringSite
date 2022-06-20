@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useQuery, UseQueryResult } from "react-query";
