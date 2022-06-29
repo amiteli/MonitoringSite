@@ -10,9 +10,15 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import UserControllerTable from "../components/UserControllerTable";
 import { Navigate, useNavigate } from "react-router-dom";
 
-type Props = {};
+interface IProps {
+  accessToken: string;
+  selectedUnit: string;
+  controllerTable: any;
+  controllerHeader: any;
+}
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -21,14 +27,14 @@ interface TabPanelProps {
 }
 
 const generalMachineTabList = [
-  "All",
-  "Other",
-  "Hamalim",
-  "Platform",
-  "TakashHativa",
-  "TakashRadio",
-  "Kronot",
   "TakashServer",
+  "Kronot",
+  "TakashRadio",
+  "TakashHativa",
+  "Platform",
+  "Hamalim",
+  "Other",
+  "All",
 ];
 
 function TabPanel(props: TabPanelProps) {
@@ -58,8 +64,14 @@ function a11yProps(index: number) {
   };
 }
 
-const UserInfo = (props: Props) => {
-  const navigate = useNavigate();
+const UserInfo = (props: IProps) => {
+  const controllerTable = {
+    asdf: [{ id: 0, שם: "asdf", מספר: 147, הראה: "true" }],
+    qwer: [{ id: 0, שם: "qwer", מספר: 258, הראה: "true" }],
+    zxcv: [{ id: 0, שם: "zxcv", מספר: 369, הראה: "false" }],
+  };
+  const controllerName: Array<string> = ["asdf", "qwer", "zxcv"];
+  const controllerHeader = ["שם", "מספר", "הראה"];
 
   const [value, setValue] = React.useState(0);
 
@@ -79,34 +91,39 @@ const UserInfo = (props: Props) => {
                 textColor="secondary"
                 indicatorColor="secondary"
                 aria-label="secondary tabs example"
-                dir="ltr"
+                dir="rtl"
+                centered
               >
-                <Tab label="הכל" {...a11yProps(0)} />
-                <Tab label="אחרים" {...a11yProps(1)} />
-                <Tab label="חמלים" {...a11yProps(2)} />
-                <Tab label="פלטפורמות" {...a11yProps(3)} />
-                <Tab label='תק"שי חטיבה' {...a11yProps(4)} />
-                <Tab label='תק"שי רדיו' {...a11yProps(5)} />
-                <Tab label="קרונות" {...a11yProps(6)} />
-                <Tab label='תק"שי שרתים' {...a11yProps(7)} />
+                <Tab label='תק"שי שרתים' {...a11yProps(0)} />
+                <Tab label="קרונות" {...a11yProps(1)} />
+                <Tab label='תק"שי רדיו' {...a11yProps(2)} />
+                <Tab label='תק"שי חטיבה' {...a11yProps(3)} />
+                <Tab label="פלטפורמות" {...a11yProps(4)} />
+                <Tab label="חמלים" {...a11yProps(5)} />
+                <Tab label="אחרים" {...a11yProps(6)} />
+                <Tab label="הכל" {...a11yProps(7)} />
               </Tabs>
             </Box>
-
-            {generalMachineTabList &&
-              generalMachineTabList.map((name, index) => {
-                return (
-                  <TabPanel value={value} index={index}>
-                    <Grid container direction="row">
-                      <Grid item xs={12}>
-                        <Box dir="ltr">
-                          {/* <GeneralMachineTable /> */}
-                          blabla jkgjkg hghg jgg
-                        </Box>
+            <Box dir="rtl">
+              {generalMachineTabList &&
+                generalMachineTabList.map((name, index) => {
+                  return (
+                    <TabPanel value={value} index={index}>
+                      <Grid container direction="row">
+                        <Grid item xs={12}>
+                          <Box>
+                            <UserControllerTable
+                              controllerTable={controllerTable}
+                              controllerHeader={controllerHeader}
+                              name={controllerName[index]}
+                            />
+                          </Box>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </TabPanel>
-                );
-              })}
+                    </TabPanel>
+                  );
+                })}
+            </Box>
           </Box>
         </Box>
       </Paper>

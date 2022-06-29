@@ -7,11 +7,21 @@ import { useQuery, UseQueryResult } from "react-query";
 import PureComponent from "./PureTable";
 
 interface IProps {
-  accessToken: string;
-  selectedUnit: string;
+  //   accessToken: string;
+  //   selectedUnit: string;
+  controllerTable: any;
+  controllerHeader: any;
+  name: string;
 }
 
-type ControllerHeader = {
-  שם: string;
-  מספר: number;
+const UserControllerTable = (props: IProps) => {
+  const { controllerTable, controllerHeader, name } = props;
+
+  return (
+    <Box>
+      <PureComponent rows={controllerTable[name]} columns={controllerHeader} />
+    </Box>
+  );
 };
+
+export default UserControllerTable;

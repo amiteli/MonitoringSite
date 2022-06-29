@@ -26,6 +26,7 @@ type RadioParams = {
   ["שם רכיב"]: string;
   id: string;
   מאזינים?: string | string[];
+  הראה: string;
 };
 
 type IProps = {
@@ -41,6 +42,12 @@ const NeedToBeNumberList = [
   "מספר פורט",
   "תדר",
 ];
+const NeedToBeCheckboxList = [
+  "הראה",
+  "הראה במפה",
+  "הראה בפינגר",
+  "הראה במבט על",
+];
 const customProgressbar = ["תפוסת דיסק", "צריכת זיכרון", "צריכת מעבד"];
 
 const ColumnWidthCalc = (title: string) => {
@@ -52,6 +59,7 @@ const ColumnWidthCalc = (title: string) => {
 
 const ColumnTypeDecider = (title: string) => {
   if (NeedToBeNumberList.includes(title)) return "number";
+  else if (NeedToBeCheckboxList.includes(title)) return "boolean";
   else return "string";
 };
 
@@ -61,11 +69,45 @@ const ShowData = (data: any) => {
 
 const PureTable = (props: IProps) => {
   const { rows, columns } = props;
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  console.log(rows);
+  console.log(columns);
   const [pageSize, setPageSize] = useState<number>(25);
+  const [checked, setChecked] = useState<Array<boolean>>(
+    rows.map((row) => row["הראה"] === "true")
+  );
 
   const editRows = rows.map((row) =>
-    Object.assign(row, { id: row["שם רכיב"] })
+    Object.assign(row, { id: row["שם רכיב"] || row["id"] })
   );
+
+  const handleChange = (params: any) => {
+    const temp = [
+      ...checked.slice(0, params.id),
+      checked[params.id] === false,
+      ...checked.slice(params.id + 1, checked.length),
+    ];
+    console.log(checked);
+    setChecked(temp);
+  };
+
+  function cellElement(params: any, column: string) {
+    console.log(params.id);
+    if (customProgressbar.includes(column)) {
+      return renderProgress(params);
+    } else if (NeedToBeCheckboxList.includes(column)) {
+      return (
+        <Checkbox
+          checked={checked[params.id]}
+          onChange={() => handleChange(params)}
+        />
+      );
+    } else {
+      return <span>{params.value}</span>;
+    }
+  }
 
   const editColumns = columns.map((column: string) => ({
     field: column,
@@ -76,11 +118,7 @@ const PureTable = (props: IProps) => {
     type: ColumnTypeDecider(column),
     renderCell: (params: any) => (
       <Tooltip title={params.value ? params.value : "temp"}>
-        {customProgressbar.includes(column) ? (
-          renderProgress(params)
-        ) : (
-          <span>{params.value}</span>
-        )}
+        {cellElement(params, column)}
       </Tooltip>
     ),
   }));
