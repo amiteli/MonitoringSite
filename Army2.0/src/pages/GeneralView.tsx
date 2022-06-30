@@ -15,7 +15,7 @@ const GeneralView = (props: IProps) => {
   const { selectedUnit } = props;
   return (
     <>
-      <Grid container direction="column" sx={{ width: "50vw" }}>
+      <Grid container direction="column" sx={{ width: "100%" }}>
         <Grid item xs={2} sx={{ mb: 2 }}>
           <TableOfContents />
         </Grid>

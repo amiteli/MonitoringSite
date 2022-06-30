@@ -1,0 +1,637 @@
+{
+  "RcgwChartData": [
+    {
+      "id": 1,
+      "state": "OK",
+      "number": 12
+    },
+    {
+      "id": 2,
+      "state": "FAILED",
+      "number": 4
+    },
+    {
+      "id": 3,
+      "state": "ERROR",
+      "number": 2
+    }
+  ],
+  "MakmashimChartData": [
+    {
+      "id": 1,
+      "state": "OK",
+      "number": 9
+    },
+    {
+      "id": 2,
+      "state": "FAILED",
+      "number": 3
+    },
+    {
+      "id": 3,
+      "state": "ERROR",
+      "number": 11
+    }
+  ],
+  "CCUChartData": [
+    {
+      "id": 1,
+      "state": "OK",
+      "number": 2
+    },
+    {
+      "id": 2,
+      "state": "FAILED",
+      "number": 15
+    },
+    {
+      "id": 3,
+      "state": "ERROR",
+      "number": 4
+    }
+  ],
+  "CCTChartData": [
+    {
+      "id": 1,
+      "state": "OK",
+      "number": 2
+    },
+    {
+      "id": 2,
+      "state": "FAILED",
+      "number": 1
+    },
+    {
+      "id": 3,
+      "state": "ERROR",
+      "number": 0
+    }
+  ],
+  "YadbarChartData": [
+    {
+      "id": 1,
+      "state": "OK",
+      "number": 16
+    },
+    {
+      "id": 2,
+      "state": "FAILED",
+      "number": 64
+    },
+    {
+      "id": 3,
+      "state": "ERROR",
+      "number": 3
+    }
+  ],
+  "SoftwareDistributionServerChartData": [
+    {
+      "id": 1,
+      "state": "OK",
+      "number": 1
+    },
+    {
+      "id": 2,
+      "state": "FAILED",
+      "number": 1
+    },
+    {
+      "id": 3,
+      "state": "ERROR",
+      "number": 1
+    }
+  ],
+  "NetworkChartData": [
+    { "id": 1, "network": "בלה בלה 1", "OK": 2, "ERROR": 1, "FAILED": 0 },
+    { "id": 2, "network": "ראשון לציון", "OK": 1, "ERROR": 2, "FAILED": 1 },
+    { "id": 3, "network": "פתח תקווה", "OK": 1, "ERROR": 1, "FAILED": 1 },
+    { "id": 4, "network": "ישראל", "OK": 1, "ERROR": 0, "FAILED": 2 },
+    { "id": 5, "network": "קיבוץ מזרע", "OK": 2, "ERROR": 1, "FAILED": 1 }
+  ],
+  "WorkingStations": [
+    {
+      "id": 1,
+      "location": "אבד",
+      "type": "שרתים",
+      "devices": [
+        {
+          "device": "CCT",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 0
+        },
+        {
+          "device": "RCGW",
+          "OK": 2,
+          "ERROR": 5,
+          "FAILED": 1
+        },
+        {
+          "device": "Yadbar",
+          "OK": 0,
+          "ERROR": 1,
+          "FAILED": 2
+        },
+        {
+          "device": "Deploy",
+          "OK": 0,
+          "ERROR": 1,
+          "FAILED": 0
+        },
+        {
+          "device": "CCU",
+          "OK": 1,
+          "ERROR": 4,
+          "FAILED": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "location": "יוסי",
+      "type": "שרתים",
+      "devices": [
+        {
+          "device": "CCT",
+          "OK": 2,
+          "ERROR": 1,
+          "FAILED": 0
+        },
+        {
+          "device": "RCGW",
+          "OK": 2,
+          "ERROR": 0,
+          "FAILED": 0
+        },
+
+        {
+          "device": "CCU",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "location": "דוד",
+      "type": "שרתים",
+      "devices": [
+        {
+          "device": "Deploy",
+          "OK": 1,
+          "ERROR": 2,
+          "FAILED": 0
+        },
+        {
+          "device": "CCU",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "שרתים",
+      "location": "שאול",
+      "devices": [
+        {
+          "device": "RCGW",
+          "OK": 2,
+          "ERROR": 0,
+          "FAILED": 0
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "אתרי תקשוב",
+      "location": "יונתן",
+      "devices": [
+        {
+          "device": "CCU",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 1
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "אתרי תקשוב",
+      "location": "עמית",
+      "devices": [
+        {
+          "device": "CCT",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 0
+        },
+        {
+          "device": "RCGW",
+          "OK": 2,
+          "ERROR": 0,
+          "FAILED": 0
+        },
+        {
+          "device": "Yadbar",
+          "OK": 0,
+          "ERROR": 1,
+          "FAILED": 2
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "type": "אתרי תקשוב",
+      "location": "מעיין",
+      "devices": [
+        {
+          "device": "CCT",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 0
+        },
+        {
+          "device": "RCGW",
+          "OK": 2,
+          "ERROR": 5,
+          "FAILED": 1
+        },
+        {
+          "device": "Yadbar",
+          "OK": 0,
+          "ERROR": 1,
+          "FAILED": 2
+        },
+        {
+          "device": "Deploy",
+          "OK": 0,
+          "ERROR": 1,
+          "FAILED": 0
+        },
+        {
+          "device": "CCU",
+          "OK": 1,
+          "ERROR": 4,
+          "FAILED": 1
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "type": "אתרי תקשוב",
+      "location": "רוני",
+      "devices": [
+        {
+          "device": "CCT",
+          "OK": 2,
+          "ERROR": 1,
+          "FAILED": 0
+        },
+        {
+          "device": "RCGW",
+          "OK": 2,
+          "ERROR": 0,
+          "FAILED": 0
+        },
+
+        {
+          "device": "CCU",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 1
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "type": "אתרי תקשוב",
+      "location": "פבל",
+      "devices": [
+        {
+          "device": "Deploy",
+          "OK": 1,
+          "ERROR": 2,
+          "FAILED": 0
+        },
+        {
+          "device": "CCU",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 1
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "type": "תק\"שי רדיו",
+      "location": "דניאל",
+      "devices": [
+        {
+          "device": "RCGW",
+          "OK": 2,
+          "ERROR": 0,
+          "FAILED": 0
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "type": "תק\"שי רדיו",
+      "location": "גדי",
+      "devices": [
+        {
+          "device": "CCU",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 1
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "type": "תק\"שי רדיו",
+      "location": "אברהם",
+      "devices": [
+        {
+          "device": "CCT",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 0
+        },
+        {
+          "device": "RCGW",
+          "OK": 2,
+          "ERROR": 0,
+          "FAILED": 0
+        },
+        {
+          "device": "Yadbar",
+          "OK": 0,
+          "ERROR": 1,
+          "FAILED": 2
+        }
+      ]
+    },
+    {
+      "id": 121,
+      "type": "פת\"ל",
+      "location": "ויטלי",
+      "devices": [
+        {
+          "device": "Deploy",
+          "OK": 1,
+          "ERROR": 2,
+          "FAILED": 0
+        },
+        {
+          "device": "CCU",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 1
+        }
+      ]
+    },
+    {
+      "id": 1212,
+      "type": "פת\"ל",
+      "location": "מנחם",
+      "devices": [
+        {
+          "device": "RCGW",
+          "OK": 2,
+          "ERROR": 0,
+          "FAILED": 0
+        }
+      ]
+    },
+    {
+      "id": 123,
+      "type": "פת\"ל",
+      "location": "רון",
+      "devices": [
+        {
+          "device": "CCU",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 1
+        }
+      ]
+    },
+    {
+      "id": 124,
+      "type": "פת\"ל",
+      "location": "אלי",
+      "devices": [
+        {
+          "device": "Yadbar",
+          "OK": 0,
+          "ERROR": 1,
+          "FAILED": 2
+        }
+      ]
+    },
+    {
+      "id": 112,
+      "type": "קידמית",
+      "location": "אליהו",
+      "devices": [
+        {
+          "device": "Deploy",
+          "OK": 1,
+          "ERROR": 2,
+          "FAILED": 0
+        }
+      ]
+    },
+    {
+      "id": 122,
+      "type": "קידמית",
+      "location": "דיויד",
+      "devices": [
+        {
+          "device": "RCGW",
+          "OK": 2,
+          "ERROR": 0,
+          "FAILED": 0
+        }
+      ]
+    },
+    {
+      "id": 132,
+      "type": "קידמית",
+      "location": "אורון",
+      "devices": [
+        {
+          "device": "CCU",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 1
+        }
+      ]
+    },
+    {
+      "id": 142,
+      "type": "קרונות",
+      "location": "שופט",
+      "devices": [
+        {
+          "device": "CCT",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 0
+        }
+      ]
+    },
+    {
+      "id": 1412,
+      "type": "קרונות",
+      "location": "שופטים",
+      "devices": [
+        {
+          "device": "CCT",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 0
+        }
+      ]
+    },
+    {
+      "id": 14113,
+      "type": "קרונות",
+      "location": "שופטים ב",
+      "devices": [
+        {
+          "device": "CCT",
+          "OK": 1,
+          "ERROR": 1,
+          "FAILED": 0
+        }
+      ]
+    }
+  ],
+  "LocationBasedChart": [
+    {
+      "id": 2,
+      "location": "חולון",
+      "network": "פבל",
+      "status": {
+        "OK": 7,
+        "ERROR": 0,
+        "FAILED": 2
+      }
+    },
+    {
+      "id": 3,
+      "location": "שלומי",
+      "network": "פבל",
+      "status": {
+        "OK": 1,
+        "ERROR": 1,
+        "FAILED": 1
+      }
+    },
+    {
+      "id": 4,
+      "location": "פבל",
+      "network": "פבל",
+      "status": {
+        "OK": 0,
+        "ERROR": 2,
+        "FAILED": 0
+      }
+    },
+    {
+      "id": 5,
+      "location": "חדרה",
+      "network": "דיויד",
+      "status": {
+        "OK": 2,
+        "ERROR": 0,
+        "FAILED": 2
+      }
+    },
+    {
+      "id": 6,
+      "location": "צריפין",
+      "network": "דיויד",
+      "status": {
+        "OK": 0,
+        "ERROR": 0,
+        "FAILED": 1
+      }
+    },
+    {
+      "id": 7,
+      "location": "ששש",
+      "network": "דיויד",
+      "status": {
+        "OK": 6,
+        "ERROR": 0,
+        "FAILED": 1
+      }
+    },
+    {
+      "id": 8,
+      "location": "ירון",
+      "network": "דיויד",
+      "status": {
+        "OK": 10,
+        "ERROR": 0,
+        "FAILED": 0
+      }
+    },
+    {
+      "id": 9,
+      "location": "ראשון לציון",
+      "network": "מנחם",
+      "status": {
+        "OK": 0,
+        "ERROR": 4,
+        "FAILED": 4
+      }
+    },
+    {
+      "id": 10,
+      "location": "רחובות",
+      "network": "מנחם",
+      "status": {
+        "OK": 1,
+        "ERROR": 3,
+        "FAILED": 3
+      }
+    },
+    {
+      "id": 11,
+      "location": "עפולה",
+      "network": "מנחם",
+      "status": {
+        "OK": 6,
+        "ERROR": 0,
+        "FAILED": 1
+      }
+    },
+    {
+      "id": 12,
+      "location": "קציר",
+      "network": "מנחם",
+      "status": {
+        "OK": 1,
+        "ERROR": 2,
+        "FAILED": 2
+      }
+    },
+    {
+      "id": 13,
+      "location": "עלית",
+      "network": "מנחם",
+      "status": {
+        "OK": 0,
+        "ERROR": 1,
+        "FAILED": 0
+      }
+    }
+  ]
+}
