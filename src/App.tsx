@@ -20,21 +20,21 @@ function App() {
   console.log(import.meta.env.VITE_SERVER_URL);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Box
-          // dir="rtl"
-          style={{
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          <SideMenu />
-          {/* <HeaderAppBar HeaderData={HeaderData} /> */}
-        </Box>
-      </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Box
+            // dir="rtl"
+            style={{
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            <SideMenu />
+            {/* <HeaderAppBar HeaderData={HeaderData} /> */}
+          </Box>
+        </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
   );
 }
 

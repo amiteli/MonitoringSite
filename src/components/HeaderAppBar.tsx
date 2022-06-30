@@ -91,7 +91,6 @@ const HeaderAppBar = (props: IProps) => {
             sx={{
               width: 56,
               height: 56,
-
               display: { xs: "none", md: "flex" },
             }}
           />
@@ -105,9 +104,10 @@ const HeaderAppBar = (props: IProps) => {
               display: { xs: "none", md: "flex" },
               fontSize: 40,
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              letterSpacing: ".2rem",
               color: "inherit",
               textDecoration: "none",
+              mr: 1.5,
             }}
           >
             צוות בורג
@@ -188,7 +188,12 @@ const HeaderAppBar = (props: IProps) => {
           >
             בורג
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            flexGrow="3"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
             <HeaderInfo
               userName={HeaderData.userName}
               Permissions={HeaderData.Permissions}
@@ -196,7 +201,7 @@ const HeaderAppBar = (props: IProps) => {
               pakalMonitored={HeaderData.pakalMonitored}
             />
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0.5 }}>
             <Tooltip title="להגדרות לחץ כאן">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="name1" src="" />

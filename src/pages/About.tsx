@@ -2,36 +2,30 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Paper,
-  Stack,
+  Divider,
   Tooltip,
   Typography,
 } from "@mui/material";
+import PhoneIcon from "@mui/icons-material/Phone";
+import CopyrightIcon from "@mui/icons-material/Copyright";
 import Grid from "@mui/material/Grid";
-import { Box, width } from "@mui/system";
-import React from "react";
-import { IconBase } from "react-icons";
+import { bgcolor, Box, padding } from "@mui/system";
 
 type Props = {};
 
 const About = (props: Props) => {
   return (
-    <Grid
-      container
-      spacing={0}
-      direction="column"
-      alignItems="center"
-    >
+    <Grid container spacing={0} direction="column" alignItems="center">
       <Grid item xs={3}>
         <Card>
           <Card sx={{ width: "500px" }}>
             <CardMedia
               component="img"
-              height="140"
+              height="170"
               image="src\images\about-card-image.png"
               alt="about us"
             />
-            <CardContent>
+            <CardContent sx={{ p: 3 }}>
               <Typography
                 gutterBottom
                 variant="h4"
@@ -51,7 +45,7 @@ const About = (props: Props) => {
               <Typography
                 variant="body2"
                 color="text.secondary"
-                align="right"
+                align="justify"
                 fontSize="15px"
               >
                 לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ליבם סולגק.
@@ -70,24 +64,40 @@ const About = (props: Props) => {
                 ליץ, ושבעגט ליבם סולגק. בראיט ולחת צורק מונחף, בגורמי מגמש.
                 תרבנך וסתעד לכנו סתשם השמה - לתכי מורגם בורק? לתיג ישבעס.
               </Typography>
-              <Typography
-                variant="subtitle1"
-                color="info.main"
-                align="right"
-                marginTop={5}
-              >
-                אנשי קשר:
+              <Card elevation={0} sx={{ mb: 4, mt: 3 }}>
+                <CardMedia sx={{ bgcolor: "info.main", padding: "2px" }}>
+                  <Typography
+                    variant="subtitle1"
+                    color="white"
+                    align="center"
+                    fontWeight="medium"
+                  >
+                    אנשי קשר
+                    <PhoneIcon fontSize="small" />
+                  </Typography>
+                </CardMedia>
                 <Typography
                   variant="subtitle2"
                   color="text.secondary"
                   fontSize="16px"
+                  bgcolor="rgba(0, 0, 0, 0.04)"
+                  textAlign="center"
+                  p="8px"
                 >
-                  דייויד 050-852-7845 <br />
-                  מנחם 050-852-7845 <br />
-                  עמית 050-852-7845 <br />
-                  <br />
+                  <Tooltip disableInteractive title="דייויד" followCursor>
+                    <Typography> דייויד 050-852-7845</Typography>
+                  </Tooltip>
+                  <Tooltip disableInteractive title="מנחם" followCursor>
+                    <Typography> מנחם 050-852-7845</Typography>
+                  </Tooltip>
+                  <Tooltip disableInteractive title="עמית" followCursor>
+                    <Typography> עמית 050-852-7845</Typography>
+                  </Tooltip>
                 </Typography>
-              </Typography>
+              </Card>
+
+              <Divider variant="middle" sx={{ marginBottom: 1 }} />
+              
               <Tooltip
                 disableInteractive
                 TransitionProps={{ timeout: 600 }}
@@ -97,8 +107,10 @@ const About = (props: Props) => {
                   variant="subtitle2"
                   color="primary.main"
                   align="center"
+                  pt="3px"
                   sx={{ cursor: "pointer" }}
                 >
+                  <CopyrightIcon fontSize="small" sx={{ marginLeft: "3px" }} />
                   המערכת פותחה על ידי צוות פיתוח מדור מערכות לומ"ר
                 </Typography>
               </Tooltip>
