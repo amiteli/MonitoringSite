@@ -24,16 +24,11 @@ const deviceToIcon = {
 type Props = {};
 
 const TableOfContents = (props: Props) => {
-  // const items = [];
-  // for (const [index, value] of deviceToIcon.entries()) {
-  //   items.push(<Element key={index} />);
-  // }
-
   return (
     <Card
       sx={{
         borderRadius: 3,
-        backgroundColor: "#93B0B0",
+        backgroundColor: "#D3D3D3",
         width: "600px",
         "& .MuiCardContent-root": {
           p: 1,
@@ -62,7 +57,7 @@ const TableOfContents = (props: Props) => {
                         <Typography
                           variant="subtitle2"
                           component="span"
-                          color="white"
+                          color="black"
                         >
                           {element[0]}
                         </Typography>

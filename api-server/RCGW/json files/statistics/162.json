@@ -1,0 +1,43 @@
+{
+  "RcgwChartData": [
+    {
+      "id": 1,
+      "state": "OK",
+      "number": 5
+    },
+    {
+      "id": 2,
+      "state": "FAILED",
+      "number": 3
+    },
+    {
+      "id": 3,
+      "state": "ERROR",
+      "number": 2
+    }
+  ],
+  "MakmashimChartData": [
+    {
+      "id": 1,
+      "state": "OK",
+      "number": 9
+    },
+    {
+      "id": 2,
+      "state": "FAILED",
+      "number": 3
+    },
+    {
+      "id": 3,
+      "state": "ERROR",
+      "number": 11
+    }
+  ],
+  "NetworkChartData": [
+    { "id": 1, "network": "בלה בלה 1", "OK": 1, "ERROR": 1, "FAILED": 0 },
+    { "id": 2, "network": "ראשון לציון", "OK": 1, "ERROR": 2, "FAILED": 1 },
+    { "id": 3, "network": "פתח תקווה", "OK": 1, "ERROR": 1, "FAILED": 1 },
+    { "id": 4, "network": "ישראל", "OK": 1, "ERROR": 0, "FAILED": 2 },
+    { "id": 5, "network": "קיבוץ מזרע", "OK": 2, "ERROR": 1, "FAILED": 1 }
+  ]
+}

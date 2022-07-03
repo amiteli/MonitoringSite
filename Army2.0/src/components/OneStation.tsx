@@ -13,9 +13,11 @@ type oneDevice = {
   FAILED: number;
 };
 
+const DEVICE_WIDTH: number = 80;
+
 const calcHeaderWidth = (devices: Array<oneDevice>) => {
   let size = devices.length;
-  return devices.length * 60 + 2;
+  return devices.length * DEVICE_WIDTH + 2;
 };
 
 const OneStation = (props: IProps) => {
