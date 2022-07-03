@@ -46,6 +46,7 @@ const GeneralAccordion = (props: IProps) => {
   const [errorText, setErrorText] = useState(" ");
   const [headersName, setHeadersName] = useState<string[]>([]);
   const [stations, setStations] = useState<Array<oneBlock>>([]);
+  const [amount, setAmount] = useState<number[]>([]);
 
   const fetchUnitDevicesData = async (): Promise<GeneralDataBlocks> => {
     const res = await fetch(
@@ -74,13 +75,21 @@ const GeneralAccordion = (props: IProps) => {
     {
       onSuccess: (data) => {
         let tempArr: Array<string> = [];
+        let counterArr: Array<number> = [];
+        let index = 0,
+          c = 0;
+
         for (let i = 0; i < data.WorkingStations.length; i++) {
           if (!tempArr.includes(data.WorkingStations[i].type)) {
             // setHeadersName([...headersName, data.WorkingStations[i].type]);
             tempArr.push(data.WorkingStations[i].type);
+            index++;
+            c = 0;
           }
+          counterArr[index] = ++c;
         }
         setHeadersName(tempArr);
+        setAmount(counterArr);
         setStations(data.WorkingStations);
       },
     }
@@ -100,7 +109,14 @@ const GeneralAccordion = (props: IProps) => {
                 aria-controls={`panel-content ${index}`}
                 id={`panel-content ${index} header`}
               >
-                <Typography>{header}</Typography>
+                <Typography>
+                  {header}{" "}
+                  {
+                    <b>
+                      {amount[index + 1]}
+                    </b>
+                  }
+                </Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <Grid container direction="row">
