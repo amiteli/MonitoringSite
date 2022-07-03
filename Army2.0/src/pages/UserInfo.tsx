@@ -124,6 +124,7 @@ const UserInfo = (props: IProps) => {
                 <Tab label="הכל" {...a11yProps(7)} />
               </Tabs>
             </Box>
+<<<<<<< HEAD:src/pages/UserInfo.tsx
             <Box dir="rtl">
               {generalMachineTabList &&
                 generalMachineTabList.map((name, index) => {
@@ -141,6 +142,19 @@ const UserInfo = (props: IProps) => {
                             />
                           </Box>
                         </Grid>
+=======
+
+            {generalMachineTabList &&
+              generalMachineTabList.map((name, index) => {
+                return (
+                  <TabPanel value={value} index={index}>
+                    <Grid container direction="row">
+                      <Grid item xs={12}>
+                        <Box dir="rtl">
+                          {/* <GeneralMachineTable /> */}
+                          blabla jkgjkחנחנחנg jgg
+                        </Box>
+>>>>>>> master:Army2.0/src/pages/UserInfo.tsx
                       </Grid>
                     </TabPanel>
                   );

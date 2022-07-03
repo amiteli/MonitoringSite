@@ -179,7 +179,7 @@ export default function SideMenu() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box>
       <CssBaseline />
       <HeaderAppBar HeaderData={HeaderData} />
       <Box sx={{ display: "flex" }}>

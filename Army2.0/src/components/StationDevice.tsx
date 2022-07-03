@@ -13,6 +13,8 @@ type oneDevice = {
   FAILED: number;
 };
 
+const DEVICE_WIDTH: number = 80;
+
 const percentCalculator = (
   okNum: number,
   errorNum: number,
@@ -52,7 +54,7 @@ const StationDevice = (props: IProps) => {
     <Grid
       item
       container
-      sx={{ width: 60, border: 1, borderColor: "#D3D3D3", px: 0.5 }}
+      sx={{ width: DEVICE_WIDTH, border: 1, borderColor: "#D3D3D3", px: 0.5 }}
     >
       <Grid item xs={12}>
         <Typography align="center" sx={{ fontWeight: "bold" }}>
