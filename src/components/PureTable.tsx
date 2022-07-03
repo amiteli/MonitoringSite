@@ -32,6 +32,8 @@ type RadioParams = {
 type IProps = {
   rows: RadioParams[];
   columns: string[];
+  checked: boolean[];
+  setChecked: React.Dispatch<React.SetStateAction<boolean[]>>;
 };
 
 const shortColumn = ["מושאל", "קוד הצפנה", "קידוד שמע", "תדר", "פורט", "adf"];
@@ -68,16 +70,11 @@ const ShowData = (data: any) => {
 };
 
 const PureTable = (props: IProps) => {
-  const { rows, columns } = props;
-
-  const [isChecked, setIsChecked] = useState(false);
+  const { rows, columns, checked, setChecked } = props;
 
   console.log(rows);
   console.log(columns);
   const [pageSize, setPageSize] = useState<number>(25);
-  const [checked, setChecked] = useState<Array<boolean>>(
-    rows.map((row) => row["הראה"] === "true")
-  );
 
   const editRows = rows.map((row) =>
     Object.assign(row, { id: row["שם רכיב"] || row["id"] })

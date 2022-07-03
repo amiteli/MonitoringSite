@@ -2,7 +2,6 @@
 
 import { Box } from "@mui/material";
 import React from "react";
-import { useState } from "react";
 import { useQuery, UseQueryResult } from "react-query";
 import PureComponent from "./PureTable";
 
@@ -12,14 +11,22 @@ interface IProps {
   controllerTable: any;
   controllerHeader: any;
   name: string;
+  checked: boolean[];
+  setChecked: React.Dispatch<React.SetStateAction<boolean[]>>;
 }
 
 const UserControllerTable = (props: IProps) => {
-  const { controllerTable, controllerHeader, name } = props;
+  const { controllerTable, controllerHeader, name, checked, setChecked } =
+    props;
 
   return (
     <Box>
-      <PureComponent rows={controllerTable[name]} columns={controllerHeader} />
+      <PureComponent
+        rows={controllerTable[name]}
+        columns={controllerHeader}
+        checked={checked}
+        setChecked={setChecked}
+      />
     </Box>
   );
 };

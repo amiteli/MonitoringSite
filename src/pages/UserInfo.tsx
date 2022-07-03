@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { useState } from "react";
 import UserControllerTable from "../components/UserControllerTable";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -26,7 +27,7 @@ interface TabPanelProps {
   value: number;
 }
 
-const generalMachineTabList = [
+const generalMachineTabList: Array<string> = [
   "TakashServer",
   "Kronot",
   "TakashRadio",
@@ -35,6 +36,17 @@ const generalMachineTabList = [
   "Hamalim",
   "Other",
   "All",
+];
+
+const generalTabList: Array<string> = [
+  'תק"שי שרתים',
+  "קרונות",
+  'תק"שי רדיו',
+  'תק"שי חטיבה',
+  "פלטפורמות",
+  "חמלים",
+  "אחרים",
+  "הכל",
 ];
 
 function TabPanel(props: TabPanelProps) {
@@ -71,13 +83,17 @@ const UserInfo = (props: IProps) => {
     zxcv: [{ id: 0, שם: "zxcv", מספר: 369, הראה: "false" }],
   };
   const controllerName: Array<string> = ["asdf", "qwer", "zxcv"];
-  const controllerHeader = ["שם", "מספר", "הראה"];
+  const controllerHeader: Array<string> = ["שם", "מספר", "הראה"];
 
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const [checked, setChecked] = useState<Array<boolean>>(
+    controllerTable[name].map((row: any) => row["הראה"] === "true")
+  );
 
   return (
     <>
@@ -94,6 +110,10 @@ const UserInfo = (props: IProps) => {
                 dir="rtl"
                 centered
               >
+                {generalTabList &&
+                  generalTabList.map((name, index) => {
+                    <Tab label={name} {...a11yProps(index)} />;
+                  })}
                 <Tab label='תק"שי שרתים' {...a11yProps(0)} />
                 <Tab label="קרונות" {...a11yProps(1)} />
                 <Tab label='תק"שי רדיו' {...a11yProps(2)} />
@@ -116,6 +136,8 @@ const UserInfo = (props: IProps) => {
                               controllerTable={controllerTable}
                               controllerHeader={controllerHeader}
                               name={controllerName[index]}
+                              checked={checked}
+                              setChecked={setChecked}
                             />
                           </Box>
                         </Grid>
