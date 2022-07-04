@@ -54,7 +54,7 @@ const StationDevice = (props: IProps) => {
     <Grid
       item
       container
-      sx={{ width: DEVICE_WIDTH, border: 1, borderColor: "#D3D3D3", px: 0.5 }}
+      sx={{ width: DEVICE_WIDTH, border: 1, borderColor: "#D3D3D3", px: 0.5}}
     >
       <Grid item xs={12}>
         <Typography align="center" sx={{ fontWeight: "bold" }}>
