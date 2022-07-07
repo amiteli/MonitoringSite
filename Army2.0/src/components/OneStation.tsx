@@ -17,7 +17,7 @@ const DEVICE_WIDTH: number = 80;
 
 const calcHeaderWidth = (devices: Array<oneDevice>) => {
   let size = devices.length;
-  return devices.length * DEVICE_WIDTH + 2;
+  return devices.length * DEVICE_WIDTH + 5;
 };
 
 const OneStation = (props: IProps) => {

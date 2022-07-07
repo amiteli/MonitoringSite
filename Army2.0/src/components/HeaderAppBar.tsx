@@ -15,14 +15,14 @@ import AdbIcon from "@mui/icons-material/Adb";
 import screw from "../images/screw.png";
 import HeaderInfo from "./HeaderInfo";
 
-type IProps = HeaderData;
+interface IProps { HeaderData: HeaderData};
 
-const HeaderData = {
-  userName: "עמי ותמי",
-  Permissions: "בית המכשפה",
-  lastLogIn: "14:24 - 01/06/2022",
-  pakalMonitored: "b1g d",
-};
+// const HeaderData = {
+//   userName: "עמי ותמי",
+//   Permissions: "בית המכשפה",
+//   lastLogIn: "14:24 - 01/06/2022",
+//   pakalMonitored: "b1g d",
+// };
 
 type HeaderData = {
   userName: string;
@@ -142,8 +142,7 @@ const HeaderAppBar = (props: IProps) => {
               }}
             >
               {/* TODO: ELIAV HELP */}
-
-              {HeaderData &&
+              {/* {HeaderData &&
                 Object.keys(HeaderData).forEach((e) => {
                   // console.log(e);
 
@@ -152,7 +151,7 @@ const HeaderAppBar = (props: IProps) => {
                       {e}: {HeaderData[e]}
                     </Typography>
                   </MenuItem>;
-                })}
+                })} */}
               {/* {information.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>

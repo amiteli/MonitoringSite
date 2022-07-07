@@ -1,0 +1,18 @@
+div[role="tooltip"] {
+    direction: rtl;
+}
+
+div[class="MuiDataGrid-panel css-6ilb9x-MuiDataGrid-panel"] {
+    top: -100px !important;
+    right: 1080px !important;
+}
+
+div[class="MuiDataGrid-toolbarContainer css-ypofq1-MuiDataGrid-toolbarContainer"] {
+    display: flex;
+    justify-content: end;
+    padding: 4px;
+}
+
+div[class="MuiFormControl-root MuiDataGrid-filterFormColumnInput css-q68e8e-MuiFormControl-root-MuiDataGrid-filterFormColumnInput"] {
+    direction: rtl;
+}

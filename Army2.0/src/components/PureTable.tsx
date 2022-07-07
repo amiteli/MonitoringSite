@@ -4,15 +4,29 @@ import {
   GridToolbarContainer,
   GridToolbarFilterButton,
   GridToolbarDensitySelector,
+  GridToolbarExport,
 } from "@mui/x-data-grid";
 import { useState } from "react";
 import { renderProgress } from "./ProgressBarTableCell";
+import "../components/style/StylePureTable.css";
 
 function CustomToolbar() {
   return (
     <GridToolbarContainer>
-      <GridToolbarFilterButton />
-      <GridToolbarDensitySelector />
+      <GridToolbarFilterButton sx={{direction:"rtl"}}/>
+      <GridToolbarDensitySelector sx={{direction:"rtl"}}/>
+      <GridToolbarExport
+        csvOptions={{
+          fileName: "ויטלי מקמשים בעמ",
+          utf8WithBom: true,
+        }}
+        printOptions={{
+          hideFooter: true,
+          hideToolbar: true,
+          // allColumns: true,
+          fileName: "ויטלי מקמשים בעמ",
+        }}
+      />
     </GridToolbarContainer>
   );
 }
@@ -31,6 +45,14 @@ type RadioParams = {
 type IProps = {
   rows: RadioParams[];
   columns: string[];
+};
+
+const EliavColumnsPanel = () => {
+  return (
+    <>
+      <Checkbox checked />
+    </>
+  );
 };
 
 const shortColumn = ["מושאל", "קוד הצפנה", "קידוד שמע", "תדר", "פורט", "adf"];
@@ -87,7 +109,7 @@ const PureTable = (props: IProps) => {
 
   return (
     // <div>
-    <Box sx={{ height: 700 }}>
+    <Box sx={{ height: 700}}>
       <DataGrid
         density="compact"
         pageSize={pageSize}
@@ -101,8 +123,8 @@ const PureTable = (props: IProps) => {
         }}
         componentsProps={{ columnsPanel: {} }}
         sx={{
-          borderRadius: "12px",
-          boxShadow: 1,
+          direction:"rtl",
+          borderRadius: "8px",
         }}
         localeText={{
           //for change titles for Hebrew

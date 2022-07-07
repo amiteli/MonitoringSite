@@ -227,7 +227,7 @@ export default function SideMenu() {
             <Route path="/version-viewer" element={<VersionViewer />} />
             <Route path="/map-monitor" element={<MapMonitor />} />
             <Route path="/statistics-graphs" element={<StatisticsGraphs />} />
-            <Route path="/device-monitor" element={<DeviceMonitor />} />
+            <Route path="/device-monitor" element={<DeviceMonitor  selectedUnit={selectedUnit}/>} />
             <Route
               path="/general-view"
               element={<GeneralView selectedUnit={selectedUnit} />}
