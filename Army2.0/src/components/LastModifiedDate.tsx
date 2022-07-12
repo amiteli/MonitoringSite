@@ -12,7 +12,7 @@ type LastModifiedDate = {
 };
 
 const LastModifiedDate = (props: IProps) => {
-  const {  selectedUnit } = props;
+  const { selectedUnit } = props;
   const [errorText, setErrorText] = useState(" ");
   const [dateArray, setDateArray] = useState<any>([]);
 
@@ -20,7 +20,7 @@ const LastModifiedDate = (props: IProps) => {
     const res = await fetch(
       `${
         import.meta.env.VITE_SERVER_URL
-      }/api/last-modified-date/${selectedUnit}`,
+      }/api/last-modified-date/${selectedUnit}`
     );
     if (!res.ok) {
       console.log("error at fetching file last modified date");
@@ -48,25 +48,16 @@ const LastModifiedDate = (props: IProps) => {
   if (isError) return <>"An error has occurred: " {errorText}</>;
 
   return (
-    <Box sx={{ justifyContent: "center", alignItems: "center" }}>
-      <Grid container>
-        <Grid item xs={12}>
-          <Typography variant="h6" component="div">
-            <Box display="inline"> תאריך עדכון אחרון: </Box>
-            <Box sx={{ fontWeight: "bold" }} display="inline">
-              {dateArray[0]}
-            </Box>
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h6" component="div">
-            <Box display="inline"> בשעה: </Box>
-            <Box sx={{ fontWeight: "bold" }} display="inline">
-              {dateArray[1]}
-            </Box>
-          </Typography>
-        </Grid>
-      </Grid>
+    <Box
+      sx={{
+        justifyContent: "center",
+        alignItems: "center",
+        width: "600px",
+        fontSize: "16px",
+        marginBottom: "6px",
+      }}
+    >
+      תאריך עדכון אחרון: <b>{dateArray[0]}</b>      בשעה: <b>{dateArray[1]}</b>
     </Box>
   );
   //   return <>

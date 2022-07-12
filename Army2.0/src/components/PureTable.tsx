@@ -5,6 +5,7 @@ import {
   GridToolbarFilterButton,
   GridToolbarDensitySelector,
   GridToolbarExport,
+  heIL,
 } from "@mui/x-data-grid";
 import { useState } from "react";
 import { renderProgress } from "./ProgressBarTableCell";
@@ -111,10 +112,11 @@ const PureTable = (props: IProps) => {
     // <div>
     <Box sx={{ height: 700}}>
       <DataGrid
+        localeText={heIL.components.MuiDataGrid.defaultProps.localeText}
         density="compact"
         pageSize={pageSize}
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        rowsPerPageOptions={[10, 25, 50, 100, 200]}
+        rowsPerPageOptions={[10, 25, 50, 100]}
         rows={editRows}
         columns={editColumns}
         disableSelectionOnClick
@@ -125,48 +127,6 @@ const PureTable = (props: IProps) => {
         sx={{
           direction:"rtl",
           borderRadius: "8px",
-        }}
-        localeText={{
-          //for change titles for Hebrew
-          // columns panel
-          toolbarColumns: "סינון עמודות",
-          columnsPanelTextFieldLabel: "הכנס שם עמודה",
-          columnsPanelTextFieldPlaceholder: "חיפוש לפי שם עמודה",
-          columnsPanelShowAllButton: "הצג את כולם",
-          columnsPanelHideAllButton: "בטל את כולם",
-          // filters panel
-          toolbarFilters: "סינון טקסט",
-          filterPanelOperators: "סינון בעזרת",
-          filterPanelColumns: "עמודה לסינון",
-          filterPanelInputLabel: "ערך לסינון",
-          filterPanelInputPlaceholder: "הכנס ערך",
-          // Filter operators text
-          filterOperatorContains: "מכיל",
-          filterOperatorEquals: "שווה",
-          filterOperatorStartsWith: "מתחיל ב",
-          filterOperatorEndsWith: "מסתיים ב",
-          filterOperatorIsEmpty: "תוכן ריק",
-          filterOperatorIsNotEmpty: "תוכן לא ריק",
-          filterOperatorIsAnyOf: "חלק מ",
-
-          // density panel
-          toolbarDensity: "צפיפות",
-          toolbarDensityCompact: "קטן",
-          toolbarDensityStandard: "רגיל",
-          toolbarDensityComfortable: "גדול",
-
-          // export panel
-          toolbarExport: "ייצוא קובץ",
-          toolbarExportCSV: "הורדת קובץ אקסל",
-          toolbarExportPrint: "PDF הדפסת קובץ",
-
-          // Column menu text
-          columnMenuShowColumns: "סינון עמודות",
-          columnMenuFilter: "סינון טקסט",
-          columnMenuHideColumn: "הסתר",
-          columnMenuUnsort: "ביטול מיון",
-          columnMenuSortAsc: "מיון לפי א-ב",
-          columnMenuSortDesc: "מיון מילון הפוך",
         }}
       />
     </Box>

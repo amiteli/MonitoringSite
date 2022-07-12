@@ -7,9 +7,17 @@ import {
   Typography,
   Tab,
   Tabs,
+  Switch,
 } from "@mui/material";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Link,
+  Navigate,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import { ReactQueryDevtools } from "react-query/devtools";
 import MakmashTable from "../components/MakmashTable";
 
@@ -21,6 +29,7 @@ interface IProps {
   // username: string;
   // isAdmin: boolean;
   selectedUnit: string;
+  name: number
   // accessToken: string;
 }
 interface TabPanelProps {
@@ -58,6 +67,23 @@ const theme = createTheme({
   },
 });
 
+interface LinkTabProps {
+  label?: string;
+  href?: string;
+}
+
+function LinkTab(props: LinkTabProps) {
+  return (
+    <Tab
+      component="a"
+      onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        event.preventDefault();
+      }}
+      {...props}
+    />
+  );
+}
+
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
@@ -84,16 +110,25 @@ function a11yProps(index: number) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
+const paths = [
+  "/device-monitor/Makmashim",
+  "/device-monitor/Yashlakim",
+  "/device-monitor/RadioServers",
+  "/device-monitor/CCT",
+  "/device-monitor/Yadbar",
+  "/device-monitor/Deploy",
+];
 
 const DevicesTablePage = (props: IProps) => {
-  const { selectedUnit } = props;
+  const { selectedUnit, name } = props;
 
   const navigate = useNavigate();
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(name);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    navigate(paths[newValue]);
   };
 
   const handleClick = (): void => {
@@ -113,7 +148,13 @@ const DevicesTablePage = (props: IProps) => {
                 // accessToken={accessToken}
               />
             </Box>
-            <Box sx={{ width: "95%", border: "1px solid #e0e0e0", borderRadius: 4, margin:"0 auto"}}>
+            <Box
+              sx={{
+                width: "95%",
+                border: "1px solid #e0e0e0",
+                borderRadius: 4,
+              }}
+            >
               <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                 <Tabs
                   value={value}
@@ -126,8 +167,8 @@ const DevicesTablePage = (props: IProps) => {
                   <Tab label='מקמ"שים' {...a11yProps(0)} />
                   <Tab label='ישל"קים' {...a11yProps(1)} />
                   <Tab label="שרתי רדיו" {...a11yProps(2)} />
-                  <Tab label="CCT עמדות" {...a11yProps(3)} />
-                  <Tab label="ידברים" {...a11yProps(4)} />
+                  <Tab label="עמדות CCT" {...a11yProps(3)} />
+                  <Tab label='ידב"רים' {...a11yProps(4)} />
                   <Tab label="שרתי הפצה" {...a11yProps(5)} />
                 </Tabs>
               </Box>
@@ -136,18 +177,12 @@ const DevicesTablePage = (props: IProps) => {
                 deviceTableNameList.map((deviceName, index) => {
                   return (
                     <TabPanel value={value} index={index}>
-                      <Grid container direction="row">
-                        <Grid item xs={12}>
-                          <Box dir="rtl">
-                            <MakmashTable
-                              // accessToken={accessToken}
-                              selectedUnit={selectedUnit}
-                              table={deviceName}
-                              headerName={deviceHeaderNameList[value]}
-                            />
-                          </Box>
-                        </Grid>
-                      </Grid>
+                      <MakmashTable
+                        // accessToken={accessToken}
+                        selectedUnit={selectedUnit}
+                        table={deviceName}
+                        headerName={deviceHeaderNameList[value]}
+                      />
                     </TabPanel>
                   );
                 })}

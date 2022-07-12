@@ -1,6 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
-import { ProgressBar } from "react-bootstrap";
+import { Button, ProgressBar } from "react-bootstrap";
+import { Navigate, useNavigate } from "react-router-dom";
 import CustomProgressBar from "./CustomProgressBar";
 
 type IProps = {
@@ -45,25 +46,30 @@ const StationDevice = (props: IProps) => {
   );
 
   const arrayOfPercents = [okPercent, errorPercent, failPercent];
-  //   console.log(arrayOfPercents);
+
 
   const arrayOfLabel = [okNumber, errorNumber, failedNumber];
-
+  const navigate = useNavigate();
+  const navigateToTable = (device:string) => {
+      if (device == "CCT") navigate("/device-monitor/CCT");
+      else if(device == "RCGW") navigate("/device-monitor/Yashlakim");
+      else if(device == "Yadbar") navigate("/device-monitor/Yadbar");
+      else if(device == "Deploy") navigate("/device-monitor/Deploy");
+      else if(device == "CCU") navigate("/device-monitor/RadioServers");
+  };
   return (
-    // <Grid container direction="row">
     <Grid
       item
       container
-      sx={{ width: DEVICE_WIDTH, border: 1, borderColor: "#D3D3D3", px: 0.5}}
+      sx={{ width: DEVICE_WIDTH, border: 1, borderColor: "#D3D3D3", px: 0.5 }}
     >
       <Grid item xs={12}>
         <Typography align="center" sx={{ fontWeight: "bold" }}>
-          {device}
+          <Button style={{backgroundColor: "white", color:"black", border:"none", fontWeight:"bold",padding:"0"}} onClick={()=>navigateToTable(device)}>{device}</Button>
         </Typography>
       </Grid>
       <Grid item xs={12}>
         <CustomProgressBar percents={arrayOfPercents} labels={arrayOfLabel} />
-        {/* <CustomProgressBar percents={[50, 50, 0]} labels={arrayOfLabel} /> */}
       </Grid>
     </Grid>
   );

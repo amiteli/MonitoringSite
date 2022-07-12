@@ -1,18 +1,17 @@
 import * as React from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import { styled, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
-
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import HeaderAppBar from "./HeaderAppBar";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, generatePath } from "react-router-dom";
 import GeneralView from "../pages/GeneralView";
 import { useNavigate } from "react-router-dom";
 import {
@@ -178,6 +177,19 @@ export default function SideMenu() {
     navigate(page);
   };
 
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const buttonProps = (value: number) => ({
+    selected: selectedIndex === value,
+    onClick: () => setSelectedIndex(value),
+  });
+  const routes = [
+    "/Makmashim",
+    "/Yashlakim",
+    "/RadioServers",
+    "/CCT",
+    "/Yadbar",
+    "/Deploy",
+  ];
   return (
     <Box>
       <CssBaseline />
@@ -188,16 +200,25 @@ export default function SideMenu() {
         <Drawer variant="permanent" open={open} anchor="right">
           <DrawerHeader></DrawerHeader>
           <Divider />
-          <List>
+          <List
+            component="nav"
+            sx={{
+              "& .MuiListItemButton-root:hover": {
+                bgcolor: "secondary",
+                "&, & .MuiListItemIcon-root": {
+                  color: "black",
+                },
+              },
+            }}
+          >
             {sideBarMenuList.map((page, index) => (
-              <ListItem key={index} disablePadding sx={{ display: "block" }}>
-                <ListItemButton
-                  onClick={() => PageClicked(page.navigationTo)}
-                  sx={{
-                    minHeight: 48,
-                    px: 2.5,
-                  }}
-                >
+              <ListItem
+                key={index}
+                disablePadding
+                sx={{ display: "block" }}
+                onClick={() => PageClicked(page.navigationTo)}
+              >
+                <ListItemButton {...buttonProps(index)}>
                   <ListItemIcon
                     sx={{
                       minWidth: 0,
@@ -217,9 +238,9 @@ export default function SideMenu() {
           </List>
           <Divider />
         </Drawer>
+        
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-
           <Routes>
             <Route path="/about" element={<About />} />
             <Route path="/favorite-devices" element={<FavoriteDevices />} />
@@ -227,11 +248,35 @@ export default function SideMenu() {
             <Route path="/version-viewer" element={<VersionViewer />} />
             <Route path="/map-monitor" element={<MapMonitor />} />
             <Route path="/statistics-graphs" element={<StatisticsGraphs />} />
-            <Route path="/device-monitor" element={<DeviceMonitor  selectedUnit={selectedUnit}/>} />
             <Route
-              path="/general-view"
-              element={<GeneralView selectedUnit={selectedUnit} />}
+              path="/device-monitor/"
+              element={<DeviceMonitor selectedUnit={selectedUnit} name={0}/>}
             />
+            <Route
+              path="/device-monitor/Makmashim"
+              element={<DeviceMonitor selectedUnit={selectedUnit} name={0} />}
+            />
+            <Route
+              path="/device-monitor/Yashlakim"
+              element={<DeviceMonitor selectedUnit={selectedUnit} name={1} />}
+            />
+            <Route
+              path="/device-monitor/RadioServers"
+              element={<DeviceMonitor selectedUnit={selectedUnit} name={2}/>}
+            />
+            <Route
+              path="/device-monitor/CCT"
+              element={<DeviceMonitor selectedUnit={selectedUnit} name={3}/>}
+            />
+            <Route
+              path="/device-monitor/Yadbar"
+              element={<DeviceMonitor selectedUnit={selectedUnit} name={4}/>}
+            />
+            <Route
+              path="/device-monitor/Deploy"
+              element={<DeviceMonitor selectedUnit={selectedUnit} name={5}/>}
+            />
+            <Route path="/general-view" element={<GeneralView selectedUnit={selectedUnit} />}/>
             <Route path="user-info" element={<UserInfo />} />
             <Route path="*" element={<Navigate to="/user-info" />} />
           </Routes>

@@ -1,18 +1,27 @@
 div[role="tooltip"] {
     direction: rtl;
 }
-
-div[class="MuiDataGrid-panel css-6ilb9x-MuiDataGrid-panel"] {
-    top: -100px !important;
-    right: 1080px !important;
+ div[class="MuiDataGrid-toolbarContainer css-1j9kmqg-MuiDataGrid-toolbarContainer"] {
+    padding: 8px;
 }
-
-div[class="MuiDataGrid-toolbarContainer css-ypofq1-MuiDataGrid-toolbarContainer"] {
+ div[class="MuiDataGrid-toolbarContainer css-1j9kmqg-MuiDataGrid-toolbarContainer"] {
+    flex-direction:row-reverse;
+}
+div[class="MuiDataGrid-panel css-n3z9fz-MuiPopper-root-MuiDataGrid-panel"] {
+    top: -105px !important;
+    left: 290px !important;
+    width: 530px;
+}
+div[class="MuiTablePagination-root css-rtrcn9-MuiTablePagination-root"] {
     display: flex;
-    justify-content: end;
-    padding: 4px;
+    flex-direction: row-reverse;
 }
-
+button[title="לעמוד הבא"] {
+    transform: rotate(180deg);
+}
+button[title="לעמוד הקודם"] {
+    transform: rotate(180deg);
+}
 div[class="MuiFormControl-root MuiDataGrid-filterFormColumnInput css-q68e8e-MuiFormControl-root-MuiDataGrid-filterFormColumnInput"] {
     direction: rtl;
 }

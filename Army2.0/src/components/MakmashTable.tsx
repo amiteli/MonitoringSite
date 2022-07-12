@@ -63,9 +63,6 @@ const MakmashTable = (props: IProps) => {
   const [tableData, setTableData] = useState<RadioParams[]>([]);
   const [tableHeader, setTableHeader] = useState<string[]>([]);
   const [errorText, setErrorText] = useState(" ");
-  console.log(`${
-    import.meta.env.VITE_SERVER_URL
-  }/radioStates/${selectedUnit}`)
 
 
   const fetchRadioStates = async (): Promise<Data> => {
@@ -151,7 +148,6 @@ const MakmashTable = (props: IProps) => {
   const { isLoading: isLoadingHeader, isError: isErrorHeader } =
     useQuery<Headers>("FileHeader", fetchHeaderList, {
       onSuccess: (headerData: any) => {
-          console.log(headerData)
 
         // const { param_headers, radio_state_headers } = headerData ?? {
         //   param_headers: [],
@@ -172,9 +168,7 @@ const MakmashTable = (props: IProps) => {
     return <>"An error has occurred: " {errorText}</>;
 
   return (
-    <Box>
       <PureComponent rows={tableData} columns={tableHeader} />
-    </Box>
   );
 };
 export default MakmashTable;
