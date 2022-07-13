@@ -85,6 +85,22 @@ app.get("/headerList", (req, res) => {
   });
 });
 
+app.get("/userController/:id", (req, res) => {
+  const { id } = req.params;
+  // To read as a text file, you have to specify the correct
+  // encoding.
+  fs.readFile(
+    `././RCGW/json files/userController/${id}.json`,
+    "utf8",
+    (err, data) => {
+      // You should always specify the content type header,
+      // when you don't use 'res.json' for sending JSON.
+      res.set("Content-Type", "application/json");
+      res.send(JSON.parse(data));
+    }
+  );
+});
+
 app.get("/api/charts/rcgw-chart-data/:id", (req, res) => {
   const { id } = req.params;
   // To read as a text file, you have to specify the correct

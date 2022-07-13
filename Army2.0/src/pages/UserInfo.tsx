@@ -14,12 +14,7 @@ import { useState } from "react";
 import UserControllerTable from "../components/UserControllerTable";
 import { Navigate, useNavigate } from "react-router-dom";
 
-interface IProps {
-  accessToken: string;
-  selectedUnit: string;
-  controllerTable: any;
-  controllerHeader: any;
-}
+interface IProps {}
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -49,6 +44,8 @@ const generalTabList: Array<string> = [
   "הכל",
 ];
 
+const header = ["id", "שם", "מספר", "הראה1", "הראה2", "הראה3"];
+
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
@@ -77,24 +74,171 @@ function a11yProps(index: number) {
 }
 
 const UserInfo = (props: IProps) => {
-  const controllerTable = {
-    asdf: [{ id: 0, שם: "asdf", מספר: 147, הראה: "true" }],
-    qwer: [{ id: 0, שם: "qwer", מספר: 258, הראה: "true" }],
-    zxcv: [{ id: 0, שם: "zxcv", מספר: 369, הראה: "false" }],
-  };
-  const controllerName: Array<string> = ["asdf", "qwer", "zxcv"];
-  const controllerHeader: Array<string> = ["שם", "מספר", "הראה"];
-
   const [value, setValue] = React.useState(0);
+
+  const [info, setInfo]: any = useState({
+    TakashServer: [
+      {
+        id: "0",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: true,
+        הראה3: true,
+      },
+      {
+        id: "1",
+        שם: "qwer",
+        מספר: "258",
+        הראה1: true,
+        הראה2: true,
+        הראה3: false,
+      },
+      {
+        id: "2",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: false,
+        הראה3: true,
+      },
+    ],
+    Kronot: [
+      {
+        id: "0",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: true,
+        הראה3: true,
+      },
+      {
+        id: "1",
+        שם: "qwer",
+        מספר: "258",
+        הראה1: true,
+        הראה2: true,
+        הראה3: false,
+      },
+      {
+        id: "2",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: false,
+        הראה3: true,
+      },
+    ],
+    Platform: [
+      {
+        id: "0",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: true,
+        הראה3: true,
+      },
+      {
+        id: "1",
+        שם: "qwer",
+        מספר: "258",
+        הראה1: true,
+        הראה2: true,
+        הראה3: false,
+      },
+      {
+        id: "2",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: false,
+        הראה3: true,
+      },
+    ],
+    Hamalim: [
+      {
+        id: "0",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: true,
+        הראה3: true,
+      },
+      {
+        id: "1",
+        שם: "qwer",
+        מספר: "258",
+        הראה1: true,
+        הראה2: true,
+        הראה3: false,
+      },
+      {
+        id: "2",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: false,
+        הראה3: true,
+      },
+    ],
+    Other: [
+      {
+        id: "0",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: true,
+        הראה3: true,
+      },
+      {
+        id: "1",
+        שם: "qwer",
+        מספר: "258",
+        הראה1: true,
+        הראה2: true,
+        הראה3: false,
+      },
+      {
+        id: "2",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: false,
+        הראה3: true,
+      },
+    ],
+    All: [
+      {
+        id: "0",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: true,
+        הראה3: true,
+      },
+      {
+        id: "1",
+        שם: "qwer",
+        מספר: "258",
+        הראה1: true,
+        הראה2: true,
+        הראה3: false,
+      },
+      {
+        id: "2",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: false,
+        הראה3: true,
+      },
+    ],
+  });
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
-  const [checked, setChecked] = useState<Array<boolean>>(
-    controllerTable[name].map((row: any) => row["הראה"] === "true")
-  );
-
+  // console.log(info);
   return (
     <>
       <Paper sx={{ bgcolor: "#f3f3f3", width: "85vw" }}>
@@ -110,10 +254,10 @@ const UserInfo = (props: IProps) => {
                 dir="rtl"
                 centered
               >
-                {generalTabList &&
+                {/* {generalTabList &&
                   generalTabList.map((name, index) => {
                     <Tab label={name} {...a11yProps(index)} />;
-                  })}
+                  })} */}
                 <Tab label='תק"שי שרתים' {...a11yProps(0)} />
                 <Tab label="קרונות" {...a11yProps(1)} />
                 <Tab label='תק"שי רדיו' {...a11yProps(2)} />
@@ -124,7 +268,6 @@ const UserInfo = (props: IProps) => {
                 <Tab label="הכל" {...a11yProps(7)} />
               </Tabs>
             </Box>
-<<<<<<< HEAD:src/pages/UserInfo.tsx
             <Box dir="rtl">
               {generalMachineTabList &&
                 generalMachineTabList.map((name, index) => {
@@ -134,27 +277,14 @@ const UserInfo = (props: IProps) => {
                         <Grid item xs={12}>
                           <Box>
                             <UserControllerTable
-                              controllerTable={controllerTable}
-                              controllerHeader={controllerHeader}
-                              name={controllerName[index]}
-                              checked={checked}
-                              setChecked={setChecked}
+                              controllerTable={info[name]}
+                              controllerHeader={header}
+                              info={info}
+                              setInfo={setInfo}
+                              name={name}
                             />
                           </Box>
                         </Grid>
-=======
-
-            {generalMachineTabList &&
-              generalMachineTabList.map((name, index) => {
-                return (
-                  <TabPanel value={value} index={index}>
-                    <Grid container direction="row">
-                      <Grid item xs={12}>
-                        <Box dir="rtl">
-                          {/* <GeneralMachineTable /> */}
-                          blabla jkgjkחנחנחנg jgg
-                        </Box>
->>>>>>> master:Army2.0/src/pages/UserInfo.tsx
                       </Grid>
                     </TabPanel>
                   );
