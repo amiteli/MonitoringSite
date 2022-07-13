@@ -277,8 +277,7 @@ const UserInfo = (props: IProps) => {
                         <Grid item xs={12}>
                           <Box>
                             <UserControllerTable
-                              controllerTable={info[name]}
-                              controllerHeader={header}
+                              columns={header}
                               info={info}
                               setInfo={setInfo}
                               name={name}

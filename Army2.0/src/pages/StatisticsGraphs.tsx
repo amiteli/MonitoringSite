@@ -7,7 +7,7 @@ type Props = {};
 const StatisticsGraphs = (props: Props) => {
   return (
     <div>
-      <GraphBackground />
+      <GraphBackground widthSize={"100%"} heightSize={"100%"} />
     </div>
   );
 };
