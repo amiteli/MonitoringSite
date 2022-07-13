@@ -1,5 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
+import { Navigate } from "react-router-dom";
 import StationDevice from "./StationDevice";
 
 type IProps = {
@@ -16,13 +17,13 @@ type oneDevice = {
 const DEVICE_WIDTH: number = 80;
 
 const calcHeaderWidth = (devices: Array<oneDevice>) => {
-  let size = devices.length;
   return devices.length * DEVICE_WIDTH + 2;
 };
 
 const OneStation = (props: IProps) => {
   const { location, devices } = props;
 
+  
   return (
     <Grid item>
       <Box

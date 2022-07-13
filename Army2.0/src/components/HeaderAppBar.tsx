@@ -15,14 +15,14 @@ import AdbIcon from "@mui/icons-material/Adb";
 import screw from "../images/screw.png";
 import HeaderInfo from "./HeaderInfo";
 
-type IProps = HeaderData;
+interface IProps { HeaderData: HeaderData};
 
-const HeaderData = {
-  userName: "עמי ותמי",
-  Permissions: "בית המכשפה",
-  lastLogIn: "14:24 - 01/06/2022",
-  pakalMonitored: "b1g d",
-};
+// const HeaderData = {
+//   userName: "עמי ותמי",
+//   Permissions: "בית המכשפה",
+//   lastLogIn: "14:24 - 01/06/2022",
+//   pakalMonitored: "b1g d",
+// };
 
 type HeaderData = {
   userName: string;
@@ -91,7 +91,6 @@ const HeaderAppBar = (props: IProps) => {
             sx={{
               width: 56,
               height: 56,
-
               display: { xs: "none", md: "flex" },
             }}
           />
@@ -105,9 +104,10 @@ const HeaderAppBar = (props: IProps) => {
               display: { xs: "none", md: "flex" },
               fontSize: 40,
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              letterSpacing: ".2rem",
               color: "inherit",
               textDecoration: "none",
+              mr: 1.5,
             }}
           >
             צוות בורג
@@ -142,8 +142,7 @@ const HeaderAppBar = (props: IProps) => {
               }}
             >
               {/* TODO: ELIAV HELP */}
-
-              {HeaderData &&
+              {/* {HeaderData &&
                 Object.keys(HeaderData).forEach((e) => {
                   // console.log(e);
 
@@ -152,7 +151,7 @@ const HeaderAppBar = (props: IProps) => {
                       {e}: {HeaderData[e]}
                     </Typography>
                   </MenuItem>;
-                })}
+                })} */}
               {/* {information.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
@@ -188,7 +187,12 @@ const HeaderAppBar = (props: IProps) => {
           >
             בורג
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            flexGrow="3"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
             <HeaderInfo
               userName={HeaderData.userName}
               Permissions={HeaderData.Permissions}
@@ -196,7 +200,7 @@ const HeaderAppBar = (props: IProps) => {
               pakalMonitored={HeaderData.pakalMonitored}
             />
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0.5 }}>
             <Tooltip title="להגדרות לחץ כאן">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="name1" src="" />

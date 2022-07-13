@@ -4,15 +4,30 @@ import {
   GridToolbarContainer,
   GridToolbarFilterButton,
   GridToolbarDensitySelector,
+  GridToolbarExport,
+  heIL,
 } from "@mui/x-data-grid";
 import { useState } from "react";
 import { renderProgress } from "./ProgressBarTableCell";
+import "../components/style/StylePureTable.css";
 
 function CustomToolbar() {
   return (
     <GridToolbarContainer>
-      <GridToolbarFilterButton />
-      <GridToolbarDensitySelector />
+      <GridToolbarFilterButton sx={{direction:"rtl"}}/>
+      <GridToolbarDensitySelector sx={{direction:"rtl"}}/>
+      <GridToolbarExport
+        csvOptions={{
+          fileName: "ויטלי מקמשים בעמ",
+          utf8WithBom: true,
+        }}
+        printOptions={{
+          hideFooter: true,
+          hideToolbar: true,
+          // allColumns: true,
+          fileName: "ויטלי מקמשים בעמ",
+        }}
+      />
     </GridToolbarContainer>
   );
 }
@@ -40,6 +55,14 @@ type checked = {
   הראה1: Array<boolean>;
   הראה2: Array<boolean>;
   הראה3: Array<boolean>;
+};
+
+const EliavColumnsPanel = () => {
+  return (
+    <>
+      <Checkbox checked />
+    </>
+  );
 };
 
 const shortColumn = ["מושאל", "קוד הצפנה", "קידוד שמע", "תדר", "פורט", "adf"];
@@ -149,12 +172,13 @@ const PureTable = (props: IProps) => {
 
   return (
     // <div>
-    <Box sx={{ height: 700 }}>
+    <Box sx={{ height: 700}}>
       <DataGrid
+        localeText={heIL.components.MuiDataGrid.defaultProps.localeText}
         density="compact"
         pageSize={pageSize}
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        rowsPerPageOptions={[10, 25, 50, 100, 200]}
+        rowsPerPageOptions={[10, 25, 50, 100]}
         rows={editRows}
         columns={editColumns}
         disableSelectionOnClick
@@ -163,50 +187,8 @@ const PureTable = (props: IProps) => {
         }}
         componentsProps={{ columnsPanel: {} }}
         sx={{
-          borderRadius: "12px",
-          boxShadow: 1,
-        }}
-        localeText={{
-          //for change titles for Hebrew
-          // columns panel
-          toolbarColumns: "סינון עמודות",
-          columnsPanelTextFieldLabel: "הכנס שם עמודה",
-          columnsPanelTextFieldPlaceholder: "חיפוש לפי שם עמודה",
-          columnsPanelShowAllButton: "הצג את כולם",
-          columnsPanelHideAllButton: "בטל את כולם",
-          // filters panel
-          toolbarFilters: "סינון טקסט",
-          filterPanelOperators: "סינון בעזרת",
-          filterPanelColumns: "עמודה לסינון",
-          filterPanelInputLabel: "ערך לסינון",
-          filterPanelInputPlaceholder: "הכנס ערך",
-          // Filter operators text
-          filterOperatorContains: "מכיל",
-          filterOperatorEquals: "שווה",
-          filterOperatorStartsWith: "מתחיל ב",
-          filterOperatorEndsWith: "מסתיים ב",
-          filterOperatorIsEmpty: "תוכן ריק",
-          filterOperatorIsNotEmpty: "תוכן לא ריק",
-          filterOperatorIsAnyOf: "חלק מ",
-
-          // density panel
-          toolbarDensity: "צפיפות",
-          toolbarDensityCompact: "קטן",
-          toolbarDensityStandard: "רגיל",
-          toolbarDensityComfortable: "גדול",
-
-          // export panel
-          toolbarExport: "ייצוא קובץ",
-          toolbarExportCSV: "הורדת קובץ אקסל",
-          toolbarExportPrint: "PDF הדפסת קובץ",
-
-          // Column menu text
-          columnMenuShowColumns: "סינון עמודות",
-          columnMenuFilter: "סינון טקסט",
-          columnMenuHideColumn: "הסתר",
-          columnMenuUnsort: "ביטול מיון",
-          columnMenuSortAsc: "מיון לפי א-ב",
-          columnMenuSortDesc: "מיון מילון הפוך",
+          direction:"rtl",
+          borderRadius: "8px",
         }}
       />
     </Box>

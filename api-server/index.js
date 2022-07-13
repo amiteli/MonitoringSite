@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const { users } = require("./users/users");
-const JWT = require("jsonwebtoken");
+// const JWT = require("jsonwebtoken");
 const fs = require("fs");
 
 const TIME_MODE = 3; // change to number 2 when working in winter
@@ -21,36 +21,36 @@ app.post("/api/login", (req, res) => {
   });
   if (user) {
     //Generate a JSON-WEB-TOKEN to the user
-    const accessToken = JWT.sign(
-      { id: user.id, isAdmin: user.isAdmin },
-      process.env.ACCESS_TOKEN_SECRET_KEY
-    );
+    // const accessToken = JWT.sign(
+    //   { id: user.id, isAdmin: user.isAdmin },
+    //   process.env.ACCESS_TOKEN_SECRET_KEY
+    // );
     res.json({
       username: user.username,
       isAdmin: user.isAdmin,
       unitAccess: user.unitAccess,
-      accessToken,
+      // accessToken,
     });
   } else res.status(400).json("Username or password incorrect");
 });
 
 // VERIFYING-JWT
-const verifyJWT = (req, res, next) => {
-  const authHeader = req.headers.authorization;
+// const verifyJWT = (req, res, next) => {
+//   const authHeader = req.headers.authorization;
 
-  if (authHeader) {
-    const token = authHeader.split(" ")[1]; // authHeader = "bearer AUTH_KEY"
-    JWT.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY, (err, payload) => {
-      if (err) return res.status(403).json("Token is not valid!");
-      //   req.user = payload;
-      next();
-    });
-  } else {
-    res.status(401).json("Authorization not allowed");
-  }
-};
+  // if (authHeader) {
+  //   // const token = authHeader.split(" ")[1]; // authHeader = "bearer AUTH_KEY"
+  //   JWT.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY, (err, payload) => {
+  //     if (err) return res.status(403).json("Token is not valid!");
+  //     //   req.user = payload;
+  //     next();
+  //   });
+  // } else {
+  //   res.status(401).json("Authorization not allowed");
+  // }
+// };
 
-app.get("/api/users", verifyJWT, (req, res) => {
+app.get("/api/users", (req, res) => {
   res.status(200).json("good by here");
 });
 

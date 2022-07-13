@@ -16,9 +16,9 @@ const GeneralView = (props: IProps) => {
   return (
     <>
       <Grid container direction="column" sx={{ width: "100%" }}>
-        <Grid item xs={2} sx={{ mb: 2 }}>
+        {/* <Grid item xs={2} sx={{ mb: 2 }}>
           <TableOfContents />
-        </Grid>
+        </Grid> */}
         <Grid item xs={10}>
           <GeneralAccordion selectedUnit={selectedUnit} />
         </Grid>
