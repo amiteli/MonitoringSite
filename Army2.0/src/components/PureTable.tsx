@@ -26,11 +26,20 @@ type RadioParams = {
   ["שם רכיב"]: string;
   id: string;
   מאזינים?: string | string[];
+  הראה: string;
 };
 
 type IProps = {
-  rows: RadioParams[];
+  // rows: RadioParams[];
   columns: string[];
+  info: any;
+  setInfo: any;
+  name: string;
+};
+type checked = {
+  הראה1: Array<boolean>;
+  הראה2: Array<boolean>;
+  הראה3: Array<boolean>;
 };
 
 const shortColumn = ["מושאל", "קוד הצפנה", "קידוד שמע", "תדר", "פורט", "adf"];
@@ -40,6 +49,15 @@ const NeedToBeNumberList = [
   "צריכת מעבד",
   "מספר פורט",
   "תדר",
+];
+const NeedToBeCheckboxList = [
+  "הראה",
+  "הראה1",
+  "הראה2",
+  "הראה3",
+  "הראה במפה",
+  "הראה בפינגר",
+  "הראה במבט על",
 ];
 const customProgressbar = ["תפוסת דיסק", "צריכת זיכרון", "צריכת מעבד"];
 
@@ -52,20 +70,64 @@ const ColumnWidthCalc = (title: string) => {
 
 const ColumnTypeDecider = (title: string) => {
   if (NeedToBeNumberList.includes(title)) return "number";
+  else if (NeedToBeCheckboxList.includes(title)) return "boolean";
   else return "string";
 };
 
 const ShowData = (data: any) => {
-  console.log(data);
+  // console.log(data);
 };
 
 const PureTable = (props: IProps) => {
-  const { rows, columns } = props;
+  const { columns, info, setInfo, name } = props;
+
+  const rows = info[name];
+
+  // console.log(rows);
+  // console.log(columns);
   const [pageSize, setPageSize] = useState<number>(25);
 
-  const editRows = rows.map((row) =>
-    Object.assign(row, { id: row["שם רכיב"] })
+  const [checked, setChecked] = useState<checked>({
+    הראה1: rows.map((row: any) => row["הראה1"] === true),
+    הראה2: rows.map((row: any) => row["הראה2"] === true),
+    הראה3: rows.map((row: any) => row["הראה3"] === true),
+  });
+
+  const editRows = rows.map((row: any) =>
+    Object.assign(row, { id: row["שם רכיב"] || row["id"] })
   );
+
+  const handleChange = (params: any) => {
+    console.log(params);
+    const temp2 = info;
+    temp2[name][params.id][params.field] =
+      temp2[name][params.id][params.field] === false;
+    console.log(temp2);
+    setInfo(temp2);
+    setChecked({
+      הראה1: rows.map((row: any) => row["הראה1"] === true),
+      הראה2: rows.map((row: any) => row["הראה2"] === true),
+      הראה3: rows.map((row: any) => row["הראה3"] === true),
+    });
+  };
+
+  function cellElement(params: any, column: string) {
+    // console.log(params.field);
+    // const field: string = params.field;
+    // console.log(params.id);
+    if (customProgressbar.includes(column)) {
+      return renderProgress(params);
+    } else if (NeedToBeCheckboxList.includes(column)) {
+      return (
+        <Checkbox
+          checked={checked[params.field][params.id]}
+          onChange={() => handleChange(params)}
+        />
+      );
+    } else {
+      return <span>{params.value}</span>;
+    }
+  }
 
   const editColumns = columns.map((column: string) => ({
     field: column,
@@ -75,12 +137,12 @@ const PureTable = (props: IProps) => {
     width: shortColumn.includes(column) ? 50 : ColumnWidthCalc(column),
     type: ColumnTypeDecider(column),
     renderCell: (params: any) => (
-      <Tooltip title={params.value ? params.value : "temp"}>
-        {customProgressbar.includes(column) ? (
-          renderProgress(params)
-        ) : (
-          <span>{params.value}</span>
-        )}
+      <Tooltip
+        title={
+          params.value && typeof params.value != "boolean" ? params.value : ""
+        }
+      >
+        {cellElement(params, column)}
       </Tooltip>
     ),
   }));
