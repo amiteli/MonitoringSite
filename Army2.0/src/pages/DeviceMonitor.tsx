@@ -112,8 +112,8 @@ function a11yProps(index: number) {
 }
 const paths = [
   "/device-monitor/Makmashim",
-  "/device-monitor/Yashlakim",
-  "/device-monitor/RadioServers",
+  "/device-monitor/RCGW",
+  "/device-monitor/CCU",
   "/device-monitor/CCT",
   "/device-monitor/Yadbar",
   "/device-monitor/Deploy",

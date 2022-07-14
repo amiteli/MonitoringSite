@@ -64,16 +64,12 @@ const GeneralAccordion = (props: IProps) => {
       `${
         import.meta.env.VITE_SERVER_URL
       }/api/charts/rcgw-chart-data/${selectedUnit}`
-      // {
-      //   headers: { authorization: "Bearer " + accessToken },
-      // }
     );
     if (!res.ok) {
       console.log("error at fetching headerList");
       setErrorText(
         `status code: ${res.status} status text: ${res.statusText} url: ${res.url}`
       );
-      // console.log(res.status, res.statusText, res.url);
 
       throw new Error("Problem fetching data at fetchUnitDevicesData function");
     }
@@ -93,7 +89,6 @@ const GeneralAccordion = (props: IProps) => {
 
         for (let i = 0; i < data.WorkingStations.length; i++) {
           if (!tempArr.includes(data.WorkingStations[i].type)) {
-            // setHeadersName([...headersName, data.WorkingStations[i].type]);
             tempArr.push(data.WorkingStations[i].type);
             sum += c;
             index++;

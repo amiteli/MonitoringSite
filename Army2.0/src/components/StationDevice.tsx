@@ -3,7 +3,8 @@ import { Button, ProgressBar } from "react-bootstrap";
 import context from "react-bootstrap/esm/AccordionContext";
 import { Navigate, useNavigate } from "react-router-dom";
 import CustomProgressBar from "./CustomProgressBar";
-
+import { useDispatch } from "react-redux";
+import { setData } from "../redux/filterTable";
 
 type IProps = {
   data: oneDevice;
@@ -48,6 +49,7 @@ const StationDevice = (props: IProps) => {
     errorNumber,
     failedNumber
   );
+  const dispatch: any = useDispatch();
 
   const arrayOfPercents = [okPercent, errorPercent, failPercent];
 
@@ -55,19 +57,9 @@ const StationDevice = (props: IProps) => {
   const navigate = useNavigate();
 
   const navigateToTable = (device: string, location: string) => {
-    console.log(location)
-    // navigate(`/device-monitor/${device}`);
-
-    if (device == "CCT") {
-
-      navigate("/device-monitor/CCT");
-    }
-    if (device == "RCGW"){
-      navigate("/device-monitor/Yashlakim");
-    };
-    if (device == "Yadbar") navigate("/device-monitor/Yadbar");
-    if (device == "Deploy") navigate("/device-monitor/Deploy");
-    if (device == "CCU") navigate("/device-monitor/RadioServers");
+    console.log(location);
+    dispatch(setData({ location }));
+    navigate(`/device-monitor/${device}`);
   };
   return (
     <Grid

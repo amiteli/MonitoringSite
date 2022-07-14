@@ -184,8 +184,8 @@ export default function SideMenu() {
   });
   const routes = [
     "/Makmashim",
-    "/Yashlakim",
-    "/RadioServers",
+    "/RCGW",
+    "/CCU",
     "/CCT",
     "/Yadbar",
     "/Deploy",
@@ -257,11 +257,11 @@ export default function SideMenu() {
               element={<DeviceMonitor selectedUnit={selectedUnit} tab={0} />}
             />
             <Route
-              path="/device-monitor/Yashlakim"
+              path="/device-monitor/RCGW"
               element={<DeviceMonitor selectedUnit={selectedUnit} tab={1} />}
             />
             <Route
-              path="/device-monitor/RadioServers"
+              path="/device-monitor/CCU"
               element={<DeviceMonitor selectedUnit={selectedUnit} tab={2}/>}
             />
             <Route
