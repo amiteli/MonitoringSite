@@ -10,12 +10,12 @@ import {
 import { useState } from "react";
 import { renderProgress } from "./ProgressBarTableCell";
 import "../components/style/StylePureTable.css";
-
+import * as React from "react";
 function CustomToolbar() {
   return (
     <GridToolbarContainer>
-      <GridToolbarFilterButton sx={{direction:"rtl"}}/>
-      <GridToolbarDensitySelector sx={{direction:"rtl"}}/>
+      <GridToolbarFilterButton sx={{ direction: "rtl" }} />
+      <GridToolbarDensitySelector sx={{ direction: "rtl" }} />
       <GridToolbarExport
         csvOptions={{
           fileName: "ויטלי מקמשים בעמ",
@@ -24,7 +24,7 @@ function CustomToolbar() {
         printOptions={{
           hideFooter: true,
           hideToolbar: true,
-          // allColumns: true,
+          allColumns: true,
           fileName: "ויטלי מקמשים בעמ",
         }}
       />
@@ -83,6 +83,10 @@ const ShowData = (data: any) => {
 };
 
 const PureTable = (props: IProps) => {
+  // Filter the value of device-monitor
+  const [value, setValue] = useState<string | null>("דוד");
+  const [columnField, setColumnField] = useState<string | null>("מיקום");
+
   const { rows, columns } = props;
   const [pageSize, setPageSize] = useState<number>(25);
 
@@ -109,8 +113,7 @@ const PureTable = (props: IProps) => {
   }));
 
   return (
-    // <div>
-    <Box sx={{ height: 700}}>
+    <Box sx={{ height: 700 }}>
       <DataGrid
         localeText={heIL.components.MuiDataGrid.defaultProps.localeText}
         density="compact"
@@ -125,8 +128,21 @@ const PureTable = (props: IProps) => {
         }}
         componentsProps={{ columnsPanel: {} }}
         sx={{
-          direction:"rtl",
+          direction: "rtl",
           borderRadius: "8px",
+        }}
+        initialState={{
+          filter: {
+            filterModel: {
+              items: [
+                {
+                  columnField: `${columnField}`,
+                  operatorValue: "contains",
+                  value: `${value}`,
+                },
+              ],
+            },
+          },
         }}
       />
     </Box>

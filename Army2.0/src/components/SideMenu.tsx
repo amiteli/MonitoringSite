@@ -250,31 +250,31 @@ export default function SideMenu() {
             <Route path="/statistics-graphs" element={<StatisticsGraphs />} />
             <Route
               path="/device-monitor/"
-              element={<DeviceMonitor selectedUnit={selectedUnit} name={0}/>}
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={0}/>}
             />
             <Route
               path="/device-monitor/Makmashim"
-              element={<DeviceMonitor selectedUnit={selectedUnit} name={0} />}
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={0} />}
             />
             <Route
               path="/device-monitor/Yashlakim"
-              element={<DeviceMonitor selectedUnit={selectedUnit} name={1} />}
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={1} />}
             />
             <Route
               path="/device-monitor/RadioServers"
-              element={<DeviceMonitor selectedUnit={selectedUnit} name={2}/>}
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={2}/>}
             />
             <Route
               path="/device-monitor/CCT"
-              element={<DeviceMonitor selectedUnit={selectedUnit} name={3}/>}
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={3}/>}
             />
             <Route
               path="/device-monitor/Yadbar"
-              element={<DeviceMonitor selectedUnit={selectedUnit} name={4}/>}
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={4}/>}
             />
             <Route
               path="/device-monitor/Deploy"
-              element={<DeviceMonitor selectedUnit={selectedUnit} name={5}/>}
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={5}/>}
             />
             <Route path="/general-view" element={<GeneralView selectedUnit={selectedUnit} />}/>
             <Route path="user-info" element={<UserInfo />} />

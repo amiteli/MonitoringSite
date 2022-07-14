@@ -3,6 +3,7 @@ div[role="tooltip"] {
 }
  div[class="MuiDataGrid-toolbarContainer css-1j9kmqg-MuiDataGrid-toolbarContainer"] {
     padding: 8px;
+    margin-left: 30px;
 }
  div[class="MuiDataGrid-toolbarContainer css-1j9kmqg-MuiDataGrid-toolbarContainer"] {
     flex-direction:row-reverse;

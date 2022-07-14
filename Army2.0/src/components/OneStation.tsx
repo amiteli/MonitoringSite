@@ -50,7 +50,7 @@ const OneStation = (props: IProps) => {
         </Typography>
         <Grid item container direction="row">
           {devices?.map((deviceUnit, index) => {
-            return <StationDevice key={index} data={deviceUnit} />;
+            return <StationDevice key={index} data={deviceUnit} location={location}/>;
           })}
         </Grid>
       </Box>

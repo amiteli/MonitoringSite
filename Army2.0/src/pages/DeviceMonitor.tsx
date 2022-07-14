@@ -29,7 +29,7 @@ interface IProps {
   // username: string;
   // isAdmin: boolean;
   selectedUnit: string;
-  name: number
+  tab: number
   // accessToken: string;
 }
 interface TabPanelProps {
@@ -120,11 +120,11 @@ const paths = [
 ];
 
 const DevicesTablePage = (props: IProps) => {
-  const { selectedUnit, name } = props;
+  const { selectedUnit, tab } = props;
 
   const navigate = useNavigate();
 
-  const [value, setValue] = React.useState(name);
+  const [value, setValue] = React.useState(tab);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
