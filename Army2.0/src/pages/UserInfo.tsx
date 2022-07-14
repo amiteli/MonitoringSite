@@ -10,9 +10,11 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { useState } from "react";
+import UserControllerTable from "../components/UserControllerTable";
 import { Navigate, useNavigate } from "react-router-dom";
 
-type Props = {};
+interface IProps {}
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -20,16 +22,29 @@ interface TabPanelProps {
   value: number;
 }
 
-const generalMachineTabList = [
-  "All",
-  "Other",
-  "Hamalim",
-  "Platform",
-  "TakashHativa",
-  "TakashRadio",
-  "Kronot",
+const generalMachineTabList: Array<string> = [
   "TakashServer",
+  "Kronot",
+  "TakashRadio",
+  "TakashHativa",
+  "Platform",
+  "Hamalim",
+  "Other",
+  "All",
 ];
+
+const generalTabList: Array<string> = [
+  'תק"שי שרתים',
+  "קרונות",
+  'תק"שי רדיו',
+  'תק"שי חטיבה',
+  "פלטפורמות",
+  "חמלים",
+  "אחרים",
+  "הכל",
+];
+
+const header = ["id", "שם", "מספר", "הראה1", "הראה2", "הראה3"];
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -58,15 +73,172 @@ function a11yProps(index: number) {
   };
 }
 
-const UserInfo = (props: Props) => {
-  const navigate = useNavigate();
-
+const UserInfo = (props: IProps) => {
   const [value, setValue] = React.useState(0);
+
+  const [info, setInfo]: any = useState({
+    TakashServer: [
+      {
+        id: "0",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: true,
+        הראה3: true,
+      },
+      {
+        id: "1",
+        שם: "qwer",
+        מספר: "258",
+        הראה1: true,
+        הראה2: true,
+        הראה3: false,
+      },
+      {
+        id: "2",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: false,
+        הראה3: true,
+      },
+    ],
+    Kronot: [
+      {
+        id: "0",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: true,
+        הראה3: true,
+      },
+      {
+        id: "1",
+        שם: "qwer",
+        מספר: "258",
+        הראה1: true,
+        הראה2: true,
+        הראה3: false,
+      },
+      {
+        id: "2",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: false,
+        הראה3: true,
+      },
+    ],
+    Platform: [
+      {
+        id: "0",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: true,
+        הראה3: true,
+      },
+      {
+        id: "1",
+        שם: "qwer",
+        מספר: "258",
+        הראה1: true,
+        הראה2: true,
+        הראה3: false,
+      },
+      {
+        id: "2",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: false,
+        הראה3: true,
+      },
+    ],
+    Hamalim: [
+      {
+        id: "0",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: true,
+        הראה3: true,
+      },
+      {
+        id: "1",
+        שם: "qwer",
+        מספר: "258",
+        הראה1: true,
+        הראה2: true,
+        הראה3: false,
+      },
+      {
+        id: "2",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: false,
+        הראה3: true,
+      },
+    ],
+    Other: [
+      {
+        id: "0",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: true,
+        הראה3: true,
+      },
+      {
+        id: "1",
+        שם: "qwer",
+        מספר: "258",
+        הראה1: true,
+        הראה2: true,
+        הראה3: false,
+      },
+      {
+        id: "2",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: false,
+        הראה3: true,
+      },
+    ],
+    All: [
+      {
+        id: "0",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: true,
+        הראה3: true,
+      },
+      {
+        id: "1",
+        שם: "qwer",
+        מספר: "258",
+        הראה1: true,
+        הראה2: true,
+        הראה3: false,
+      },
+      {
+        id: "2",
+        שם: "zxcv",
+        מספר: "369",
+        הראה1: false,
+        הראה2: false,
+        הראה3: true,
+      },
+    ],
+  });
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
+  // console.log(info);
   return (
     <>
       <Paper sx={{ bgcolor: "#f3f3f3", width: "85vw" }}>
@@ -80,33 +252,43 @@ const UserInfo = (props: Props) => {
                 indicatorColor="secondary"
                 aria-label="secondary tabs example"
                 dir="rtl"
+                centered
               >
-                <Tab label="הכל" {...a11yProps(0)} />
-                <Tab label="אחרים" {...a11yProps(1)} />
-                <Tab label="חמלים" {...a11yProps(2)} />
-                <Tab label="פלטפורמות" {...a11yProps(3)} />
-                <Tab label='תק"שי חטיבה' {...a11yProps(4)} />
-                <Tab label='תק"שי רדיו' {...a11yProps(5)} />
-                <Tab label="קרונות" {...a11yProps(6)} />
-                <Tab label='תק"שי שרתים' {...a11yProps(7)} />
+                {/* {generalTabList &&
+                  generalTabList.map((name, index) => {
+                    <Tab label={name} {...a11yProps(index)} />;
+                  })} */}
+                <Tab label='תק"שי שרתים' {...a11yProps(0)} />
+                <Tab label="קרונות" {...a11yProps(1)} />
+                <Tab label='תק"שי רדיו' {...a11yProps(2)} />
+                <Tab label='תק"שי חטיבה' {...a11yProps(3)} />
+                <Tab label="פלטפורמות" {...a11yProps(4)} />
+                <Tab label="חמלים" {...a11yProps(5)} />
+                <Tab label="אחרים" {...a11yProps(6)} />
+                <Tab label="הכל" {...a11yProps(7)} />
               </Tabs>
             </Box>
-
-            {generalMachineTabList &&
-              generalMachineTabList.map((name, index) => {
-                return (
-                  <TabPanel value={value} index={index}>
-                    <Grid container direction="row">
-                      <Grid item xs={12}>
-                        <Box dir="rtl">
-                          {/* <GeneralMachineTable /> */}
-                          blabla jkgjkחנחנחנg jgg
-                        </Box>
+            <Box dir="rtl">
+              {generalMachineTabList &&
+                generalMachineTabList.map((name, index) => {
+                  return (
+                    <TabPanel value={value} index={index}>
+                      <Grid container direction="row">
+                        <Grid item xs={12}>
+                          <Box>
+                            <UserControllerTable
+                              columns={header}
+                              info={info}
+                              setInfo={setInfo}
+                              name={name}
+                            />
+                          </Box>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </TabPanel>
-                );
-              })}
+                    </TabPanel>
+                  );
+                })}
+            </Box>
           </Box>
         </Box>
       </Paper>

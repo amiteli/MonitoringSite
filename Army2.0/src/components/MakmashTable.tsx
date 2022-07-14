@@ -64,14 +64,10 @@ const MakmashTable = (props: IProps) => {
   const [tableHeader, setTableHeader] = useState<string[]>([]);
   const [errorText, setErrorText] = useState(" ");
 
-
   const fetchRadioStates = async (): Promise<Data> => {
     try {
       const res = await fetch(
-        `${
-          import.meta.env.VITE_SERVER_URL
-        }/radioStates/${selectedUnit}`,
-        
+        `${import.meta.env.VITE_SERVER_URL}/radioStates/${selectedUnit}`
       );
       if (!res.ok) {
         // console.log("error at fetching radioStates");
@@ -80,7 +76,7 @@ const MakmashTable = (props: IProps) => {
         );
         throw new Error("Problem fetching data");
       }
-      
+      // console.log(res);
       return res.json();
     } catch (err) {
       console.log(err);
@@ -88,9 +84,7 @@ const MakmashTable = (props: IProps) => {
   };
 
   const fetchHeaderList = async (): Promise<Headers> => {
-    const res = await fetch(`${
-      import.meta.env.VITE_SERVER_URL
-    }/headerList`, );
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/headerList`);
     if (!res.ok) {
       console.log("error at fetching headerList");
       setErrorText(
@@ -102,16 +96,17 @@ const MakmashTable = (props: IProps) => {
     }
     return res.json();
   };
+
   const {
     data,
     isLoading: isLoadingData,
     isError: isErrorData,
   } = useQuery<Data>("FileData", fetchRadioStates, {
     onSuccess: (data) => {
-        const { RCGW } = data ?? {
+      const { RCGW } = data ?? {
         RCGW: [],
       };
-      // console.log(data)
+      // console.log(data);
       let oneArray: any[] = [];
       if (table === "Makmash") {
         const sortRCGWData = data.RCGW.map((machine: RCGW) => {
@@ -148,17 +143,16 @@ const MakmashTable = (props: IProps) => {
   const { isLoading: isLoadingHeader, isError: isErrorHeader } =
     useQuery<Headers>("FileHeader", fetchHeaderList, {
       onSuccess: (headerData: any) => {
-
         // const { param_headers, radio_state_headers } = headerData ?? {
         //   param_headers: [],
         //   radio_state_headers: [],
         // };
         // if (table === "Makmash") {
+        // console.log(headerData);
         setTableHeader(headerData[headerName]);
         // } else {
         //   setTableHeader(param_headers);
         // }
-
       },
     });
 
@@ -167,8 +161,6 @@ const MakmashTable = (props: IProps) => {
   if (isErrorHeader || isErrorData)
     return <>"An error has occurred: " {errorText}</>;
 
-  return (
-      <PureComponent rows={tableData} columns={tableHeader} />
-  );
+  return <PureComponent rows={tableData} columns={tableHeader} />;
 };
 export default MakmashTable;

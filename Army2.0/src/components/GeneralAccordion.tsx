@@ -95,7 +95,7 @@ const GeneralAccordion = (props: IProps) => {
           if (!tempArr.includes(data.WorkingStations[i].type)) {
             // setHeadersName([...headersName, data.WorkingStations[i].type]);
             tempArr.push(data.WorkingStations[i].type);
-            sum+=c;
+            sum += c;
             index++;
             c = 0;
           }
