@@ -48,14 +48,6 @@ type IProps = {
   columns: string[];
 };
 
-const EliavColumnsPanel = () => {
-  return (
-    <>
-      <Checkbox checked />
-    </>
-  );
-};
-
 const shortColumn = ["מושאל", "קוד הצפנה", "קידוד שמע", "תדר", "פורט", "adf"];
 const NeedToBeNumberList = [
   "תפוסת דיסק",
