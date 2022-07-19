@@ -114,7 +114,7 @@ const MakmashTable = (props: IProps) => {
         RCGW: [],
       };
 
-      let oneArray = [];
+      let oneArray: any = [];
       if (table === "Makmash") {
         const sortRCGWData = data.RCGW.map((machine: RCGW) => {
           if (machine.state !== "FAILED") {
