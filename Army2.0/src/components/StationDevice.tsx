@@ -58,7 +58,12 @@ const StationDevice = (props: IProps) => {
 
   const navigateToTable = (device: string, location: string) => {
     console.log(location);
-    dispatch(setData({ location }));
+    const columnField = "שם רכיב"
+    dispatch(setData({
+      columnField: {columnField},
+      operatorValue: "contains",
+      value: {location},
+    }));
     navigate(`/device-monitor/${device}`);
   };
   return (

@@ -7,32 +7,19 @@ import {
   GridToolbarExport,
   heIL,
   GridFilterModel,
+  GridToolbar,
+  GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
 import { useState } from "react";
 import { renderProgress } from "./ProgressBarTableCell";
 import "../components/style/StylePureTable.css";
 import * as React from "react";
-import { useSelector } from "react-redux";
-function CustomToolbar() {
-  return (
-    <GridToolbarContainer>
-      <GridToolbarFilterButton sx={{ direction: "rtl" }} />
-      <GridToolbarDensitySelector sx={{ direction: "rtl" }} />
-      <GridToolbarExport
-        csvOptions={{
-          fileName: "ויטלי מקמשים בעמ",
-          utf8WithBom: true,
-        }}
-        printOptions={{
-          hideFooter: true,
-          hideToolbar: true,
-          allColumns: true,
-          fileName: "ויטלי מקמשים בעמ",
-        }}
-      />
-    </GridToolbarContainer>
-  );
-}
+import { useDispatch, useSelector } from "react-redux";
+import { render } from "react-dom";
+import { clear } from "console";
+import { setData } from "../redux/filterTable";
+
+
 
 type RadioParams = {
   שם?: string;
@@ -76,21 +63,50 @@ const ShowData = (data: any) => {
   console.log(data);
 };
 
+function CustomToolbar() {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarFilterButton sx={{ direction: "rtl" }} />
+      <GridToolbarDensitySelector sx={{ direction: "rtl" }} />
+      <GridToolbarExport
+        csvOptions={{
+          fileName: "ויטלי מקמשים בעמ",
+          utf8WithBom: true,
+        }}
+        printOptions={{
+          hideFooter: true,
+          hideToolbar: true,
+          allColumns: true,
+          fileName: "ויטלי מקמשים בעמ",
+        }}
+      />
+      <GridToolbarQuickFilter debounceMs={500}/>
+    </GridToolbarContainer>
+  );
+}
 const PureTable = (props: IProps) => {
   // Filter the value of device-monitor
-  const { value } = useSelector((state: any) => state.filterTable);
-  const columnField = "שם רכיב";
-  console.log(value, columnField);
+  let { items } = useSelector((state: any) => state.filterTable);
 
-  const [filterModel, setFilterModel] = React.useState<GridFilterModel>({
-    items: [
-      {
-        columnField: `${columnField}`,
-        operatorValue: "contains",
-        value: `${value}`,
-      },
-    ],
+  // const dispatch: any = useDispatch();
+  const [filterModel, setFilterModel] = React.useState<any>({
+    items: [items[0]]
   });
+  // const handleChange = (newFilter:any) => {
+  //   if(count == 0){
+  //     setFilterModel(filterModel)
+  //   }
+  //   // setFilterModel(newFilter);
+  // }
+  console.log(items)
+  console.log(filterModel);
+
+  // const handleChange = (newFilterModel: any) => {
+  //   const columnField = newFilterModel.items.columnField;
+  //   const value = newFilterModel.items ? newFilterModel.items.value : undefined
+  //   const items = newFilterModel.items
+  //   // setFilterModel(useSelector((state: any) => state.filterTable))
+  // }
 
   const { rows, columns } = props;
   const [pageSize, setPageSize] = useState<number>(25);
@@ -137,7 +153,7 @@ const PureTable = (props: IProps) => {
           borderRadius: "8px",
         }}
         filterModel={filterModel}
-        onFilterModelChange={(newFilterModel) => setFilterModel(newFilterModel)}
+        onFilterModelChange={(newFilter) => setFilterModel(newFilter)}
       />
     </Box>
   );
