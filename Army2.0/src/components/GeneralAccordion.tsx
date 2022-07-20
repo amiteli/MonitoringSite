@@ -56,7 +56,6 @@ const GeneralAccordion = (props: IProps) => {
   const [headersName, setHeadersName] = useState<string[]>([]);
   const [stations, setStations] = useState<Array<oneBlock>>([]);
   const [amount, setAmount] = useState<number[]>([]);
-  const [sum, setSum] = useState<number>();
   const [open, setOpen] = useState(false);
 
   const fetchUnitDevicesData = async (): Promise<GeneralDataBlocks> => {
@@ -83,24 +82,20 @@ const GeneralAccordion = (props: IProps) => {
       onSuccess: (data) => {
         let tempArr: Array<string> = [];
         let counterArr: Array<number> = [];
-        let sum: number = 0;
         let index: number = 0,
           c = 0;
 
         for (let i = 0; i < data.WorkingStations.length; i++) {
           if (!tempArr.includes(data.WorkingStations[i].type)) {
             tempArr.push(data.WorkingStations[i].type);
-            sum += c;
             index++;
             c = 0;
           }
           counterArr[index] = ++c;
         }
-        sum += counterArr[index];
         setHeadersName(tempArr);
         setAmount(counterArr);
         setStations(data.WorkingStations);
-        setSum(sum);
       },
     }
   );
@@ -123,7 +118,7 @@ const GeneralAccordion = (props: IProps) => {
         <AppBar sx={{ position: "relative" }}>
           <Toolbar>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              כל הכלים {<>({sum})</>}
+              כל הכלים
             </Typography>
             <IconButton
               edge="end"
@@ -148,7 +143,6 @@ const GeneralAccordion = (props: IProps) => {
                       fontWeight: "bold",
                     }}
                   >
-                    {" "}
                     {amount[index + 1]} {header}
                   </Typography>
                   <Divider />
