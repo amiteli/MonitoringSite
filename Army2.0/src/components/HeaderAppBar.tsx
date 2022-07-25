@@ -15,7 +15,9 @@ import AdbIcon from "@mui/icons-material/Adb";
 import screw from "../images/screw.png";
 import HeaderInfo from "./HeaderInfo";
 
-interface IProps { HeaderData: HeaderData};
+interface IProps {
+  HeaderData: HeaderData;
+}
 
 // const HeaderData = {
 //   userName: "עמי ותמי",
@@ -72,7 +74,7 @@ const HeaderAppBar = (props: IProps) => {
         justifyContent: "space-around",
         textAlign: "center",
         backgroundColor: "white",
-        height: "70px",
+        height: "80px",
         color: "black",
         borderBottom: "2px solid grey",
         zIndex: (theme) => theme.zIndex.drawer + 1,

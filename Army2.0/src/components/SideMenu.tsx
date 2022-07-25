@@ -30,6 +30,9 @@ import UserInfo from "../pages/UserInfo";
 import MapMonitor from "../pages/MapMonitor";
 import StatisticsGraphs from "../pages/StatisticsGraphs";
 import DeviceMonitor from "../pages/DeviceMonitor";
+import { Button, IconButton } from "@mui/material";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -50,6 +53,7 @@ const sideBarMenuList = [
   {
     title: "נתוני משתמש וכלים",
     icon: <RiAccountCircleFill />,
+    // size={25}
     navigationTo: "/user-info",
   },
   {
@@ -163,12 +167,8 @@ const Drawer = styled(MuiDrawer, {
 export default function SideMenu() {
   const [open, setOpen] = React.useState(true);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleClick = () => {
+    setOpen(!open);
   };
 
   const navigate = useNavigate();
@@ -182,14 +182,7 @@ export default function SideMenu() {
     selected: selectedIndex === value,
     onClick: () => setSelectedIndex(value),
   });
-  const routes = [
-    "/Makmashim",
-    "/RCGW",
-    "/CCU",
-    "/CCT",
-    "/Yadbar",
-    "/Deploy",
-  ];
+
   return (
     <Box>
       <CssBaseline />
@@ -214,7 +207,7 @@ export default function SideMenu() {
             {sideBarMenuList.map((page, index) => (
               <ListItem
                 key={index}
-                disablePadding
+                // disablePadding
                 sx={{ display: "block" }}
                 onClick={() => PageClicked(page.navigationTo)}
               >
@@ -238,7 +231,18 @@ export default function SideMenu() {
           </List>
           <Divider />
         </Drawer>
-        
+        <Button>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+            onClick={handleClick}
+          >
+            {open ? <ArrowForwardIosIcon /> : <ArrowBackIosNewIcon />}
+          </IconButton>
+        </Button>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
           <Routes>
@@ -250,7 +254,7 @@ export default function SideMenu() {
             <Route path="/statistics-graphs" element={<StatisticsGraphs />} />
             <Route
               path="/device-monitor/"
-              element={<DeviceMonitor selectedUnit={selectedUnit} tab={0}/>}
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={0} />}
             />
             <Route
               path="/device-monitor/Makmashim"
@@ -262,21 +266,24 @@ export default function SideMenu() {
             />
             <Route
               path="/device-monitor/CCU"
-              element={<DeviceMonitor selectedUnit={selectedUnit} tab={2}/>}
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={2} />}
             />
             <Route
               path="/device-monitor/CCT"
-              element={<DeviceMonitor selectedUnit={selectedUnit} tab={3}/>}
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={3} />}
             />
             <Route
               path="/device-monitor/Yadbar"
-              element={<DeviceMonitor selectedUnit={selectedUnit} tab={4}/>}
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={4} />}
             />
             <Route
               path="/device-monitor/Deploy"
-              element={<DeviceMonitor selectedUnit={selectedUnit} tab={5}/>}
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={5} />}
             />
-            <Route path="/general-view" element={<GeneralView selectedUnit={selectedUnit} />}/>
+            <Route
+              path="/general-view"
+              element={<GeneralView selectedUnit={selectedUnit} />}
+            />
             <Route path="user-info" element={<UserInfo />} />
             <Route path="*" element={<Navigate to="/user-info" />} />
           </Routes>
