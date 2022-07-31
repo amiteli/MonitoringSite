@@ -284,7 +284,10 @@ export default function MiniDrawer() {
           <Route path="/pinger" element={<Pinger />} />
           <Route path="/version-viewer" element={<VersionViewer />} />
           <Route path="/map-monitor" element={<MapMonitor />} />
-          <Route path="/statistics-graphs" element={<StatisticsGraphs />} />
+          <Route
+            path="/statistics-graphs"
+            element={<StatisticsGraphs selectedUnit={selectedUnit} />}
+          />
           <Route
             path="/device-monitor/"
             element={<DeviceMonitor selectedUnit={selectedUnit} tab={0} />}
