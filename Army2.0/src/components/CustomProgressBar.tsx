@@ -14,11 +14,12 @@ const BackgroundColors = [
 const CustomProgressBar = (props: IProps) => {
   const { percents, labels } = props;
   return (
-    <ProgressBar>
+    <ProgressBar style={{ marginBottom: 5 }}>
       {percents &&
         percents.map((ele, value) => {
           return (
             <ProgressBar
+              animated={true}
               style={{ backgroundColor: BackgroundColors[value] }}
               now={ele}
               label={labels[value]}

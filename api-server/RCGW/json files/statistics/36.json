@@ -506,8 +506,8 @@
         {
           "device": "CCT",
           "OK": 1,
-          "ERROR": 1,
-          "FAILED": 0
+          "ERROR": 5,
+          "FAILED": 8
         }
       ]
     }

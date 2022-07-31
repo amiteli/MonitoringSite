@@ -1,8 +1,10 @@
 import { Box } from "@mui/material";
+import { GridFilterModel } from "@mui/x-data-grid";
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useQuery, UseQueryResult } from "react-query";
+import { useSelector } from "react-redux";
 import PureComponent from "./PureTable";
 
 interface IProps {
@@ -63,6 +65,7 @@ const MakmashTable = (props: IProps) => {
   const [tableData, setTableData] = useState<RadioParams[]>([]);
   const [tableHeader, setTableHeader] = useState<string[]>([]);
   const [errorText, setErrorText] = useState(" ");
+
 
   const fetchRadioStates = async (): Promise<Data> => {
     try {
@@ -150,6 +153,18 @@ const MakmashTable = (props: IProps) => {
         // if (table === "Makmash") {
         // console.log(headerData);
         setTableHeader(headerData[headerName]);
+        
+        
+        // setFilterModel({
+        //   items: [
+        //     {
+        //       columnField: `${columnField}`,
+        //       operatorValue: "contains",
+        //       value: `${value}`,
+        //     },
+        //   ],
+        // })
+
         // } else {
         //   setTableHeader(param_headers);
         // }
@@ -160,7 +175,7 @@ const MakmashTable = (props: IProps) => {
 
   if (isErrorHeader || isErrorData)
     return <>"An error has occurred: " {errorText}</>;
-
+    // filterModel={filterModel} setFilterModel={setFilterModel}
   return <PureComponent rows={tableData} columns={tableHeader} />;
 };
 export default MakmashTable;

@@ -6,7 +6,6 @@ import {
   GridToolbarDensitySelector,
   GridToolbarExport,
   heIL,
-  GridFilterModel,
 } from "@mui/x-data-grid";
 import { useState } from "react";
 import { renderProgress } from "./ProgressBarTableCell";
@@ -14,26 +13,6 @@ import "../components/style/StylePureTable.css";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setData } from "../redux/filterTable";
-function CustomToolbar() {
-  return (
-    <GridToolbarContainer>
-      <GridToolbarFilterButton sx={{ direction: "rtl" }} />
-      <GridToolbarDensitySelector sx={{ direction: "rtl" }} />
-      <GridToolbarExport
-        csvOptions={{
-          fileName: "ויטלי מקמשים בעמ",
-          utf8WithBom: true,
-        }}
-        printOptions={{
-          hideFooter: true,
-          hideToolbar: true,
-          allColumns: true,
-          fileName: "ויטלי מקמשים בעמ",
-        }}
-      />
-    </GridToolbarContainer>
-  );
-}
 
 type RadioParams = {
   שם?: string;
@@ -78,15 +57,30 @@ const ShowData = (data: any) => {
 };
 let count = 1;
 
+function CustomToolbar() {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarFilterButton sx={{ direction: "rtl" }} />
+      <GridToolbarDensitySelector sx={{ direction: "rtl" }} />
+      <GridToolbarExport
+        csvOptions={{
+          fileName: "ויטלי מקמשים בעמ",
+          utf8WithBom: true,
+        }}
+        printOptions={{
+          hideFooter: true,
+          hideToolbar: true,
+          allColumns: true,
+          fileName: "ויטלי מקמשים בעמ",
+        }}
+      />
+    </GridToolbarContainer>
+  );
+}
 const PureTable = (props: IProps) => {
   // Filter the value of device-monitor
   const { items } = { items: useSelector((state: any) => state.filterTable) };
   const dispatch: any = useDispatch();
-
-  // const [filterModel, setFilterModel] = useState();
-  // console.log(value, columnField);
-
-  // console.log(items);
 
   const { rows, columns } = props;
   const [change, setChange] = useState<number>(1);
@@ -95,29 +89,8 @@ const PureTable = (props: IProps) => {
   const editRows = rows.map((row) =>
     Object.assign(row, { id: row["שם רכיב"] })
   );
-  // function stateChange(newFilterModel: any) {
-  //   setTimeout(function () {
-  //     console.log(items);
-  //     console.log(newFilterModel);
-  //     console.log("change");
-  //     console.log(count);
-  //     if (newFilterModel["items"].length) {
-  //       const columnField = newFilterModel["items"][0]["columnField"];
-  //       const operatorValue = newFilterModel["items"][0]["operatorValue"];
-  //       const value = newFilterModel["items"][0]["value"];
-  //       dispatch(setData({ columnField, operatorValue, value }));
-  //     } else {
-  //       const columnField = newFilterModel["items"];
-  //       dispatch(setData({ columnField }));
-  //     }
-  //   }, 5000);
-  // }
-
+  
   const onFilterModelChange = (newFilterModel: any) => {
-    // console.log(newFilterModel["items"]);
-    // console.log(newFilterModel["items"].length ? "hello" : "goodbye");
-    console.log(items);
-    console.log(newFilterModel);
     if (change) {
       setTimeout(function () {
         setChange(0);
@@ -172,37 +145,10 @@ const PureTable = (props: IProps) => {
           direction: "rtl",
           borderRadius: "8px",
         }}
-        // filterModel={{
-        //   items: [
-        //     {
-        //       columnField: "שם רכיב",
-        //       operatorValue: "contains",
-        //       value: "w",
-        //     },
-        //   ],
-        // }}
         filterModel={items}
         onFilterModelChange={(newFilterModel) =>
           onFilterModelChange(newFilterModel)
         }
-        // onFilterModelChange={(newFilterModel) => {
-        //   console.log(newFilterModel);
-        //   setFilterModel(newFilterModel);
-        // }}
-        // filterModel={{
-        //   items: [
-        //     {
-        //       columnField: "שם רכיב",
-        //       operatorValue: "מכיל",
-        //       // id: 32055,
-        //       value: "w",
-        //     },
-        //   ],
-        // }}
-        // onFilterModelChange={(newFilterModel) => {
-        //   console.log(newFilterModel);
-        //   setFilterModel(newFilterModel);
-        // }}
       />
     </Box>
   );

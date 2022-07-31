@@ -1,33 +1,24 @@
+import { ActionTypes } from "@mui/base";
 import { createSlice } from "@reduxjs/toolkit";
+import { Action } from "react-query/types/core/query";
 
+//Create Global State To Change The Filter In Pure Table
 const filterTableSlice = createSlice({
   name: "filterTable",
   initialState: {
     items: [],
-    // items: [
-    //   {
-    //     columnField: "שם רכיב",
-    //     operatorValue: "contains",
-    //     value: "",
-    //   },
-    // ],
-    // columnField: null
   },
   reducers: {
     setData: (state, action) => {
-      // console.log(action.payload.columnField.length);
       action.payload.columnField.length
         ? (state.items = [
             {
-              columnField: action.payload.columnField,
+              columnField:action.payload.columnField,
               operatorValue: action.payload.operatorValue,
-              // id: 32055,
               value: action.payload.value,
             },
           ])
         : (state.items = []);
-      // state.items = action.payload;
-      // state.columnField = action.payload.location
     },
   },
 });

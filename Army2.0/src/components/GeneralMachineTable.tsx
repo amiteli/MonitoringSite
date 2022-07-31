@@ -69,7 +69,7 @@ const MakmashTable = (props: IProps) => {
   const fetchRadioStates = async (): Promise<Data> => {
     try {
       const res = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/radioStates/${selectedUnit}`,
+        `${import.meta.env.VITE_SERVER_URL}/radioStates/${selectedUnit}`,
         {
           headers: { authorization: "Bearer " + accessToken },
           // unit,
@@ -89,7 +89,7 @@ const MakmashTable = (props: IProps) => {
   };
 
   const fetchHeaderList = async (): Promise<Headers> => {
-    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/headerList`, {
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/headerList`, {
       headers: { authorization: "Bearer " + accessToken },
     });
     if (!res.ok) {
