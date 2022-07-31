@@ -163,6 +163,7 @@ const DevicesTablePage = (props: IProps) => {
                   indicatorColor="secondary"
                   aria-label="secondary tabs example"
                   dir="rtl"
+                  centered
                 >
                   <Tab label='מקמ"שים' {...a11yProps(0)} />
                   <Tab label='ישל"קים' {...a11yProps(1)} />

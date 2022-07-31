@@ -182,14 +182,13 @@ export default function SideMenu() {
     selected: selectedIndex === value,
     onClick: () => setSelectedIndex(value),
   });
-  const routes = [
-    "/Makmashim",
-    "/RCGW",
-    "/CCU",
-    "/CCT",
-    "/Yadbar",
-    "/Deploy",
-  ];
+  const [selectedInd, setSelectedInd] = React.useState(1);
+
+  const handleListItemClick = (event:any, index:number,page:any) => {
+    setSelectedIndex(index);
+    PageClicked(page.navigationTo);
+  };
+  
   return (
     <Box>
       <CssBaseline />
@@ -216,7 +215,9 @@ export default function SideMenu() {
                 key={index}
                 disablePadding
                 sx={{ display: "block" }}
-                onClick={() => PageClicked(page.navigationTo)}
+                onClick={() => {handleListItemClick(event, index, page)} }
+                selected={selectedIndex === 0}
+                
               >
                 <ListItemButton {...buttonProps(index)}>
                   <ListItemIcon
@@ -247,7 +248,7 @@ export default function SideMenu() {
             <Route path="/pinger" element={<Pinger />} />
             <Route path="/version-viewer" element={<VersionViewer />} />
             <Route path="/map-monitor" element={<MapMonitor />} />
-            <Route path="/statistics-graphs" element={<StatisticsGraphs />} />
+            <Route path="/statistics-graphs" element={<StatisticsGraphs selectedUnit={selectedUnit}/>} />
             <Route
               path="/device-monitor/"
               element={<DeviceMonitor selectedUnit={selectedUnit} tab={0}/>}

@@ -57,25 +57,36 @@ const StationDevice = (props: IProps) => {
   const navigate = useNavigate();
 
   const navigateToTable = (device: string, location: string) => {
-    console.log(location);
-    const columnField = "שם רכיב"
-    dispatch(setData({
-      columnField: {columnField},
-      operatorValue: "contains",
-      value: {location},
-    }));
+    const columnField = "שם רכיב";
+    const operatorValue = "contains";
+    const value = location;
+    dispatch(setData({ columnField, operatorValue, value }));
     navigate(`/device-monitor/${device}`);
   };
+  // const colorsOfDevices:any = {
+  //   RCGW: "#FF1E56",
+  //   Makmash: "#323232",
+  //   CCU: "#293A80",
+  //   CCT: "#D65A31",
+  //   Yadbar: "#D72323",
+  //   Deploy: "#62A388",
+  // };
   return (
     <Grid
       item
       container
-      sx={{ width: DEVICE_WIDTH, border: 1, borderColor: "#D3D3D3", px: 0.5 }}
+      sx={{
+        width: DEVICE_WIDTH,
+        borderLeft: 1,
+        borderColor: "#D3D3D3",
+        px: 0.5,
+      }}
     >
       <Grid item xs={12}>
         <Typography
           align="center"
-          sx={{ fontWeight: "bold", cursor: "pointer", p: "2px" }}
+          sx={{ fontWeight: "bold", cursor: "pointer", p: "1px" }}
+          // color={colorsOfDevices[`${device}`]}
           onClick={() => navigateToTable(device, location)}
         >
           {device}

@@ -6,20 +6,13 @@ import {
   GridToolbarDensitySelector,
   GridToolbarExport,
   heIL,
-  GridFilterModel,
-  GridToolbar,
-  GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
 import { useState } from "react";
 import { renderProgress } from "./ProgressBarTableCell";
 import "../components/style/StylePureTable.css";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { render } from "react-dom";
-import { clear } from "console";
 import { setData } from "../redux/filterTable";
-
-
 
 type RadioParams = {
   שם?: string;
@@ -62,6 +55,7 @@ const ColumnTypeDecider = (title: string) => {
 const ShowData = (data: any) => {
   console.log(data);
 };
+let count = 1;
 
 function CustomToolbar() {
   return (
@@ -80,40 +74,39 @@ function CustomToolbar() {
           fileName: "ויטלי מקמשים בעמ",
         }}
       />
-      <GridToolbarQuickFilter debounceMs={500}/>
     </GridToolbarContainer>
   );
 }
 const PureTable = (props: IProps) => {
   // Filter the value of device-monitor
-  let { items } = useSelector((state: any) => state.filterTable);
-
-  // const dispatch: any = useDispatch();
-  const [filterModel, setFilterModel] = React.useState<any>({
-    items: [items[0]]
-  });
-  // const handleChange = (newFilter:any) => {
-  //   if(count == 0){
-  //     setFilterModel(filterModel)
-  //   }
-  //   // setFilterModel(newFilter);
-  // }
-  console.log(items)
-  console.log(filterModel);
-
-  // const handleChange = (newFilterModel: any) => {
-  //   const columnField = newFilterModel.items.columnField;
-  //   const value = newFilterModel.items ? newFilterModel.items.value : undefined
-  //   const items = newFilterModel.items
-  //   // setFilterModel(useSelector((state: any) => state.filterTable))
-  // }
+  const { items } = { items: useSelector((state: any) => state.filterTable) };
+  const dispatch: any = useDispatch();
 
   const { rows, columns } = props;
+  const [change, setChange] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(25);
 
   const editRows = rows.map((row) =>
     Object.assign(row, { id: row["שם רכיב"] })
   );
+  
+  const onFilterModelChange = (newFilterModel: any) => {
+    if (change) {
+      setTimeout(function () {
+        setChange(0);
+      }, 1000);
+    } else {
+      if (newFilterModel["items"].length) {
+        const columnField = newFilterModel["items"][0]["columnField"];
+        const operatorValue = newFilterModel["items"][0]["operatorValue"];
+        const value = newFilterModel["items"][0]["value"];
+        dispatch(setData({ columnField, operatorValue, value }));
+      } else {
+        const columnField = newFilterModel["items"];
+        dispatch(setData({ columnField }));
+      }
+    }
+  };
 
   const editColumns = columns.map((column: string) => ({
     field: column,
@@ -152,8 +145,10 @@ const PureTable = (props: IProps) => {
           direction: "rtl",
           borderRadius: "8px",
         }}
-        filterModel={filterModel}
-        onFilterModelChange={(newFilter) => setFilterModel(newFilter)}
+        filterModel={items}
+        onFilterModelChange={(newFilterModel) =>
+          onFilterModelChange(newFilterModel)
+        }
       />
     </Box>
   );

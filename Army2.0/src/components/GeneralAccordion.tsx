@@ -80,14 +80,15 @@ const GeneralAccordion = (props: IProps) => {
     fetchUnitDevicesData,
     {
       onSuccess: (data) => {
+        let dataAmountOfStations = data.WorkingStations;
         let tempArr: Array<string> = [];
         let counterArr: Array<number> = [];
         let index: number = 0,
           c = 0;
 
-        for (let i = 0; i < data.WorkingStations.length; i++) {
-          if (!tempArr.includes(data.WorkingStations[i].type)) {
-            tempArr.push(data.WorkingStations[i].type);
+        for (let i = 0; i < dataAmountOfStations.length; i++) {
+          if (!tempArr.includes(dataAmountOfStations[i].type)) {
+            tempArr.push(dataAmountOfStations[i].type);
             index++;
             c = 0;
           }
