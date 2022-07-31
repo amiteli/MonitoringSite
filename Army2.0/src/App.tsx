@@ -2,6 +2,7 @@ import { useState } from "react";
 import logo from "./logo.svg";
 import HeaderAppBar from "./components/HeaderAppBar";
 import { Box } from "@mui/material";
+import NewSideMenu from "./components/NewSideMenu";
 import SideMenu from "./components/SideMenu";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -28,7 +29,7 @@ function App() {
             overflow: "hidden",
           }}
         >
-          <SideMenu />
+          <NewSideMenu />
         </Box>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />

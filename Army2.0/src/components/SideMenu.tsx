@@ -231,18 +231,6 @@ export default function SideMenu() {
           </List>
           <Divider />
         </Drawer>
-        <Button>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={handleClick}
-          >
-            {open ? <ArrowForwardIosIcon /> : <ArrowBackIosNewIcon />}
-          </IconButton>
-        </Button>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
           <Routes>

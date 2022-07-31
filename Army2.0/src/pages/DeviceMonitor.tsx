@@ -29,7 +29,7 @@ interface IProps {
   // username: string;
   // isAdmin: boolean;
   selectedUnit: string;
-  tab: number
+  tab: number;
   // accessToken: string;
 }
 interface TabPanelProps {
@@ -150,7 +150,7 @@ const DevicesTablePage = (props: IProps) => {
             </Box>
             <Box
               sx={{
-                width: "95%",
+                // width: "95%",
                 border: "1px solid #e0e0e0",
                 borderRadius: 4,
               }}
@@ -188,7 +188,7 @@ const DevicesTablePage = (props: IProps) => {
                 })}
             </Box>
             <ReactQueryDevtools initialIsOpen={false} />
-            <Stack direction="row" spacing={5} justifyContent="center">
+            {/* <Stack direction="row" spacing={5} justifyContent="center">
               <Button
                 variant="contained"
                 onClick={handleClick}
@@ -197,7 +197,7 @@ const DevicesTablePage = (props: IProps) => {
               >
                 חזור
               </Button>
-            </Stack>
+            </Stack> */}
           </Box>
         </Paper>
       </ThemeProvider>

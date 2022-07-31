@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import screw from "../images/screw.png";
 import HeaderInfo from "./HeaderInfo";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 interface IProps {
   HeaderData: HeaderData;
@@ -87,6 +88,19 @@ const HeaderAppBar = (props: IProps) => {
         }}
       >
         <Toolbar disableGutters>
+          <Button>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              // onClick={handleClick}
+            >
+              <ArrowForwardIosIcon />
+              {/* {open ? <ArrowForwardIosIcon /> : <ArrowBackIosNewIcon />} */}
+            </IconButton>
+          </Button>
           <Avatar
             alt="screw"
             src={screw}
