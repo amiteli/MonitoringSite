@@ -9,7 +9,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const queryClient = new QueryClient({
+const queryClient = new QueryClient({   
   defaultOptions: {
     queries: {
       refetchInterval: 5000,
