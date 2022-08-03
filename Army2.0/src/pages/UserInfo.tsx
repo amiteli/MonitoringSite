@@ -241,15 +241,15 @@ const UserInfo = (props: IProps) => {
   // console.log(info);
   return (
     <>
-      <Paper sx={{ bgcolor: "#f3f3f3", width: "85vw" }}>
+      <Paper sx={{ bgcolor: "#f3f3f3" }}>
         <Box>
           <Box sx={{ width: "100%", borderRadius: 4 }}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
               <Tabs
                 value={value}
                 onChange={handleChange}
-                textColor="secondary"
-                indicatorColor="secondary"
+                textColor="primary"
+                indicatorColor="primary"
                 aria-label="secondary tabs example"
                 dir="rtl"
                 centered
@@ -258,14 +258,46 @@ const UserInfo = (props: IProps) => {
                   generalTabList.map((name, index) => {
                     <Tab label={name} {...a11yProps(index)} />;
                   })} */}
-                <Tab label='תק"שי שרתים' {...a11yProps(0)} />
-                <Tab label="קרונות" {...a11yProps(1)} />
-                <Tab label='תק"שי רדיו' {...a11yProps(2)} />
-                <Tab label='תק"שי חטיבה' {...a11yProps(3)} />
-                <Tab label="פלטפורמות" {...a11yProps(4)} />
-                <Tab label="חמלים" {...a11yProps(5)} />
-                <Tab label="אחרים" {...a11yProps(6)} />
-                <Tab label="הכל" {...a11yProps(7)} />
+                <Tab
+                  label='תק"שי שרתים'
+                  {...a11yProps(0)}
+                  sx={{ marginLeft: 3, marginRight: 3 }}
+                />
+                <Tab
+                  label="קרונות"
+                  {...a11yProps(1)}
+                  sx={{ marginLeft: 3, marginRight: 3 }}
+                />
+                <Tab
+                  label='תק"שי רדיו'
+                  {...a11yProps(2)}
+                  sx={{ marginLeft: 3, marginRight: 3 }}
+                />
+                <Tab
+                  label='תק"שי חטיבה'
+                  {...a11yProps(3)}
+                  sx={{ marginLeft: 3, marginRight: 3 }}
+                />
+                <Tab
+                  label="פלטפורמות"
+                  {...a11yProps(4)}
+                  sx={{ marginLeft: 3, marginRight: 3 }}
+                />
+                <Tab
+                  label="חמלים"
+                  {...a11yProps(5)}
+                  sx={{ marginLeft: 3, marginRight: 3 }}
+                />
+                <Tab
+                  label="אחרים"
+                  {...a11yProps(6)}
+                  sx={{ marginLeft: 3, marginRight: 3 }}
+                />
+                <Tab
+                  label="הכל"
+                  {...a11yProps(7)}
+                  sx={{ marginLeft: 3, marginRight: 3 }}
+                />
               </Tabs>
             </Box>
             <Box dir="rtl">
@@ -277,8 +309,7 @@ const UserInfo = (props: IProps) => {
                         <Grid item xs={12}>
                           <Box>
                             <UserControllerTable
-                              controllerTable={info[name]}
-                              controllerHeader={header}
+                              columns={header}
                               info={info}
                               setInfo={setInfo}
                               name={name}

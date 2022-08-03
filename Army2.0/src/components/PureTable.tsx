@@ -4,18 +4,15 @@ import {
   GridToolbarContainer,
   GridToolbarFilterButton,
   GridToolbarDensitySelector,
+  GridToolbarExport,
+  heIL,
 } from "@mui/x-data-grid";
 import { useState } from "react";
 import { renderProgress } from "./ProgressBarTableCell";
-
-function CustomToolbar() {
-  return (
-    <GridToolbarContainer>
-      <GridToolbarFilterButton />
-      <GridToolbarDensitySelector />
-    </GridToolbarContainer>
-  );
-}
+import "../components/style/StylePureTable.css";
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setData } from "../redux/filterTable";
 
 type RadioParams = {
   שם?: string;
@@ -26,20 +23,11 @@ type RadioParams = {
   ["שם רכיב"]: string;
   id: string;
   מאזינים?: string | string[];
-  הראה: string;
 };
 
 type IProps = {
-  // rows: RadioParams[];
+  rows: RadioParams[];
   columns: string[];
-  info: any;
-  setInfo: any;
-  name: string;
-};
-type checked = {
-  הראה1: Array<boolean>;
-  הראה2: Array<boolean>;
-  הראה3: Array<boolean>;
 };
 
 const shortColumn = ["מושאל", "קוד הצפנה", "קידוד שמע", "תדר", "פורט", "adf"];
@@ -49,15 +37,6 @@ const NeedToBeNumberList = [
   "צריכת מעבד",
   "מספר פורט",
   "תדר",
-];
-const NeedToBeCheckboxList = [
-  "הראה",
-  "הראה1",
-  "הראה2",
-  "הראה3",
-  "הראה במפה",
-  "הראה בפינגר",
-  "הראה במבט על",
 ];
 const customProgressbar = ["תפוסת דיסק", "צריכת זיכרון", "צריכת מעבד"];
 
@@ -70,64 +49,64 @@ const ColumnWidthCalc = (title: string) => {
 
 const ColumnTypeDecider = (title: string) => {
   if (NeedToBeNumberList.includes(title)) return "number";
-  else if (NeedToBeCheckboxList.includes(title)) return "boolean";
   else return "string";
 };
 
 const ShowData = (data: any) => {
-  // console.log(data);
+  console.log(data);
 };
+let count = 1;
 
+function CustomToolbar() {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarFilterButton sx={{ direction: "rtl" }} />
+      <GridToolbarDensitySelector sx={{ direction: "rtl" }} />
+      <GridToolbarExport
+        csvOptions={{
+          fileName: "ויטלי מקמשים בעמ",
+          utf8WithBom: true,
+        }}
+        printOptions={{
+          hideFooter: true,
+          hideToolbar: true,
+          allColumns: true,
+          fileName: "ויטלי מקמשים בעמ",
+        }}
+      />
+    </GridToolbarContainer>
+  );
+}
 const PureTable = (props: IProps) => {
-  const { columns, info, setInfo, name } = props;
+  // Filter the value of device-monitor
+  const { items } = { items: useSelector((state: any) => state.filterTable) };
+  const dispatch: any = useDispatch();
 
-  const rows = info[name];
-
-  // console.log(rows);
-  // console.log(columns);
+  const { rows, columns } = props;
+  const [change, setChange] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(25);
 
-  const [checked, setChecked] = useState<checked>({
-    הראה1: rows.map((row: any) => row["הראה1"] === true),
-    הראה2: rows.map((row: any) => row["הראה2"] === true),
-    הראה3: rows.map((row: any) => row["הראה3"] === true),
-  });
-
-  const editRows = rows.map((row: any) =>
-    Object.assign(row, { id: row["שם רכיב"] || row["id"] })
+  const editRows = rows.map((row) =>
+    Object.assign(row, { id: row["שם רכיב"] })
   );
-
-  const handleChange = (params: any) => {
-    console.log(params);
-    const temp2 = info;
-    temp2[name][params.id][params.field] =
-      temp2[name][params.id][params.field] === false;
-    console.log(temp2);
-    setInfo(temp2);
-    setChecked({
-      הראה1: rows.map((row: any) => row["הראה1"] === true),
-      הראה2: rows.map((row: any) => row["הראה2"] === true),
-      הראה3: rows.map((row: any) => row["הראה3"] === true),
-    });
-  };
-
-  function cellElement(params: any, column: string) {
-    // console.log(params.field);
-    // const field: string = params.field;
-    // console.log(params.id);
-    if (customProgressbar.includes(column)) {
-      return renderProgress(params);
-    } else if (NeedToBeCheckboxList.includes(column)) {
-      return (
-        <Checkbox
-          checked={checked[params.field][params.id]}
-          onChange={() => handleChange(params)}
-        />
-      );
+  
+  const onFilterModelChange = (newFilterModel: any) => {
+    if (change) {
+      setTimeout(function () {
+        setChange(0);
+      }, 1000);
     } else {
-      return <span>{params.value}</span>;
+      if (newFilterModel["items"].length) {
+        const columnField = newFilterModel["items"][0]["columnField"];
+        const operatorValue = newFilterModel["items"][0]["operatorValue"];
+        const value = newFilterModel["items"][0]["value"];
+        dispatch(setData({ columnField, operatorValue, value }));
+      } else {
+        const columnField = newFilterModel["items"];
+        dispatch(setData({ columnField }));
+      }
     }
-  }
+  };
 
   const editColumns = columns.map((column: string) => ({
     field: column,
@@ -137,24 +116,24 @@ const PureTable = (props: IProps) => {
     width: shortColumn.includes(column) ? 50 : ColumnWidthCalc(column),
     type: ColumnTypeDecider(column),
     renderCell: (params: any) => (
-      <Tooltip
-        title={
-          params.value && typeof params.value != "boolean" ? params.value : ""
-        }
-      >
-        {cellElement(params, column)}
+      <Tooltip title={params.value ? params.value : "temp"}>
+        {customProgressbar.includes(column) ? (
+          renderProgress(params)
+        ) : (
+          <span>{params.value}</span>
+        )}
       </Tooltip>
     ),
   }));
 
   return (
-    // <div>
     <Box sx={{ height: 700 }}>
       <DataGrid
+        localeText={heIL.components.MuiDataGrid.defaultProps.localeText}
         density="compact"
         pageSize={pageSize}
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        rowsPerPageOptions={[10, 25, 50, 100, 200]}
+        rowsPerPageOptions={[10, 25, 50, 100]}
         rows={editRows}
         columns={editColumns}
         disableSelectionOnClick
@@ -163,51 +142,13 @@ const PureTable = (props: IProps) => {
         }}
         componentsProps={{ columnsPanel: {} }}
         sx={{
-          borderRadius: "12px",
-          boxShadow: 1,
+          direction: "rtl",
+          borderRadius: "8px",
         }}
-        localeText={{
-          //for change titles for Hebrew
-          // columns panel
-          toolbarColumns: "סינון עמודות",
-          columnsPanelTextFieldLabel: "הכנס שם עמודה",
-          columnsPanelTextFieldPlaceholder: "חיפוש לפי שם עמודה",
-          columnsPanelShowAllButton: "הצג את כולם",
-          columnsPanelHideAllButton: "בטל את כולם",
-          // filters panel
-          toolbarFilters: "סינון טקסט",
-          filterPanelOperators: "סינון בעזרת",
-          filterPanelColumns: "עמודה לסינון",
-          filterPanelInputLabel: "ערך לסינון",
-          filterPanelInputPlaceholder: "הכנס ערך",
-          // Filter operators text
-          filterOperatorContains: "מכיל",
-          filterOperatorEquals: "שווה",
-          filterOperatorStartsWith: "מתחיל ב",
-          filterOperatorEndsWith: "מסתיים ב",
-          filterOperatorIsEmpty: "תוכן ריק",
-          filterOperatorIsNotEmpty: "תוכן לא ריק",
-          filterOperatorIsAnyOf: "חלק מ",
-
-          // density panel
-          toolbarDensity: "צפיפות",
-          toolbarDensityCompact: "קטן",
-          toolbarDensityStandard: "רגיל",
-          toolbarDensityComfortable: "גדול",
-
-          // export panel
-          toolbarExport: "ייצוא קובץ",
-          toolbarExportCSV: "הורדת קובץ אקסל",
-          toolbarExportPrint: "PDF הדפסת קובץ",
-
-          // Column menu text
-          columnMenuShowColumns: "סינון עמודות",
-          columnMenuFilter: "סינון טקסט",
-          columnMenuHideColumn: "הסתר",
-          columnMenuUnsort: "ביטול מיון",
-          columnMenuSortAsc: "מיון לפי א-ב",
-          columnMenuSortDesc: "מיון מילון הפוך",
-        }}
+        filterModel={items}
+        onFilterModelChange={(newFilterModel) =>
+          onFilterModelChange(newFilterModel)
+        }
       />
     </Box>
   );

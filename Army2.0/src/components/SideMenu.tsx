@@ -1,18 +1,17 @@
 import * as React from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import { styled, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
-
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import HeaderAppBar from "./HeaderAppBar";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, generatePath } from "react-router-dom";
 import GeneralView from "../pages/GeneralView";
 import { useNavigate } from "react-router-dom";
 import {
@@ -31,6 +30,9 @@ import UserInfo from "../pages/UserInfo";
 import MapMonitor from "../pages/MapMonitor";
 import StatisticsGraphs from "../pages/StatisticsGraphs";
 import DeviceMonitor from "../pages/DeviceMonitor";
+import { Button, IconButton } from "@mui/material";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -51,6 +53,7 @@ const sideBarMenuList = [
   {
     title: "נתוני משתמש וכלים",
     icon: <RiAccountCircleFill />,
+    // size={25}
     navigationTo: "/user-info",
   },
   {
@@ -164,18 +167,26 @@ const Drawer = styled(MuiDrawer, {
 export default function SideMenu() {
   const [open, setOpen] = React.useState(true);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleClick = () => {
+    setOpen(!open);
   };
 
   const navigate = useNavigate();
 
   const PageClicked = (page: string) => {
     navigate(page);
+  };
+
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const buttonProps = (value: number) => ({
+    selected: selectedIndex === value,
+    onClick: () => setSelectedIndex(value),
+  });
+  const [selectedInd, setSelectedInd] = React.useState(1);
+
+  const handleListItemClick = (event: any, index: number, page: any) => {
+    setSelectedIndex(index);
+    PageClicked(page.navigationTo);
   };
 
   return (
@@ -188,16 +199,28 @@ export default function SideMenu() {
         <Drawer variant="permanent" open={open} anchor="right">
           <DrawerHeader></DrawerHeader>
           <Divider />
-          <List>
+          <List
+            component="nav"
+            sx={{
+              "& .MuiListItemButton-root:hover": {
+                bgcolor: "secondary",
+                "&, & .MuiListItemIcon-root": {
+                  color: "black",
+                },
+              },
+            }}
+          >
             {sideBarMenuList.map((page, index) => (
-              <ListItem key={index} disablePadding sx={{ display: "block" }}>
-                <ListItemButton
-                  onClick={() => PageClicked(page.navigationTo)}
-                  sx={{
-                    minHeight: 48,
-                    px: 2.5,
-                  }}
-                >
+              <ListItem
+                key={index}
+                // disablePadding
+                sx={{ display: "block" }}
+                onClick={() => {
+                  handleListItemClick(event, index, page);
+                }}
+                selected={selectedIndex === 0}
+              >
+                <ListItemButton {...buttonProps(index)}>
                   <ListItemIcon
                     sx={{
                       minWidth: 0,
@@ -219,15 +242,44 @@ export default function SideMenu() {
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-
           <Routes>
             <Route path="/about" element={<About />} />
             <Route path="/favorite-devices" element={<FavoriteDevices />} />
             <Route path="/pinger" element={<Pinger />} />
             <Route path="/version-viewer" element={<VersionViewer />} />
             <Route path="/map-monitor" element={<MapMonitor />} />
-            <Route path="/statistics-graphs" element={<StatisticsGraphs />} />
-            <Route path="/device-monitor" element={<DeviceMonitor />} />
+            <Route
+              path="/statistics-graphs"
+              element={<StatisticsGraphs selectedUnit={selectedUnit} />}
+            />
+            <Route
+              path="/device-monitor/"
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={0} />}
+            />
+            <Route
+              path="/device-monitor/Makmashim"
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={0} />}
+            />
+            <Route
+              path="/device-monitor/RCGW"
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={1} />}
+            />
+            <Route
+              path="/device-monitor/CCU"
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={2} />}
+            />
+            <Route
+              path="/device-monitor/CCT"
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={3} />}
+            />
+            <Route
+              path="/device-monitor/Yadbar"
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={4} />}
+            />
+            <Route
+              path="/device-monitor/Deploy"
+              element={<DeviceMonitor selectedUnit={selectedUnit} tab={5} />}
+            />
             <Route
               path="/general-view"
               element={<GeneralView selectedUnit={selectedUnit} />}
