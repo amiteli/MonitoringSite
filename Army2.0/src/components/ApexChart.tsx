@@ -5,11 +5,11 @@ import ReactApexChart from 'react-apexcharts';
 import Props from 'react-apexcharts';
 
 const fetchUsers = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users");
+  const res = await fetch("../../../api-server/RCGW/json files/statistics/pingerdb.json");
   return res.json();
 };
 
-const ApexChart = (props: Props) => {
+const ApexChart = () => {
   const { data, status } = useQuery("users", fetchUsers);
   
   /*return (<div id="chart">
@@ -17,7 +17,7 @@ const ApexChart = (props: Props) => {
   </div>);*/
 
   return (
-    <div className="App">
+    <div>
       {status === "error" && <p>Error fetching data</p>}
       {status === "loading" && <p>Fetching data...</p>}
       {status === "success" && (
@@ -31,6 +31,6 @@ const ApexChart = (props: Props) => {
   );
 }
 
-const domContainer = document.querySelector('#app');
-ReactDOM.render(React.createElement(ApexChart), domContainer);
+//const domContainer = document.querySelector('#app');
+//ReactDOM.render(React.createElement(ApexChart), domContainer);
 export default ApexChart;
