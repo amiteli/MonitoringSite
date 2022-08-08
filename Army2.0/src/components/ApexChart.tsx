@@ -23,15 +23,15 @@ const temp: StateRecord =
 {
   "Unit99": 
   {
-    "A.A.A.A": [{"time": "04/08/2022 09:05:36", "state": "down"}, {"time": "04/08/2022 09:32:36", "state": "up"}, {"time": "04/08/2022 10:05:36", "state": "down"}, {"time": "4/8/2022 10:32:36", "state": "up"}],
-    "B.B.B.B": [{"time": "04/08/2022 10:05:36", "state": "down"}, {"time": "04/08/2022 10:32:36", "state": "up"}],
-    "C.C.C.C": [{"time": "04/08/2022 10:05:36", "state": "down"}, {"time": "04/08/2022 10:32:36", "state": "up"}],
-    "D.D.D.D": [{"time": "04/08/2022 10:05:36", "state": "down"}, {"time": "04/08/2022 10:32:36", "state": "up"}],
-    "E.E.E.E": [{"time": "04/08/2022 10:05:36", "state": "up"}, {"time": "04/08/2022 10:32:36", "state": "down"}],
-    "F.F.F.F": [{"time": "04/08/2022 10:05:36", "state": "up"}, {"time": "04/08/2022 10:32:36", "state": "down"}],
-    "G.G.G.G": [{"time": "04/08/2022 10:05:36", "state": "up"}, {"time": "04/08/2022 10:32:36", "state": "down"}],
-    "H.H.H.H": [{"time": "04/08/2022 10:05:36", "state": "up"}, {"time": "04/08/2022 10:32:36", "state": "down"}],
-    "I.I.I.I": [{"time": "04/08/2022 10:05:36", "state": "up"}, {"time": "04/08/2022 10:32:36", "state": "down"}]
+    "A.A.A.A": [{"time": "08/08/2022 08:05:36", "state": "down"}, {"time": "08/08/2022 08:32:36", "state": "up"}, {"time": "08/08/2022 09:05:36", "state": "down"}, {"time": "08/08/2022 09:32:36", "state": "up"}],
+    "B.B.B.B": [{"time": "08/08/2022 09:05:36", "state": "down"}, {"time": "08/08/2022 09:32:36", "state": "up"}],
+    "C.C.C.C": [{"time": "08/08/2022 09:05:36", "state": "down"}, {"time": "08/08/2022 09:32:36", "state": "up"}],
+    "D.D.D.D": [{"time": "08/08/2022 09:05:36", "state": "down"}, {"time": "08/08/2022 09:32:36", "state": "up"}],
+    "E.E.E.E": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 09:32:36", "state": "down"}],
+    "F.F.F.F": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 09:32:36", "state": "down"}],
+    "G.G.G.G": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 09:32:36", "state": "down"}],
+    "H.H.H.H": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 09:32:36", "state": "down"}],
+    "I.I.I.I": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 09:32:36", "state": "down"}]
   }
 };
 
@@ -84,19 +84,19 @@ const ApexChart = () =>
 
   Object.keys(temp).map((unit: string) => 
   {
-    var upSeriesItem: SeriesItem = 
-      {
-        name: "up " + ip,
-        data: []
-      };
-      var downSeriesItem: SeriesItem = 
-      {
-        name: "down " + ip,
-        data: []
-      };
+    
     Object.keys(temp[unit]).map((ip) => 
     {
-      
+      var upSeriesItem: SeriesItem = 
+    {
+      name: "up",
+      data: []
+    };
+    var downSeriesItem: SeriesItem = 
+    {
+      name: "down",
+      data: []
+    };
       temp[unit][ip].map((state) =>
       {
         var localTime = new Date();
@@ -111,7 +111,7 @@ const ApexChart = () =>
         // console.log(currentDateTime + " | " + state.time + " | " + state.state); 
 
         let index = temp[unit][ip].indexOf(state);
-        let endStateTime = temp[unit][ip].length > index + 1 ? temp[unit][ip][index + 1].time : currentDateTime;
+        let endStateTime = temp[unit][ip].length > index + 1 ? temp[unit][ip][index + 1].time : state.time;
         console.log(new Date(endStateTime).getTime() + " | " + endStateTime)
         //console.log(unit + " : " + ip + " : {" + state.state + " : " + state.time + "}");
         
@@ -150,10 +150,10 @@ const ApexChart = () =>
         };*/
       });
       console.log(upSeriesItem);
-      
-    });
-    series.push(upSeriesItem);
+      series.push(upSeriesItem);
     series.push(downSeriesItem);
+    });
+    
   });
     
   return (<div id="chart">
