@@ -54,7 +54,8 @@ const ApexChart = () =>
       bar: {
         horizontal: true,
         barHeight: '70%',
-        rangeBarGroupRows: true
+        rangeBarGroupRows: true,
+        distributed: true
       }
     },
     colors: [
@@ -87,7 +88,41 @@ const ApexChart = () =>
     
     Object.keys(temp[unit]).map((ip) => 
     {
-      var upSeriesItem: SeriesItem = 
+      
+      var SeriesItem: SeriesItem = 
+    {
+      name: ip,
+      data: []
+    };
+    temp[unit][ip].map((state) =>
+      {
+        var localTime = new Date();
+        var year = localTime.getFullYear();
+        var month = localTime.getMonth() + 1;
+        var day = localTime.getDate();
+        var hours = localTime.getHours();
+        var minutes = localTime.getMinutes();
+        var seconds = localTime.getSeconds();
+        // const [currentDateTime, setCurrentDateTime] = useState(day + "/" + month + "/" + year + " " + hours + ":" + minutes + ":" + seconds);
+        let currentDateTime = day + "/" + month + "/" + year + " " + hours + ":" + minutes + ":" + seconds;
+        // console.log(currentDateTime + " | " + state.time + " | " + state.state); 
+
+        let index = temp[unit][ip].indexOf(state);
+        let endStateTime = temp[unit][ip].length > index + 1 ? temp[unit][ip][index + 1].time : currentDateTime;
+        // console.log(new Date(endStateTime).getTime() + " | " + endStateTime)
+        //console.log(unit + " : " + ip + " : {" + state.state + " : " + state.time + "}");
+        SeriesItem['data'].push({
+            x: ip,
+            y: [
+              new Date(state.time).getTime(),
+              new Date(endStateTime).getTime()
+            ]
+          })
+      })
+      // console.log(SeriesItem);
+      series.push(SeriesItem);
+      // console.log(series);
+      /*var upSeriesItem: SeriesItem = 
     {
       name: "up",
       data: []
@@ -149,10 +184,10 @@ const ApexChart = () =>
           ]
         };*/
       });
-      console.log(upSeriesItem);
-      series.push(upSeriesItem);
-    series.push(downSeriesItem);
-    });
+    //   console.log(upSeriesItem);
+    //   series.push(upSeriesItem);
+    // series.push(downSeriesItem);
+    // });
     
   });
     
