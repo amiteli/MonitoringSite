@@ -1,5 +1,11 @@
 import * as React from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import {
+  styled,
+  useTheme,
+  Theme,
+  CSSObject,
+  createTheme,
+} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
@@ -38,6 +44,9 @@ import StatisticsGraphs from "../pages/StatisticsGraphs";
 import DeviceMonitor from "../pages/DeviceMonitor";
 import GeneralView from "../pages/GeneralView";
 import { Height } from "@mui/icons-material";
+import { flexbox } from "@mui/system";
+import SignIn from "./SignIn";
+import { ThemeProvider } from "react-bootstrap";
 
 const drawerWidth = 240;
 
@@ -184,16 +193,19 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const [username, setUsername] = React.useState(" ");
+  const [isAdmin, setIsAdmin] = React.useState(false);
+  const [unitAccess, setUnitAccess] = React.useState<Array<string>>([]);
+  const [accessToken, setAccessToken] = React.useState<string>("");
+  // const [selectedUnit, setSelectedUnit] = React.useState(" ");
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
+    <Box display={"inline-flex"}>
       <AppBar
         position="fixed"
         open={open}
         style={{
           background: "#2E3B55",
-          // alignItems: "flex-start",
           paddingTop: theme.spacing(2),
           paddingBottom: theme.spacing(2),
         }}
@@ -248,7 +260,7 @@ export default function MiniDrawer() {
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
-                  px: open ? 2.8 : 3,
+                  px: open ? 1 : 3,
                   marginBottom: "25px",
                 }}
               >
@@ -264,9 +276,8 @@ export default function MiniDrawer() {
                   {element.icon}
                 </ListItemIcon>
                 <ListItemText
-                  align="right"
                   primary={element.title}
-                  sx={{ opacity: open ? 1 : 0 }}
+                  sx={{ opacity: open ? 1 : 0, textAlign:"right" }}
                 />
               </ListItemButton>
             </ListItem>
@@ -275,10 +286,21 @@ export default function MiniDrawer() {
       </Drawer>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, paddingTop: theme.spacing(6) }}
+        sx={{ flexGrow: 1,p:2, paddingTop: theme.spacing(6), width:"100vw"}}
       >
         <DrawerHeader />
         <Routes>
+          <Route
+            path="/login-page"
+            element={
+              <SignIn
+                setUsername={setUsername}
+                setIsAdmin={setIsAdmin}
+                setUnitAccess={setUnitAccess}
+                setAccessToken={setAccessToken}
+              />
+            }
+          />
           <Route path="/about" element={<About />} />
           <Route path="/favorite-devices" element={<FavoriteDevices />} />
           <Route path="/pinger" element={<Pinger />} />

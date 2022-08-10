@@ -241,7 +241,7 @@ const UserInfo = (props: IProps) => {
   // console.log(info);
   return (
     <>
-      <Paper sx={{ bgcolor: "#f3f3f3" }}>
+      <Paper sx={{ bgcolor: "#f3f3f3", width:"94vw" }}>
         <Box>
           <Box sx={{ width: "100%", borderRadius: 4 }}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>

@@ -70,10 +70,6 @@ const MakmashTable = (props: IProps) => {
     try {
       const res = await fetch(
         `${import.meta.env.VITE_SERVER_URL}/radioStates/${selectedUnit}`,
-        {
-          headers: { authorization: "Bearer " + accessToken },
-          // unit,
-        }
       );
       if (!res.ok) {
         console.log("error at fetching radioStates");

@@ -21,84 +21,86 @@ const StatisticsGraphs = (props: Props) => {
   const { selectedUnit } = props;
   return (
     <div>
-      <Grid container direction="column" sx={{ width: "100%" }}>
+      <Grid container direction="column">
         <Grid container>
           <Grid
             item
+            width={"30%"}
             mb={2}
-            xs={11.8}
+            ml={2}
             bgcolor={"rgba(242, 242, 242)"}
             borderRadius={4}
-            height={"100%"}
+            height={600}
+            wrap={"nowrap"}
           >
             <Typography
-              variant="h5"
+              variant="h6"
               align="center"
               mb={2}
               bgcolor={"rgba(75, 192, 192, 1)"}
               color={"white"}
-              p={0.5}
-              sx={{ borderTopLeftRadius: 4, borderTopRightRadius: 4 }}
+              sx={{ borderTopLeftRadius: 4, borderTopRightRadius: 4 ,letterSpacing: "0.9px"}}
             >
-              פילוח תקינות רכיבים
+              כשירות רכיבים
             </Typography>
             <DoughuntCharts selectedUnit={selectedUnit} />
           </Grid>
-          
-          <Grid
-            item
-            xs={5.5}
-            bgcolor={"rgba(242, 242, 242)"}
-            borderRadius={4}
-            ml={2}
-          >
+
+          <Grid item width={"30%"} ml={2} bgcolor={"rgba(242, 242, 242)"} borderRadius={4} height={600} wrap={"nowrap"}>
             <Typography
               variant="h6"
               align="center"
-              mb={1}
               bgcolor={"secondary.main"}
               color={"white"}
-              sx={{ borderTopLeftRadius: 4, borderTopRightRadius: 4 }}
+              sx={{
+                borderTopLeftRadius: 4,
+                borderTopRightRadius: 4,
+                letterSpacing: "0.9px",
+              }}
             >
-              רשתות מול מקמ"שים
+              כשירות מקמ"שים בחתך רשתות
             </Typography>
-            <NetWorkChart selectedUnit={selectedUnit}/>
+            <NetWorkChart selectedUnit={selectedUnit} />
           </Grid>
-          <Grid item xs={6.2} bgcolor={"rgba(242, 242, 242)"} borderRadius={4}>
+          <Grid item width={"37%"} bgcolor={"rgba(242, 242, 242)"} borderRadius={4} height={600} wrap={"nowrap"}>
             <Typography
               variant="h6"
               align="center"
-              mb={1}
               bgcolor={"success.main"}
               color={"white"}
-              sx={{ borderTopLeftRadius: 4, borderTopRightRadius: 4 }}
+              sx={{
+                borderTopLeftRadius: 4,
+                borderTopRightRadius: 4,
+                letterSpacing: "0.9px",
+              }}
             >
-              גרף נוסף
+              כשירות מקמ"שים כ"ל
             </Typography>
           </Grid>
         </Grid>
         <Grid
-            item
-            mb={2}
-            mt={2}
-            xs={10}
-            bgcolor={"rgba(242, 242, 242)"}
-            borderRadius={4}
-            height={"100%"}
+          item
+          width={"100%"}
+          bgcolor={"rgba(242, 242, 242)"}
+          borderRadius={4}
+          height={"100%"}
+        >
+          <Typography
+            variant="h6"
+            align="center"
+            mb={1}
+            bgcolor={"primary.main"}
+            color={"white"}
+            sx={{
+              borderTopLeftRadius: 4,
+              borderTopRightRadius: 4,
+              letterSpacing: "0.9px",
+            }}
           >
-            <Typography
-              variant="h5"
-              align="center"
-              mb={1}
-              bgcolor={"primary.main"}
-              color={"white"}
-              p={0.5}
-              sx={{ borderTopLeftRadius: 4, borderTopRightRadius: 4 }}
-            >
-              פילוח על פי גרפים
-            </Typography>
-            <DynamicSection selectedUnit={selectedUnit} />
-          </Grid>
+            כשירות מקמ"שים בחתך מיקומים
+          </Typography>
+          <DynamicSection selectedUnit={selectedUnit} />
+        </Grid>
       </Grid>
     </div>
   );

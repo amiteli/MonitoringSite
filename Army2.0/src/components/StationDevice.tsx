@@ -9,6 +9,7 @@ import { setData } from "../redux/filterTable";
 type IProps = {
   data: oneDevice;
   location: string;
+  devicesLen: number;
 };
 type oneDevice = {
   device: string;
@@ -17,7 +18,9 @@ type oneDevice = {
   FAILED: number;
 };
 
-const DEVICE_WIDTH: number = 80;
+const calcHeaderWidth = (devicesLen: number) => {
+  return 100 / devicesLen + "%";
+};
 
 const percentCalculator = (
   okNum: number,
@@ -35,7 +38,7 @@ const percentCalculator = (
 };
 
 const StationDevice = (props: IProps) => {
-  const { data, location } = props;
+  const { data, location, devicesLen } = props;
 
   const {
     device,
@@ -76,14 +79,16 @@ const StationDevice = (props: IProps) => {
       item
       container
       sx={{
-        width: DEVICE_WIDTH,
-        borderLeft: 1,
+        width: () => calcHeaderWidth(devicesLen),
+        border: 1,
         borderColor: "#D3D3D3",
-        px: 0.5,
+        px: 0.3,
       }}
     >
       <Grid item xs={12}>
         <Typography
+          paddingLeft={1.5}
+          paddingRight={1.5}
           align="center"
           sx={{ fontWeight: "bold", cursor: "pointer", p: "1px" }}
           // color={colorsOfDevices[`${device}`]}

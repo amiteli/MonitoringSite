@@ -13,7 +13,7 @@ const NetWorkChart = (props: IProps) => {
 
   return (
     <Box   sx={{
-      height: 300,
+      height: 560,
       overflow: "hidden",
       overflowY: "scroll",
     }}>

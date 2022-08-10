@@ -84,12 +84,12 @@ const PureTable = (props: IProps) => {
 
   const { rows, columns } = props;
   const [change, setChange] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(25);
+  const [pageSize, setPageSize] = useState<number>(50);
 
   const editRows = rows.map((row) =>
     Object.assign(row, { id: row["שם רכיב"] })
   );
-  
+
   const onFilterModelChange = (newFilterModel: any) => {
     if (change) {
       setTimeout(function () {
@@ -129,6 +129,7 @@ const PureTable = (props: IProps) => {
   return (
     <Box sx={{ height: 700 }}>
       <DataGrid
+        disableVirtualization={true}
         localeText={heIL.components.MuiDataGrid.defaultProps.localeText}
         density="compact"
         pageSize={pageSize}

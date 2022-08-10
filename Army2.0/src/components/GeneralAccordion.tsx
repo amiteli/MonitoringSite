@@ -6,6 +6,7 @@ import {
   Dialog,
   Divider,
   IconButton,
+  Paper,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -114,7 +115,7 @@ const GeneralAccordion = (props: IProps) => {
   };
 
   return (
-    <div>
+    <>
       <Dialog fullScreen open={open} onClose={handleClose}>
         <AppBar sx={{ position: "relative" }}>
           <Toolbar>
@@ -166,7 +167,7 @@ const GeneralAccordion = (props: IProps) => {
             })}
         </Box>
       </Dialog>
-      <Grid container justifyContent={"flex-end"} mb={2}>
+      <Grid container  mb={2}>
         <Button onClick={handleClickOpen}>
           הצג הכל
           <FullscreenIcon sx={{ mr: 0.5 }} />
@@ -204,8 +205,9 @@ const GeneralAccordion = (props: IProps) => {
             </Accordion>
           );
         })}
-    </div>
+   </>
   );
+  
 };
 
 export default GeneralAccordion;

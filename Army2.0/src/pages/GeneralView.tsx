@@ -14,16 +14,13 @@ type IProps = {
 const GeneralView = (props: IProps) => {
   const { selectedUnit } = props;
   return (
-    <>
+    <Paper elevation={0} sx={{ width: "94vw"}}>
       <Grid container direction="column" sx={{ width: "100%" }}>
-        {/* <Grid item xs={2} sx={{ mb: 2 }}>
-          <TableOfContents />
-        </Grid> */}
-        <Grid item xs={10}>
+        <Grid item xs={12}>
           <GeneralAccordion selectedUnit={selectedUnit} />
         </Grid>
       </Grid>
-    </>
+    </Paper>
   );
 };
 

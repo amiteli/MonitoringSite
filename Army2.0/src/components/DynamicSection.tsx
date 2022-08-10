@@ -58,16 +58,16 @@ const DynamicSection = (props: IProps) => {
   return (
     <>
         <Grid container direction="row" justifyContent="center">
-          <Grid item xs={5} md={2.5} sx={{ p: 1, ml:2 }}>
+          <Grid item xs={5} md={2.5} sx={{ p: 1, ml:1 }}>
             <MultiCheckBoxSelect stationsData={stationsData} title="צפון" />
           </Grid>
-          <Grid item xs={5} md={2.5} sx={{ p: 1, ml:2 }}>
+          <Grid item xs={5} md={2.5} sx={{ p: 1, ml:1 }}>
             <MultiCheckBoxSelect stationsData={stationsData} title="דרום" />
           </Grid>
-          <Grid item xs={5} md={2.5} sx={{ p: 1, ml:2}}>
+          <Grid item xs={5} md={2.5} sx={{ p: 1, ml:1}}>
             <MultiCheckBoxSelect stationsData={stationsData} title="מזרח" />
           </Grid>
-          <Grid item xs={5} md={2.5} sx={{ p: 1, ml:2 }}>
+          <Grid item xs={5} md={2.5} sx={{ p: 1, ml:1 }}>
             <MultiCheckBoxSelect stationsData={stationsData} title="מערב" />
           </Grid>
         </Grid>
