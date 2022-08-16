@@ -33,6 +33,7 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
+  height:"100%"
 }));
 // const onDownload = () => {
 //   const link = document.createElement("a");
@@ -78,20 +79,20 @@ const VersionViewer = (props: Props) => {
     <Box sx={{ width: "100%" }}>
       <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         {Array.from(Array(4)).map((_, index) => (
-          <Grid item xs={6} md={3}>
+          <Grid item xs={6} md={6}>
             <Item>
-              <Card style={{ border: "none", boxShadow: "none"}}>
+              <Card style={{ border: "none", boxShadow: "none",backgroundColor:"transparent"}}>
                 <CardHeader
                   className={cardHeaderTitleStyle.title}
-                  sx={{ margin: "0 auto", width: "50%" }}
+                  sx={{ margin: "0 auto", width: "70%" }}
                   title={cardHeadersTitle[index]}
                   subheader={cardHeadersSubHeader[index]}
                 />
                 <Box sx={{ margin: "0 auto" }}>
-                  <img src={cardImages[index]} height={200} width={200} />
+                  <img src={cardImages[index]} height={150} width={150} />
                 </Box>
                 <CardContent>
-                  <Box sx={{ margin: "0 auto", width: "50%" }}>
+                  <Box sx={{ margin: "0 auto", width: "70%" }}>
                     This impressive paella is a perfect party dish and a fun
                     meal to cook together with your guests. Add 1 cup of frozen
                     peas along with the mussels, if you like.

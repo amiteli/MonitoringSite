@@ -19,6 +19,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Box, fontWeight } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import { makeStyles } from "@mui/styles";
 
 type IProps = {
   selectedUnit: string;
@@ -49,7 +50,13 @@ type DevicePerems = {
   ERROR: number;
   FAILED: number;
 };
-
+// const useStyles = makeStyles({
+//   style: {
+//     "&	.MuiButton-disableElevation": {
+//       display:"none",
+//     },
+//   },
+// });
 const GeneralAccordion = (props: IProps) => {
   const { selectedUnit } = props;
 
@@ -113,11 +120,11 @@ const GeneralAccordion = (props: IProps) => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  // const button = useStyles();
   return (
     <>
       <Dialog fullScreen open={open} onClose={handleClose}>
-        <AppBar sx={{ position: "relative" }}>
+        <AppBar sx={{ position: "relative", backgroundColor: "#2e3b55" }}>
           <Toolbar>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               כל הכלים
@@ -141,7 +148,7 @@ const GeneralAccordion = (props: IProps) => {
                   <Typography
                     sx={{
                       fontSize: "20px",
-                      color: "primary.main",
+                      color: "#2e3b55",
                       fontWeight: "bold",
                     }}
                   >
@@ -167,7 +174,7 @@ const GeneralAccordion = (props: IProps) => {
             })}
         </Box>
       </Dialog>
-      <Grid container  mb={2}>
+      <Grid container mb={2}>
         <Button onClick={handleClickOpen}>
           הצג הכל
           <FullscreenIcon sx={{ mr: 0.5 }} />
@@ -205,9 +212,8 @@ const GeneralAccordion = (props: IProps) => {
             </Accordion>
           );
         })}
-   </>
+    </>
   );
-  
 };
 
 export default GeneralAccordion;
