@@ -17,7 +17,6 @@ const PageHeader = (props: IProps) => {
       direction="row"
       sx={{
         display: "flex",
-        width: "90vw",
       }}
     >
       <Grid item xs={2}>

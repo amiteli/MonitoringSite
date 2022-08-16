@@ -140,7 +140,7 @@ const StatisticsAcordion = (props: IProps) => {
             options={networks[0]}
             getOptionLabel={(option) => option}
             filterOptions={filterOptions}
-            sx={{ width: 300, m: 2 }}
+            sx={{ width: 270, m:"0 auto", mt:2,mb:2}}
             renderInput={(params) => (
               <TextField {...params} label="סנן רשתות" />
             )}
@@ -160,7 +160,7 @@ const StatisticsAcordion = (props: IProps) => {
                   <Grid item xs>
                     <Typography>{header.network}</Typography>
                   </Grid>
-                    <Typography color={"secondary.main"} fontWeight={"bold"} paddingLeft={2}>
+                    <Typography color={"black"} fontWeight={"bold"} paddingLeft={2}>
                       {header.OK + header.ERROR + header.FAILED} / 
                       <Typography
                         display={"inline-flex"}

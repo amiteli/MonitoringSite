@@ -20,7 +20,7 @@ import {
 } from "react-router-dom";
 import { ReactQueryDevtools } from "react-query/devtools";
 import MakmashTable from "../components/MakmashTable";
-
+import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PageHeader from "../components/PageHeader";
 import InfoText from "../components/InfonText";
@@ -37,7 +37,21 @@ interface TabPanelProps {
   index: number;
   value: number;
 }
-
+const useStyles = makeStyles({
+  tabs: {
+    "& .MuiTab-root":{
+      color:"white"
+    },
+    "& .MuiTab-root.Mui-selected": {
+      fontWeight:"bold",
+      fontSize:"1.02rem",
+      color:"#f0bc5e"
+    },
+    "& .MuiTabs-indicator": {
+      display: "none",
+    },
+  },
+});
 const deviceTableNameList = [
   "Makmash",
   "RCGW",
@@ -134,74 +148,63 @@ const DevicesTablePage = (props: IProps) => {
   const handleClick = (): void => {
     navigate("/show-by-page");
   };
-
+  const tabsPanelStyle = useStyles();
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <Paper elevation={0}>
-          <Box>
-            <Box>
-              <PageHeader
-                // username={username}
-                // isAdmin={isAdmin}
-                selectedUnit={selectedUnit}
-                // accessToken={accessToken}
-              />
-            </Box>
-            <Box
-              sx={{
-                // width: "95%",
-                border: "1px solid #e0e0e0",
-                borderRadius: 4,
-              }}
-            >
-              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  textColor="secondary"
-                  indicatorColor="secondary"
-                  aria-label="secondary tabs example"
-                  dir="rtl"
-                  centered
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
+        <Grid item xs={12}>
+          <ThemeProvider theme={theme}>
+              <Box>
+                <PageHeader
+                  // username={username}
+                  // isAdmin={isAdmin}
+                  selectedUnit={selectedUnit}
+                  // accessToken={accessToken}
+                />
+                <Box
+                  sx={{
+                    border: "1px solid #e0e0e0",
+                    borderRadius: 4,
+                  }}
                 >
-                  <Tab label='מקמ"שים' {...a11yProps(0)} />
-                  <Tab label='ישל"קים' {...a11yProps(1)} />
-                  <Tab label="שרתי רדיו" {...a11yProps(2)} />
-                  <Tab label="עמדות CCT" {...a11yProps(3)} />
-                  <Tab label='ידב"רים' {...a11yProps(4)} />
-                  <Tab label="שרתי הפצה" {...a11yProps(5)} />
-                </Tabs>
-              </Box>
+                  <Box sx={{ borderBottom: 1, borderColor: "divider",borderTopLeftRadius: 4,borderTopRightRadius:4,
+                    backgroundColor:"#2e3b55"}}>
+                    <Tabs
+                      className={tabsPanelStyle.tabs}
+                      value={value}
+                      onChange={handleChange}
+                      aria-label="secondary tabs example"
+                      dir="rtl"
+                      centered
+                    >
+                      <Tab label='מקמ"שים' {...a11yProps(0)} />
+                      <Tab label='ישל"קים' {...a11yProps(1)} />
+                      <Tab label="שרתי רדיו" {...a11yProps(2)} />
+                      <Tab label="עמדות CCT" {...a11yProps(3)} />
+                      <Tab label='ידב"רים' {...a11yProps(4)} />
+                      <Tab label="שרתי הפצה" {...a11yProps(5)} />
+                    </Tabs>
+                  </Box>
 
-              {deviceTableNameList &&
-                deviceTableNameList.map((deviceName, index) => {
-                  return (
-                    <TabPanel value={value} index={index}>
-                      <MakmashTable
-                        // accessToken={accessToken}
-                        selectedUnit={selectedUnit}
-                        table={deviceName}
-                        headerName={deviceHeaderNameList[value]}
-                      />
-                    </TabPanel>
-                  );
-                })}
-            </Box>
-            <ReactQueryDevtools initialIsOpen={false} />
-            {/* <Stack direction="row" spacing={5} justifyContent="center">
-              <Button
-                variant="contained"
-                onClick={handleClick}
-                size="large"
-                sx={{ margin: 5, px: 7 }}
-              >
-                חזור
-              </Button>
-            </Stack> */}
-          </Box>
-        </Paper>
-      </ThemeProvider>
+                  {deviceTableNameList &&
+                    deviceTableNameList.map((deviceName, index) => {
+                      return (
+                        <TabPanel value={value} index={index}>
+                          <MakmashTable
+                            // accessToken={accessToken}
+                            selectedUnit={selectedUnit}
+                            table={deviceName}
+                            headerName={deviceHeaderNameList[value]}
+                          />
+                        </TabPanel>
+                      );
+                    })}
+                </Box>
+                <ReactQueryDevtools initialIsOpen={false} />
+              </Box>
+          </ThemeProvider>
+        </Grid>
+      </Grid>
     </>
   );
 };

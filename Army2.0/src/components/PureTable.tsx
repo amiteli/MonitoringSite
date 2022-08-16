@@ -1,4 +1,4 @@
-import { Box, Checkbox, Tooltip } from "@mui/material";
+import { Box, Checkbox, IconButton, Tooltip } from "@mui/material";
 import {
   DataGrid,
   GridToolbarContainer,
@@ -13,6 +13,8 @@ import "../components/style/StylePureTable.css";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setData } from "../redux/filterTable";
+import { Button } from "react-bootstrap";
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 type RadioParams = {
   שם?: string;
@@ -39,6 +41,7 @@ const NeedToBeNumberList = [
   "תדר",
 ];
 const customProgressbar = ["תפוסת דיסק", "צריכת זיכרון", "צריכת מעבד"];
+const vncController = "השתלטות מרחוק";
 
 const ColumnWidthCalc = (title: string) => {
   let stringLength: number = title.length;
@@ -60,8 +63,7 @@ let count = 1;
 function CustomToolbar() {
   return (
     <GridToolbarContainer>
-      <GridToolbarFilterButton sx={{ direction: "rtl" }} />
-      <GridToolbarDensitySelector sx={{ direction: "rtl" }} />
+      <GridToolbarDensitySelector  sx={{ direction: "rtl" }} />
       <GridToolbarExport
         csvOptions={{
           fileName: "ויטלי מקמשים בעמ",
@@ -74,6 +76,7 @@ function CustomToolbar() {
           fileName: "ויטלי מקמשים בעמ",
         }}
       />
+      <GridToolbarFilterButton sx={{ direction: "rtl" }} />
     </GridToolbarContainer>
   );
 }
@@ -107,7 +110,22 @@ const PureTable = (props: IProps) => {
       }
     }
   };
+  // function for download the Menachem's script to open vns remote without using username & password
+const downloadBat = (ip:string) => {
+  const file = new File([`start "" "c:/Program Files/uvnc bvba/UltraVNC/vncviewer.exe" "${ip}" /password P@ssw0rd\n del "%~f0"`], 'vnc.bat', {
+    type: 'bat',
+  })
+  const link = document.createElement('a')
+  const url = URL.createObjectURL(file)
 
+  link.href = url
+  link.download = file.name
+  document.body.appendChild(link)
+  link.click()
+
+  document.body.removeChild(link)
+  window.URL.revokeObjectURL(url)
+}
   const editColumns = columns.map((column: string) => ({
     field: column,
     headerName: column,
@@ -116,12 +134,15 @@ const PureTable = (props: IProps) => {
     width: shortColumn.includes(column) ? 50 : ColumnWidthCalc(column),
     type: ColumnTypeDecider(column),
     renderCell: (params: any) => (
-      <Tooltip title={params.value ? params.value : "temp"}>
-        {customProgressbar.includes(column) ? (
+      <Tooltip title={params.value ? params.value : "vnc"}>
+        {customProgressbar.includes(column)? (
           renderProgress(params)
         ) : (
+          vncController.includes(column)? 
+          <IconButton onClick={()=>downloadBat(params.row.IP)}><RemoveRedEyeIcon/></IconButton>:
           <span>{params.value}</span>
         )}
+        
       </Tooltip>
     ),
   }));

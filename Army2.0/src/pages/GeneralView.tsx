@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import React from "react";
 import TableOfContents from "../components/TableOfContents";
 import GeneralAccordion from "../components/GeneralAccordion";
+import { Container } from "react-bootstrap";
 
 type IProps = {
   selectedUnit: string;
@@ -13,14 +14,9 @@ type IProps = {
 
 const GeneralView = (props: IProps) => {
   const { selectedUnit } = props;
+
   return (
-    <Paper elevation={0} sx={{ width: "94vw"}}>
-      <Grid container direction="column" sx={{ width: "100%" }}>
-        <Grid item xs={12}>
-          <GeneralAccordion selectedUnit={selectedUnit} />
-        </Grid>
-      </Grid>
-    </Paper>
+    <GeneralAccordion selectedUnit={selectedUnit} />
   );
 };
 

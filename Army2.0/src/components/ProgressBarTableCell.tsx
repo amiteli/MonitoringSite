@@ -54,6 +54,6 @@ const ProgressBar = React.memo(function ProgressBar(props: ProgressBarProps) {
 });
 
 export function renderProgress(params: any) {
-  // console.log(params.value);
+
   return <ProgressBar value={params.value} />;
 }

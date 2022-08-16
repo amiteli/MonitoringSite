@@ -43,10 +43,10 @@ import MapMonitor from "../pages/MapMonitor";
 import StatisticsGraphs from "../pages/StatisticsGraphs";
 import DeviceMonitor from "../pages/DeviceMonitor";
 import GeneralView from "../pages/GeneralView";
-import { Height } from "@mui/icons-material";
+import { Height, Login } from "@mui/icons-material";
 import { flexbox } from "@mui/system";
 import SignIn from "./SignIn";
-import { ThemeProvider } from "react-bootstrap";
+import { Container, ThemeProvider } from "react-bootstrap";
 
 const drawerWidth = 240;
 
@@ -168,11 +168,11 @@ const Drawer = styled(MuiDrawer, {
   boxSizing: "border-box",
   ...(open && {
     ...openedMixin(theme),
-    "& .MuiDrawer-paper": openedMixin(theme),
+    "& .MuiDrawer-paper": openedMixin(theme)
   }),
   ...(!open && {
     ...closedMixin(theme),
-    "& .MuiDrawer-paper": closedMixin(theme),
+    "& .MuiDrawer-paper": closedMixin(theme)
   }),
 }));
 
@@ -200,7 +200,7 @@ export default function MiniDrawer() {
   // const [selectedUnit, setSelectedUnit] = React.useState(" ");
 
   return (
-    <Box display={"inline-flex"}>
+    <Box display={"flex"}>
       <AppBar
         position="fixed"
         open={open}
@@ -277,7 +277,7 @@ export default function MiniDrawer() {
                 </ListItemIcon>
                 <ListItemText
                   primary={element.title}
-                  sx={{ opacity: open ? 1 : 0, textAlign:"right" }}
+                  sx={{ opacity: open ? 1 : 0, textAlign: "right" }}
                 />
               </ListItemButton>
             </ListItem>
@@ -286,7 +286,7 @@ export default function MiniDrawer() {
       </Drawer>
       <Box
         component="main"
-        sx={{ flexGrow: 1,p:2, paddingTop: theme.spacing(6), width:"100vw"}}
+        sx={{ width: "100%", p: 2, paddingTop: theme.spacing(6) }}
       >
         <DrawerHeader />
         <Routes>
@@ -343,7 +343,7 @@ export default function MiniDrawer() {
             element={<GeneralView selectedUnit={selectedUnit} />}
           />
           <Route path="user-info" element={<UserInfo />} />
-          <Route path="*" element={<Navigate to="/user-info" />} />
+          <Route path="*" element={<Navigate to="/login-page" />} />
         </Routes>
       </Box>
     </Box>

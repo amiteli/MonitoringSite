@@ -26,22 +26,22 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-      <CssBaseline />
-        <Box
-          style={{
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          <NewSideMenu />
-        </Box>
-      </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  );
+    return (
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <CssBaseline />
+          <Box
+            style={{
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            <NewSideMenu />
+          </Box>
+        </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    );
 }
 
 export default App;

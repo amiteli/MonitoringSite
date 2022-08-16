@@ -1,4 +1,4 @@
-import { Box, Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid, Paper, styled, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import DoughuntChart from "./DoughnutChart";
@@ -23,7 +23,13 @@ type RcgwDataObject = {
   dataNumberArray: Array<number>;
   chartTitle: string;
 };
-
+const Item = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  // padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
 //********** Component **********//
 const DoughnutCharts = (props: IProps) => {
   const { selectedUnit } = props;
@@ -236,39 +242,51 @@ const DoughnutCharts = (props: IProps) => {
 
   if (isError) return <>"An error has occurred: " {errorText}</>;
 
-  const donutsCharts:any = {
-    RCGW : <DoughuntChart
-      labels={RcgwDataStateArray}
-      data={RcgwDataNumberArray}
-      chartTitle={RcgwChartTitle}
-    />,
-    Makmash: <DoughuntChart
-      labels={MakmashimDataArray}
-      data={MakmashimNumberArray}
-      chartTitle={MakmashimChartTitle}
-    />,
-    Yadbar: <DoughuntChart
-      labels={YadbarDataArray}
-      data={YadbarNumberArray}
-      chartTitle={YadbarChartTitle}
-    />,
-    CCU: <DoughuntChart
-      labels={CCUDataArray}
-      data={CCUNumberArray}
-      chartTitle={CCUChartTitle}
-    />,
-    
-    CCT: <DoughuntChart
-      labels={CCTDataArray}
-      data={CCTNumberArray}
-      chartTitle={CCTChartTitle}
-    />,
+  const donutsCharts: any = {
+    RCGW: (
+      <DoughuntChart
+        labels={RcgwDataStateArray}
+        data={RcgwDataNumberArray}
+        chartTitle={RcgwChartTitle}
+      />
+    ),
+    Makmash: (
+      <DoughuntChart
+        labels={MakmashimDataArray}
+        data={MakmashimNumberArray}
+        chartTitle={MakmashimChartTitle}
+      />
+    ),
+    Yadbar: (
+      <DoughuntChart
+        labels={YadbarDataArray}
+        data={YadbarNumberArray}
+        chartTitle={YadbarChartTitle}
+      />
+    ),
+    CCU: (
+      <DoughuntChart
+        labels={CCUDataArray}
+        data={CCUNumberArray}
+        chartTitle={CCUChartTitle}
+      />
+    ),
 
-    Deploy: <DoughuntChart
-      labels={SoftwareDistributionServerDataArray}
-      data={SoftwareDistributionServerNumberArray}
-      chartTitle={SoftwareDistributionServerChartTitle}
-    />,
+    CCT: (
+      <DoughuntChart
+        labels={CCTDataArray}
+        data={CCTNumberArray}
+        chartTitle={CCTChartTitle}
+      />
+    ),
+
+    Deploy: (
+      <DoughuntChart
+        labels={SoftwareDistributionServerDataArray}
+        data={SoftwareDistributionServerNumberArray}
+        chartTitle={SoftwareDistributionServerChartTitle}
+      />
+    ),
   };
   const chartTitles = [
     RcgwChartTitle,
@@ -292,23 +310,21 @@ const DoughnutCharts = (props: IProps) => {
     "#D72323",
     "#62A388",
   ];
+
   return (
     <>
-      {/* פילוח תקינות רכיבים */}
-      <Box sx={{ flexGrow: 1}}>
-        <Grid
-          container
-        >
-          <Grid item width={"46%"} ml={1}>
+      <Box sx={{ width: "100%"}}>
+        <Grid container>
+          <Grid item xs={6}>
             {donutsCharts.RCGW}
           </Grid>
-          <Grid item width={"46%"} mr={1}>
+          <Grid item xs={6}>
             {donutsCharts.Makmash}
           </Grid>
-          <Grid item width={"46%"} ml={1}>
+          <Grid item xs={6}>
             {donutsCharts.Yadbar}
           </Grid>
-          <Grid item width={"46%"} mr={1}>
+          <Grid item xs={6}>
             {donutsCharts.CCT}
           </Grid>
         </Grid>
