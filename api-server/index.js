@@ -118,6 +118,23 @@ app.get("/api/charts/rcgw-chart-data/:id", (req, res) => {
   );
 });
 
+app.get("/api/pinger/hitory/:id", (req, res) => {
+  const { id } = req.params;
+  // To read as a text file, you have to specify the correct
+  // encoding.
+  fs.readFile(
+    `./RCGW/json files/pinger/pingerHistory.json`,
+    "utf8",
+    (err, data) => {
+      // You should always specify the content type header,
+      // when you don't use 'res.json' for sending JSON.
+      res.set("Content-Type", "application/json");
+      // console.log(data);
+      res.send(JSON.parse(data));
+    }
+  );
+});
+
 app.get("/api/last-modified-date/:id", (req, res) => {
   const { id } = req.params;
 
