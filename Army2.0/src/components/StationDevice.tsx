@@ -78,11 +78,15 @@ const StationDevice = (props: IProps) => {
     <Grid
       item
       container
+      bgcolor={"#2E3B55"}
       sx={{
         width: () => calcHeaderWidth(devicesLen),
         border: 1,
-        borderColor: "#D3D3D3",
+        borderColor: "white",
+        // borderColor: "#D3D3D3",
         px: 0.3,
+        
+        // color:"white",bgcolor:"#2E3B55"
       }}
     >
       <Grid item xs={12}>
@@ -90,8 +94,9 @@ const StationDevice = (props: IProps) => {
           paddingLeft={1.5}
           paddingRight={1.5}
           align="center"
-          sx={{ fontWeight: "bold", cursor: "pointer", p: "1px" }}
-          // color={colorsOfDevices[`${device}`]}
+          sx={{  cursor: "pointer", p: "1px", }}
+          color={"white"}
+
           onClick={() => navigateToTable(device, location)}
         >
           {device}

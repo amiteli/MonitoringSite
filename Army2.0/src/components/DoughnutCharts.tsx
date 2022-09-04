@@ -23,13 +23,7 @@ type RcgwDataObject = {
   dataNumberArray: Array<number>;
   chartTitle: string;
 };
-const Item = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  // padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+
 //********** Component **********//
 const DoughnutCharts = (props: IProps) => {
   const { selectedUnit } = props;
@@ -313,18 +307,18 @@ const DoughnutCharts = (props: IProps) => {
 
   return (
     <>
-      <Box sx={{ width: "100%"}}>
+      <Box sx={{ width: "100%" }}>
         <Grid container>
-          <Grid item xs={6}>
+          <Grid item xs={3}>
             {donutsCharts.RCGW}
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={3}>
             {donutsCharts.Makmash}
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={3}>
             {donutsCharts.Yadbar}
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={3}>
             {donutsCharts.CCT}
           </Grid>
         </Grid>

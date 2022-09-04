@@ -102,11 +102,253 @@
     }
   ],
   "NetworkChartData": [
-    { "id": 1, "network": "בלה בלה 1", "OK": 2, "ERROR": 1, "FAILED": 0 },
-    { "id": 2, "network": "ראשון לציון", "OK": 1, "ERROR": 2, "FAILED": 1 },
-    { "id": 3, "network": "פתח תקווה", "OK": 1, "ERROR": 1, "FAILED": 1 },
-    { "id": 4, "network": "ישראל", "OK": 1, "ERROR": 0, "FAILED": 2 },
-    { "id": 5, "network": "קיבוץ מזרע", "OK": 2, "ERROR": 1, "FAILED": 1 }
+    {
+      "network": "אופקים",
+      "statusNetwork": {
+        "OK": 2,
+        "Fail":5
+      },
+      "devices": [
+        {
+          "deviceId": "R03300R01_1",
+          "location": "ראשון לציון",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_2",
+          "location": "הר קרן",
+          "status": "success"
+        },
+        {
+          "deviceId": "R03300R01_2",
+          "location": "הר קרן",
+          "status": "success"
+        },
+        {
+          "deviceId": "R03300R01_3",
+          "location": "מבצעים אוגדה",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_3",
+          "location": "מבצעים אוגדה",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_3",
+          "location": "מבצעים אוגדה",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_4",
+          "location": "הר קרן",
+          "status": "fail"
+        }
+      ]
+    },
+    {
+      "network": "ראשון לציון",
+      "statusNetwork": {
+        "OK": 3,
+        "Fail":1
+      },
+      "devices": [
+        {
+          "deviceId": "R03300R01_1",
+          "location": "ראשון לציון",
+          "status": "success"
+        },
+        {
+          "deviceId": "R03300R01_2",
+          "location": "הר קרן",
+          "status": "success"
+        },
+        {
+          "deviceId": "R03300R01_3",
+          "location": "מבצעים אוגדה",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_4",
+          "location": "הר קרן",
+          "status": "success"
+        }
+      ]
+    },
+    {
+      "network": "פתח תקווה",
+      "statusNetwork": {
+        "OK": 4,
+        "Fail":0
+      },
+      "devices": [
+        {
+          "deviceId": "R03300R01_1",
+          "location": "ראשון לציון",
+          "status": "success"
+        },
+        {
+          "deviceId": "R03300R01_2",
+          "location": "הר קרן",
+          "status": "success"
+        },
+        {
+          "deviceId": "R03300R01_3",
+          "location": "מבצעים אוגדה",
+          "status": "success"
+        },
+        {
+          "deviceId": "R03300R01_4",
+          "location": "הר קרן",
+          "status": "success"
+        }
+      ]
+    },
+    {
+      "network": "בלה בלה 1",
+      "statusNetwork": {
+        "OK": 1,
+        "Fail":3
+      },
+      "devices": [
+        {
+          "deviceId": "R03300R01_1",
+          "location": "ראשון לציון",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_2",
+          "location": "הר קרן",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_3",
+          "location": "מבצעים אוגדה",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_4",
+          "location": "הר קרן",
+          "status": "success"
+        }
+      ]
+    },
+    {
+      "network": "אשקלון",
+      "statusNetwork": {
+        "OK": 3,
+        "Fail":1
+      },
+      "devices": [
+        {
+          "deviceId": "R03300R01_1",
+          "location": "ראשון לציון",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_2",
+          "location": "הר קרן",
+          "status": "success"
+        },
+        {
+          "deviceId": "R03300R01_3",
+          "location": "מבצעים אוגדה",
+          "status": "success"
+        },
+        {
+          "deviceId": "R03300R01_4",
+          "location": "הר קרן",
+          "status": "success"
+        }
+      ]
+    },
+    {
+      "network": "כפר יונה",
+      "statusNetwork": {
+        "OK": 0,
+        "Fail":4
+      },
+      "devices": [
+        {
+          "deviceId": "R03300R01_1",
+          "location": "ראשון לציון",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_2",
+          "location": "הר קרן",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_3",
+          "location": "מבצעים אוגדה",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_4",
+          "location": "הר קרן",
+          "status": "fail"
+        }
+      ]
+    },
+    {
+      "network": "חולון",
+      "statusNetwork": {
+        "OK": 1,
+        "Fail":3
+      },
+      "devices": [
+        {
+          "deviceId": "R03300R01_1",
+          "location": "ראשון לציון",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_2",
+          "location": "הר קרן",
+          "status": "success"
+        },
+        {
+          "deviceId": "R03300R01_3",
+          "location": "מבצעים אוגדה",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_4",
+          "location": "הר קרן",
+          "status": "fail"
+        }
+      ]
+    },
+    {
+      "network": "נתניה",
+      "statusNetwork": {
+        "OK": 3,
+        "Fail":1
+      },
+      "devices": [
+        {
+          "deviceId": "R03300R01_1",
+          "location": "ראשון לציון",
+          "status": "fail"
+        },
+        {
+          "deviceId": "R03300R01_2",
+          "location": "הר קרן",
+          "status": "success"
+        },
+        {
+          "deviceId": "R03300R01_3",
+          "location": "מבצעים אוגדה",
+          "status": "success"
+        },
+        {
+          "deviceId": "R03300R01_4",
+          "location": "הר קרן",
+          "status": "success"
+        }
+      ]
+    }
   ],
   "WorkingStations": [
     {
@@ -163,7 +405,6 @@
           "ERROR": 0,
           "FAILED": 0
         },
-
         {
           "device": "CCU",
           "OK": 1,
@@ -296,7 +537,6 @@
           "ERROR": 0,
           "FAILED": 0
         },
-
         {
           "device": "CCU",
           "OK": 1,

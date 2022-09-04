@@ -38,7 +38,7 @@ const Copyright = (props: any) => {
     >
       {"Copyright © "}
       <Link color="inherit" href="#">
-        Roip Monitoring
+        yanshuf.tng.topsecret
       </Link>{" "}
       {new Date().getFullYear()}
     </Typography>
@@ -109,7 +109,7 @@ const SignIn = (props: IProps) => {
     <div>
       <Grid container>
         <Grid item xs wrap={"nowrap"}></Grid>
-        <Grid item xs>
+        <Grid item xs >
           <CacheProvider value={cacheRtl}>
             <ThemeProvider theme={theme}>
               <Box
@@ -117,12 +117,18 @@ const SignIn = (props: IProps) => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
+                  pt:"28%"
                 }}
               >
-                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                  <LockOutlinedIcon />
+                <Avatar sx={{ m: 1, bgcolor: "#2e3b55" }}>
+                  <LockOutlinedIcon/>
                 </Avatar>
-                <Typography component="h1" variant="h5" fontWeight={"bold"}>
+                <Typography
+                  component="h1"
+                  variant="h5"
+                  fontWeight={"bold"}
+                  color={"#2e3b55"}
+                >
                   התחברות לינשוף
                 </Typography>
                 <Box
@@ -140,7 +146,7 @@ const SignIn = (props: IProps) => {
                     name="username"
                     autoFocus
                   />
-                  <FormHelperText sx={{ color: "error.main", width:"20vw" }}>
+                  <FormHelperText sx={{ color: "error.main", width: "20vw" }}>
                     {UsernameHelperText}
                   </FormHelperText>
                   <TextField
@@ -171,14 +177,23 @@ const SignIn = (props: IProps) => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
+                    sx={{
+                      mt: 3,
+                      mb: 2,
+                      backgroundColor: "#2e3b55",
+                      "&:hover": {
+                        backgroundColor: "#2e3b55",
+                      },
+                    }}
                   >
                     התחבר
                   </Button>
                   <Grid container>
                     <Grid item xs></Grid>
                     <Grid item>
-                      <Link href="#" variant="body2">
+                      <Link href="#" variant="body2" color={"#2e3b55"} sx={{"&:hover": {
+                        color: "#2e3b55",
+                      },}}>
                         שכחת סיסמה?
                       </Link>
                     </Grid>

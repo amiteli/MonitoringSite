@@ -22,7 +22,8 @@ const OneStation = (props: IProps) => {
       <Box
         sx={{
           border: 1,
-          borderColor: "#D3D3D3",
+          // borderColor: "#D3D3D3",
+          borderColor: "white",
           m: 1,
         }}
       >
@@ -34,9 +35,12 @@ const OneStation = (props: IProps) => {
           paddingRight={1.5}
           sx={{
             borderBottom: 1,
-            borderColor: "#D3D3D3",
+            // borderColor: "#D3D3D3",
+            borderColor: "white",
             fontSize: 17,
             fontWeight: "bold",
+            backgroundColor:"#2E3B55",
+            color:"#F0BC5E"
           }}
         >
           {location}

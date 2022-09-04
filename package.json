@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "@mui/styles": "^5.9.3"
+    "@mui/styles": "^5.9.3",
+    "react-card-flip": "^1.1.5"
+  },
+  "devDependencies": {
+    "reactjs-percentage-circle": "^1.0.0"
   }
 }

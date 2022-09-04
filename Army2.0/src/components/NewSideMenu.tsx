@@ -47,6 +47,7 @@ import { Height, Login } from "@mui/icons-material";
 import { flexbox } from "@mui/system";
 import SignIn from "./SignIn";
 import { Container, ThemeProvider } from "react-bootstrap";
+import { Dialog } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -168,11 +169,11 @@ const Drawer = styled(MuiDrawer, {
   boxSizing: "border-box",
   ...(open && {
     ...openedMixin(theme),
-    "& .MuiDrawer-paper": openedMixin(theme)
+    "& .MuiDrawer-paper": openedMixin(theme),
   }),
   ...(!open && {
     ...closedMixin(theme),
-    "& .MuiDrawer-paper": closedMixin(theme)
+    "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
 
@@ -293,12 +294,14 @@ export default function MiniDrawer() {
           <Route
             path="/login-page"
             element={
-              <SignIn
-                setUsername={setUsername}
-                setIsAdmin={setIsAdmin}
-                setUnitAccess={setUnitAccess}
-                setAccessToken={setAccessToken}
-              />
+              <Dialog fullScreen open={true}>
+                  <SignIn
+                    setUsername={setUsername}
+                    setIsAdmin={setIsAdmin}
+                    setUnitAccess={setUnitAccess}
+                    setAccessToken={setAccessToken}
+                  />
+              </Dialog>
             }
           />
           <Route path="/about" element={<About />} />

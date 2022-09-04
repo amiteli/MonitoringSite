@@ -124,7 +124,7 @@ const MultiCheckBoxSelect = (props: IProps) => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="מיקומים"
+                    label={title}
                     placeholder="בחר מיקום"
                   />
                 )}

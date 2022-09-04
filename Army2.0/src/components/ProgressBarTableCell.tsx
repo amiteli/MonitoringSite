@@ -2,7 +2,7 @@ import { Box, Grid } from "@mui/material";
 import * as React from "react";
 
 interface ProgressBarProps {
-  value: number;
+  value: string;
 }
 
 const selectColor = (number: number) => {
@@ -45,7 +45,6 @@ const ProgressBar = React.memo(function ProgressBar(props: ProgressBarProps) {
         item
         style={{
           width: `${value.toLocaleString()}`,
-          borderRadius: "0px 5px 5px 0px",
           backgroundColor: selectColor(onlyValue),
         }}
       ></Grid>
@@ -55,5 +54,6 @@ const ProgressBar = React.memo(function ProgressBar(props: ProgressBarProps) {
 
 export function renderProgress(params: any) {
 
-  return <ProgressBar value={params.value} />;
+  return <ProgressBar value={params.value + "%"} />;
 }
+

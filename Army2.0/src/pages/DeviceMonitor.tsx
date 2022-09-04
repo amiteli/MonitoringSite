@@ -54,20 +54,20 @@ const useStyles = makeStyles({
 });
 const deviceTableNameList = [
   "Makmash",
-  "RCGW",
-  "CCU",
-  "CCT",
-  "Yadbar",
-  "SoftwareDistributionServer",
+  "RCGWs",
+  "CCUs",
+  "CCTs",
+  "UVTs",
+  "SDSs",
 ];
 
 const deviceHeaderNameList = [
-  "radio_state_headers",
+  "Makmash_headers",
   "RCGW_headers",
   "CCU_headers",
   "CCT_headers",
   "Yadbar_headers",
-  "SoftwareDistributionServer_headers",
+  "SDS_headers",
 ];
 
 const theme = createTheme({
@@ -155,12 +155,12 @@ const DevicesTablePage = (props: IProps) => {
         <Grid item xs={12}>
           <ThemeProvider theme={theme}>
               <Box>
-                <PageHeader
+                {/* <PageHeader
                   // username={username}
                   // isAdmin={isAdmin}
                   selectedUnit={selectedUnit}
                   // accessToken={accessToken}
-                />
+                /> */}
                 <Box
                   sx={{
                     border: "1px solid #e0e0e0",
