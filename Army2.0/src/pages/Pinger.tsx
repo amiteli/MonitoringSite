@@ -1,7 +1,6 @@
 // עמוד פינגר
 import React from "react";
 import ReactApexChart from 'apexcharts';
-import ApexChart from '../components/ApexChart';
 import '../components/style/timeline-chart-style.css';
 import TimelineChartItem, { TimelineChartItemProps, TimelineDateTime } from '../components/TimelineChartItem';
 import TimelineChartRecord, { TimelineChartRecordProps } from '../components/TimelineChartRecord';
