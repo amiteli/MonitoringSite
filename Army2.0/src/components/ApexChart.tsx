@@ -27,11 +27,11 @@ const temp: StateRecord =
     "B.B.B.B": [{"time": "08/08/2022 09:05:36", "state": "down"}, {"time": "08/08/2022 09:32:36", "state": "up"}],
     "C.C.C.C": [{"time": "08/08/2022 09:05:36", "state": "down"}, {"time": "08/08/2022 09:32:36", "state": "up"}],
     "D.D.D.D": [{"time": "08/08/2022 09:05:36", "state": "down"}, {"time": "08/08/2022 09:32:36", "state": "up"}],
-    "E.E.E.E": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 09:32:36", "state": "down"}],
-    "F.F.F.F": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 09:32:36", "state": "down"}],
-    "G.G.G.G": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 09:32:36", "state": "down"}],
-    "H.H.H.H": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 09:32:36", "state": "down"}],
-    "I.I.I.I": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 09:32:36", "state": "down"}]
+    "E.E.E.E": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 10:32:36", "state": "down"}],
+    "F.F.F.F": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 10:32:36", "state": "down"}],
+    "G.G.G.G": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 10:32:36", "state": "down"}],
+    "H.H.H.H": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 10:32:36", "state": "down"}],
+    "I.I.I.I": [{"time": "08/08/2022 09:05:36", "state": "up"}, {"time": "08/08/2022 10:32:36", "state": "down"}]
   }
 };
 
@@ -84,10 +84,7 @@ const ApexChart = () =>
 
   Object.keys(temp).map((unit: string) => 
   {
-    
-    Object.keys(temp[unit]).map((ip) => 
-    {
-      var upSeriesItem: SeriesItem = 
+    var upSeriesItem: SeriesItem = 
     {
       name: "up",
       data: []
@@ -97,6 +94,9 @@ const ApexChart = () =>
       name: "down",
       data: []
     };
+    Object.keys(temp[unit]).map((ip) => 
+    {
+      
       temp[unit][ip].map((state) =>
       {
         var localTime = new Date();
@@ -150,10 +150,10 @@ const ApexChart = () =>
         };*/
       });
       console.log(upSeriesItem);
-      series.push(upSeriesItem);
-    series.push(downSeriesItem);
+      
     });
-    
+    series.push(upSeriesItem);
+    series.push(downSeriesItem);
   });
     
   return (<div id="chart">

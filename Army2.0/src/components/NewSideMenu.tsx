@@ -275,7 +275,7 @@ export default function MiniDrawer() {
       </Drawer>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, paddingTop: theme.spacing(6) }}
+        sx={{ flexGrow: 1, p: 3, paddingTop: theme.spacing(6), height:"fit-content" }}
       >
         <DrawerHeader />
         <Routes>
