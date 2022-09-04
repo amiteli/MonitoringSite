@@ -1,9 +1,10 @@
-import { Grid, Paper } from "@mui/material";
+import { Box, Grid, Input, InputLabel, Paper, TextField } from "@mui/material";
 
 import { useState } from "react";
+import { FormControl } from "react-bootstrap";
 import { useQuery } from "react-query";
 import MultiCheckBoxSelect from "./MultiCheckBoxSelect";
-
+import { styled } from "@mui/material/styles";
 type IProps = { selectedUnit: string };
 
 type dataParam = {
@@ -18,7 +19,18 @@ type Status = {
   ERROR: number;
   FAILED: number;
 };
-
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  // borderRight: "2px solid black",
+  // borderLeft: "2px solid black",
+  // borderBottom: "2px solid primary.main",
+  borderBottomLeftRadius: 4,
+  borderBottomRightRadius: 4,
+  color: theme.palette.text.secondary,
+}));
 const DynamicSection = (props: IProps) => {
   const { selectedUnit } = props;
 
@@ -57,21 +69,22 @@ const DynamicSection = (props: IProps) => {
 
   return (
     <>
-        <Grid container direction="row" justifyContent="center">
-          <Grid item xs={5} md={2.5} sx={{ p: 1, ml:2 }}>
-            <MultiCheckBoxSelect stationsData={stationsData} title="צפון" />
+      <Box sx={{ width: "100%"}}>
+        <Grid container >
+          <Grid item xs={6}>
+          <MultiCheckBoxSelect stationsData={stationsData} title="צפון" />
           </Grid>
-          <Grid item xs={5} md={2.5} sx={{ p: 1, ml:2 }}>
+          <Grid item xs={6}>
             <MultiCheckBoxSelect stationsData={stationsData} title="דרום" />
           </Grid>
-          <Grid item xs={5} md={2.5} sx={{ p: 1, ml:2}}>
+          <Grid item xs={6}>
             <MultiCheckBoxSelect stationsData={stationsData} title="מזרח" />
           </Grid>
-          <Grid item xs={5} md={2.5} sx={{ p: 1, ml:2 }}>
+          <Grid item xs={6}>
             <MultiCheckBoxSelect stationsData={stationsData} title="מערב" />
           </Grid>
         </Grid>
-
+      </Box>
     </>
   );
 };

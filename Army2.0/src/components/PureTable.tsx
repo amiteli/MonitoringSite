@@ -26,7 +26,7 @@ type RadioParams = {
 };
 
 type IProps = {
-  rows: RadioParams[];
+  rows: any;
   columns: string[];
 };
 
@@ -86,10 +86,9 @@ const PureTable = (props: IProps) => {
   const [change, setChange] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(25);
 
-  const editRows = rows.map((row) =>
-    Object.assign(row, { id: row["שם רכיב"] })
+  const editRows = rows.map((row:any) =>
+    Object.assign(row, { id: row["deviceId"] })
   );
-  
   const onFilterModelChange = (newFilterModel: any) => {
     if (change) {
       setTimeout(function () {

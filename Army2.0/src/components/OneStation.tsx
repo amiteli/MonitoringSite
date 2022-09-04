@@ -14,43 +14,40 @@ type oneDevice = {
   FAILED: number;
 };
 
-const DEVICE_WIDTH: number = 80;
-
-const calcHeaderWidth = (devices: Array<oneDevice>) => {
-  return devices.length * DEVICE_WIDTH + 2;
-};
-
 const OneStation = (props: IProps) => {
   const { location, devices } = props;
-
   
   return (
     <Grid item>
       <Box
         sx={{
           border: 1,
-          borderColor: "#D3D3D3",
+          // borderColor: "#D3D3D3",
+          borderColor: "white",
           m: 1,
-          width: () => calcHeaderWidth(devices),
         }}
       >
         <Typography
           variant="h6"
           component="div"
           align="center"
+          paddingLeft={1.5}
+          paddingRight={1.5}
           sx={{
             borderBottom: 1,
-            borderColor: "#D3D3D3",
-            fontSize: 20,
+            // borderColor: "#D3D3D3",
+            borderColor: "white",
+            fontSize: 17,
             fontWeight: "bold",
-            width: () => calcHeaderWidth(devices),
+            backgroundColor:"#2E3B55",
+            color:"#F0BC5E"
           }}
         >
           {location}
         </Typography>
         <Grid item container direction="row">
           {devices?.map((deviceUnit, index) => {
-            return <StationDevice key={index} data={deviceUnit} location={location}/>;
+            return <StationDevice key={index} data={deviceUnit} location={location} devicesLen={devices.length}/>;
           })}
         </Grid>
       </Box>

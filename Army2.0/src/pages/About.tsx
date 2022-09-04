@@ -15,7 +15,7 @@ import {
   
   const About = (props: Props) => {
     return (
-      <Grid container spacing={0} direction="column" alignItems="center">
+      <Grid container spacing={0} direction="column" alignItems="center" sx={{ width: "94vw"}}>
         <Grid item xs={3}>
           <Card>
             <Card sx={{ width: "500px" }}>
@@ -39,7 +39,7 @@ import {
                     color="text.secondary"
                     align="center"
                   >
-                    גירסת המערכת: 2.0.0
+                    גירסת המערכת: 1.5.0
                   </Typography>
                 </Typography>
                 <Typography

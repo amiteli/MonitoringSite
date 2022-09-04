@@ -10,6 +10,7 @@ import TextField from "@mui/material/TextField";
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
+import { Button } from "react-bootstrap";
 
 
 const theme = createTheme({
@@ -76,14 +77,10 @@ const MultiCheckBoxSelect = (props: IProps) => {
   useEffect(() => {
     render();
   }, [stationsData]);
-
   return (
     <>
       <Grid container justifyContent="center" alignItems="center">
-        <Grid container display={"flex"} justifyContent="center">
-          <Typography fontWeight={700}>{title}</Typography>
-        </Grid>
-        <Grid item md={7} mt={2}>
+        <Grid item width={"100%"}>
           <DoughnutChart
             labels={labels}
             data={[
@@ -91,10 +88,9 @@ const MultiCheckBoxSelect = (props: IProps) => {
               totalNumbers.totalERROR,
               totalNumbers.totalFAILED,
             ]}
-            chartTitle=" "
-          />
+            chartTitle={title}/>
         </Grid>
-        <Grid item xs="auto">
+        <Grid item >
           <CacheProvider value={cacheRtl}>
             <ThemeProvider theme={theme}>
               <Autocomplete
@@ -128,7 +124,7 @@ const MultiCheckBoxSelect = (props: IProps) => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="מיקומים"
+                    label={title}
                     placeholder="בחר מיקום"
                   />
                 )}

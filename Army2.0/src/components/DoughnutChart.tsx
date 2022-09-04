@@ -43,19 +43,26 @@ const DoughuntChart = (props: IProps) => {
   };
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     cutout: "80%",
     plugins: {
       legend: {
         position: "bottom" as "bottom",
       },
+      title: {
+        display: true,
+        text: chartTitle,
+        font: {
+          size: 15,
+        },
+        padding: {
+          top: 5,
+          bottom: 10,
+        },
+      },
     },
   };
-  return (
-    <Box>
-      <Doughnut data={allData} options={options} />
-    </Box>
-  );
+  return <Doughnut data={allData} options={options} height={200} />;
 };
 
 export default DoughuntChart;

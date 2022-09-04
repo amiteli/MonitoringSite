@@ -6,6 +6,7 @@ import {
   Dialog,
   Divider,
   IconButton,
+  Paper,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -13,11 +14,12 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useQuery } from "react-query";
 import { useState } from "react";
 import OneStation from "./OneStation";
-import { Button } from "react-bootstrap";
+import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, fontWeight } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import { styled } from "@mui/material/styles";
 
 type IProps = {
   selectedUnit: string;
@@ -48,7 +50,18 @@ type DevicePerems = {
   ERROR: number;
   FAILED: number;
 };
-
+const MyButton = styled(Button)({
+  border: "1px solid #2e3b55",
+  borderRadius: 6,
+  color: "white",
+  height: 38,
+  padding: "0 12px",
+  backgroundColor: "#2e3b55",
+  "&:hover": {
+    backgroundColor: "#2e3b55",
+    color: "#f0bc5e",
+  },
+});
 const GeneralAccordion = (props: IProps) => {
   const { selectedUnit } = props;
 
@@ -80,6 +93,8 @@ const GeneralAccordion = (props: IProps) => {
     fetchUnitDevicesData,
     {
       onSuccess: (data) => {
+        console.log("GENERAL VIEW: ")
+        console.log(data)
         let dataAmountOfStations = data.WorkingStations;
         let tempArr: Array<string> = [];
         let counterArr: Array<number> = [];
@@ -114,9 +129,9 @@ const GeneralAccordion = (props: IProps) => {
   };
 
   return (
-    <div>
+    <>
       <Dialog fullScreen open={open} onClose={handleClose}>
-        <AppBar sx={{ position: "relative" }}>
+        <AppBar sx={{ position: "relative", backgroundColor: "#2e3b55" }}>
           <Toolbar>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               כל הכלים
@@ -140,7 +155,7 @@ const GeneralAccordion = (props: IProps) => {
                   <Typography
                     sx={{
                       fontSize: "20px",
-                      color: "primary.main",
+                      color: "#2e3b55",
                       fontWeight: "bold",
                     }}
                   >
@@ -166,13 +181,12 @@ const GeneralAccordion = (props: IProps) => {
             })}
         </Box>
       </Dialog>
-      <Grid container justifyContent={"flex-end"} mb={2}>
-        <Button onClick={handleClickOpen}>
+      <Grid container mb={2} justifyContent={"flex-end"}>
+        <MyButton onClick={handleClickOpen}>
           הצג הכל
           <FullscreenIcon sx={{ mr: 0.5 }} />
-        </Button>
+        </MyButton>
       </Grid>
-
       {headersName &&
         headersName.map((header, index) => {
           return (
@@ -204,7 +218,7 @@ const GeneralAccordion = (props: IProps) => {
             </Accordion>
           );
         })}
-    </div>
+    </>
   );
 };
 

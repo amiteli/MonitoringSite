@@ -1,3 +1,4 @@
+import { ConstructionOutlined } from "@mui/icons-material";
 import { Box } from "@mui/material";
 import { GridFilterModel } from "@mui/x-data-grid";
 import axios from "axios";
@@ -60,20 +61,65 @@ type Other = {
 };
 type Data = any;
 
+
+
 const MakmashTable = (props: IProps) => {
+  const headerList: any = {
+    "RCGW_headers": [
+      "deviceId",
+      "state",
+      "CPU_USAGE",
+      "IP",
+      "LOCATION"
+    ],
+    "CCU_headers": [
+      "deviceId",
+      "state",
+      "CPU_USAGE",
+      "IP",
+      "LOCATION"
+    ],
+    "CCT_headers": [
+      "deviceId",
+      "state",
+      "CPU_USAGE",
+      "IP",
+      "LOCATION"
+    ],
+    "Yadbar_headers": [
+      "deviceId",
+      "state",
+      "CPU_USAGE",
+      "IP",
+      "LOCATION"
+    ],
+    "SDS_headers": [
+      "deviceId",
+      "state",
+      "CPU_USAGE",
+      "LOCATION"
+    ],
+  
+    "Makmash_headers": [
+      "deviceId",
+      "state",
+      "RADIO",
+      "FREQUENCY",
+      "LISTENERS",
+      "LOCATION"
+    ]
+  }
   const { selectedUnit, table, headerName } = props;
   const [tableData, setTableData] = useState<RadioParams[]>([]);
   const [tableHeader, setTableHeader] = useState<string[]>([]);
   const [errorText, setErrorText] = useState(" ");
 
-
   const fetchRadioStates = async (): Promise<Data> => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/radioStates/${selectedUnit}`
+        `${import.meta.env.VITE_SERVER_URL}/RoipMonitoring/Units/matzov`
       );
       if (!res.ok) {
-        // console.log("error at fetching radioStates");
         setErrorText(
           `status code: ${res.status} status text: ${res.statusText} url: ${res.url}`
         );
@@ -86,19 +132,19 @@ const MakmashTable = (props: IProps) => {
     }
   };
 
-  const fetchHeaderList = async (): Promise<Headers> => {
-    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/headerList`);
-    if (!res.ok) {
-      console.log("error at fetching headerList");
-      setErrorText(
-        `status code: ${res.status} status text: ${res.statusText} url: ${res.url}`
-      );
-      console.log(res.status, res.statusText, res.url);
+  // const fetchHeaderList = async (): Promise<Headers> => {
+  //   const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/headerList`);
+  //   if (!res.ok) {
+  //     console.log("error at fetching headerList");
+  //     setErrorText(
+  //       `status code: ${res.status} status text: ${res.statusText} url: ${res.url}`
+  //     );
+  //     console.log(res.status, res.statusText, res.url);
 
-      throw new Error("Problem fetching data");
-    }
-    return res.json();
-  };
+  //     throw new Error("Problem fetching data");
+  //   }
+  //   return res.json();
+  // };
 
   const {
     data,
@@ -106,17 +152,14 @@ const MakmashTable = (props: IProps) => {
     isError: isErrorData,
   } = useQuery<Data>("FileData", fetchRadioStates, {
     onSuccess: (data) => {
-      const { RCGW } = data ?? {
-        RCGW: [],
-      };
-      // console.log(data);
+      console.log(data[table])
+      setTableHeader(headerList[headerName]);
       let oneArray: any[] = [];
       if (table === "Makmash") {
-        const sortRCGWData = data.RCGW.map((machine: RCGW) => {
-          if (machine.state !== "FAILED") {
+        const sortRCGWData = data.RCGWs.map((machine: RCGW) => {
+          if (machine.state !== null) {
             return machine.radioStates.map((device: RadioStatesIn) => {
-              if (device.state !== "FAILED") return device.params;
-              return {};
+              return device;
             });
           }
           return {};
@@ -124,10 +167,12 @@ const MakmashTable = (props: IProps) => {
         sortRCGWData.map((array: any) => {
           return (oneArray = oneArray.concat(array));
         });
-      } else {
+        
+      }
+      else {
         const sortData = data[table].map((machine: Other) => {
-          if (machine.state !== "FAILED") {
-            return machine.params;
+          if (machine.state !== null) {
+            return machine;
           }
           return {};
         });
@@ -139,43 +184,11 @@ const MakmashTable = (props: IProps) => {
       let newArray = oneArray.filter(
         (element) => Object.keys(element).length !== 0
       );
-      setTableData(newArray);
+      setTableData(newArray)
     },
   });
 
-  const { isLoading: isLoadingHeader, isError: isErrorHeader } =
-    useQuery<Headers>("FileHeader", fetchHeaderList, {
-      onSuccess: (headerData: any) => {
-        // const { param_headers, radio_state_headers } = headerData ?? {
-        //   param_headers: [],
-        //   radio_state_headers: [],
-        // };
-        // if (table === "Makmash") {
-        // console.log(headerData);
-        setTableHeader(headerData[headerName]);
-        
-        
-        // setFilterModel({
-        //   items: [
-        //     {
-        //       columnField: `${columnField}`,
-        //       operatorValue: "contains",
-        //       value: `${value}`,
-        //     },
-        //   ],
-        // })
-
-        // } else {
-        //   setTableHeader(param_headers);
-        // }
-      },
-    });
-
-  if (isLoadingData || isLoadingHeader) return <>"Loading..."</>;
-
-  if (isErrorHeader || isErrorData)
-    return <>"An error has occurred: " {errorText}</>;
-    // filterModel={filterModel} setFilterModel={setFilterModel}
+    
   return <PureComponent rows={tableData} columns={tableHeader} />;
 };
 export default MakmashTable;

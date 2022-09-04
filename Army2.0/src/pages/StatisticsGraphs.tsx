@@ -1,106 +1,150 @@
 // עמוד סטטיסטיקות
-import React from "react";
+import React, { useState } from "react";
 import DoughuntCharts from "../components/DoughnutCharts";
 import { styled } from "@mui/material/styles";
-import { Grid, Typography } from "@mui/material";
+import { Box, Chip, Grid, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import DynamicSection from "../components/DynamicSection";
 import NetWorkChart from "../components/NetworkChart";
+import Stack from "@mui/material/Stack";
+import { useQuery } from "react-query";
 
 type Props = { selectedUnit: string };
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
-  padding: theme.spacing(1),
   textAlign: "center",
+  borderBottomLeftRadius: 4,
+  borderBottomRightRadius: 4,
+  color: theme.palette.text.secondary,
+}));
+const ItemNetwork = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  textAlign: "center",
+  borderBottomLeftRadius: 4,
+  borderBottomRightRadius: 4,
+  color: theme.palette.text.secondary,
+  height: "100%",
+}));
+const ItemLocal = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  textAlign: "center",
+  borderBottomLeftRadius: 4,
+  borderBottomRightRadius: 4,
   color: theme.palette.text.secondary,
 }));
 
 const StatisticsGraphs = (props: Props) => {
   const { selectedUnit } = props;
   return (
-    <div>
-      <Grid container direction="column" sx={{ width: "100%" }}>
-        <Grid container>
+    <>
+      <Grid
+        container
+        rowSpacing={{ xs: 2 }}
+        columnSpacing={{ xs: 2 }}
+        direction="row"
+      >
+        <Grid padding={2} xs={6} paddingLeft={0}>
           <Grid
-            item
-            mb={2}
-            xs={11.8}
-            bgcolor={"rgba(242, 242, 242)"}
-            borderRadius={4}
-            height={"100%"}
+            container
+            rowSpacing={{ xs: 2 }}
+            columnSpacing={{ xs: 2 }}
+            direction="column"
           >
-            <Typography
-              variant="h5"
-              align="center"
-              mb={2}
-              bgcolor={"rgba(75, 192, 192, 1)"}
-              color={"white"}
-              p={0.5}
-              sx={{ borderTopLeftRadius: 4, borderTopRightRadius: 4 }}
-            >
-              פילוח תקינות רכיבים
-            </Typography>
-            <DoughuntCharts selectedUnit={selectedUnit} />
-          </Grid>
-          
-          <Grid
-            item
-            xs={5.5}
-            bgcolor={"rgba(242, 242, 242)"}
-            borderRadius={4}
-            ml={2}
-          >
-            <Typography
-              variant="h6"
-              align="center"
-              mb={1}
-              bgcolor={"secondary.main"}
-              color={"white"}
-              sx={{ borderTopLeftRadius: 4, borderTopRightRadius: 4 }}
-            >
-              רשתות מול מקמ"שים
-            </Typography>
-            <NetWorkChart selectedUnit={selectedUnit}/>
-          </Grid>
-          <Grid item xs={6.2} bgcolor={"rgba(242, 242, 242)"} borderRadius={4}>
-            <Typography
-              variant="h6"
-              align="center"
-              mb={1}
-              bgcolor={"success.main"}
-              color={"white"}
-              sx={{ borderTopLeftRadius: 4, borderTopRightRadius: 4 }}
-            >
-              גרף נוסף
-            </Typography>
+            <Grid item xs={6}>
+              <Typography
+                variant="inherit"
+                align="center"
+                bgcolor={"#2e3b55"}
+                color={"white"}
+                sx={{
+                  borderTopLeftRadius: 4,
+                  borderTopRightRadius: 4,
+                  letterSpacing: "0.9px",
+                }}
+              >
+                כשירות רכיבים
+              </Typography>
+
+              <Item>
+                <Stack
+                  direction="row"
+                  padding={1}
+                  sx={{ display: "flex", justifyContent: "center" }}
+                >
+                  <Chip label="CCU" />
+                  <Chip label="Deploy" variant="outlined" />
+                </Stack>
+                <DoughuntCharts selectedUnit={selectedUnit} />
+              </Item>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                variant="inherit"
+                align="center"
+                bgcolor={"#2e3b55"}
+                color={"white"}
+                sx={{
+                  borderTopLeftRadius: 4,
+                  borderTopRightRadius: 4,
+                  letterSpacing: "0.9px",
+                }}
+              >
+                כשירות מקמ"שים בחתך מיקומים
+              </Typography>
+              <ItemLocal sx={{ pb: 2 }}>
+                <DynamicSection selectedUnit={selectedUnit} />
+              </ItemLocal>
+            </Grid>
           </Grid>
         </Grid>
         <Grid
-            item
-            mb={2}
-            mt={2}
-            xs={10}
-            bgcolor={"rgba(242, 242, 242)"}
-            borderRadius={4}
-            height={"100%"}
-          >
+          container
+          rowSpacing={{ xs: 2 }}
+          columnSpacing={{ xs: 2 }}
+          xs={6}
+          paddingTop={2}
+        >
+          <Grid padding={2} xs={7}>
             <Typography
-              variant="h5"
+              variant="inherit"
               align="center"
-              mb={1}
-              bgcolor={"primary.main"}
+              bgcolor={"#2e3b55"}
               color={"white"}
-              p={0.5}
-              sx={{ borderTopLeftRadius: 4, borderTopRightRadius: 4 }}
+              sx={{
+                borderTopLeftRadius: 4,
+                borderTopRightRadius: 4,
+                letterSpacing: "0.9px",
+              }}
             >
-              פילוח על פי גרפים
+              כשירות מקמ"שים בחתך רשתות
             </Typography>
-            <DynamicSection selectedUnit={selectedUnit} />
+            <ItemNetwork>
+              <NetWorkChart selectedUnit={selectedUnit} />
+            </ItemNetwork>
           </Grid>
+          <Grid item xs={5}>
+            <Typography
+              variant="inherit"
+              align="center"
+              bgcolor={"#2e3b55"}
+              color={"white"}
+              sx={{
+                borderTopLeftRadius: 4,
+                borderTopRightRadius: 4,
+                letterSpacing: "0.9px",
+              }}
+            >
+              כשירות מקמ"שים כ"ל
+            </Typography>
+            <ItemNetwork>כשירות מקמ"שים כ"ל</ItemNetwork>
+          </Grid>
+        </Grid>
       </Grid>
-    </div>
+    </>
   );
 };
 
