@@ -35,10 +35,8 @@ export interface TimelineChartProps
 const TimelineChart = (props: TimelineChartProps) => 
 {
     const [scrollTop, setScrollTop] = useState(0); 
-    window.onscroll = () => 
-    {
+    window.onscroll = () => {
         setScrollTop(window.scrollY);
-        document.title = scrollTop + "";
     }
 
     var left = 0, width = 1;
