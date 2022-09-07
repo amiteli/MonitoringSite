@@ -106,7 +106,7 @@
       "network": "אופקים",
       "statusNetwork": {
         "OK": 2,
-        "Fail":5
+        "Fail": 5
       },
       "devices": [
         {
@@ -150,7 +150,7 @@
       "network": "ראשון לציון",
       "statusNetwork": {
         "OK": 3,
-        "Fail":1
+        "Fail": 1
       },
       "devices": [
         {
@@ -179,7 +179,7 @@
       "network": "פתח תקווה",
       "statusNetwork": {
         "OK": 4,
-        "Fail":0
+        "Fail": 0
       },
       "devices": [
         {
@@ -208,7 +208,7 @@
       "network": "בלה בלה 1",
       "statusNetwork": {
         "OK": 1,
-        "Fail":3
+        "Fail": 3
       },
       "devices": [
         {
@@ -237,7 +237,7 @@
       "network": "אשקלון",
       "statusNetwork": {
         "OK": 3,
-        "Fail":1
+        "Fail": 1
       },
       "devices": [
         {
@@ -266,7 +266,7 @@
       "network": "כפר יונה",
       "statusNetwork": {
         "OK": 0,
-        "Fail":4
+        "Fail": 4
       },
       "devices": [
         {
@@ -295,7 +295,7 @@
       "network": "חולון",
       "statusNetwork": {
         "OK": 1,
-        "Fail":3
+        "Fail": 3
       },
       "devices": [
         {
@@ -324,7 +324,7 @@
       "network": "נתניה",
       "statusNetwork": {
         "OK": 3,
-        "Fail":1
+        "Fail": 1
       },
       "devices": [
         {
@@ -872,6 +872,43 @@
         "ERROR": 1,
         "FAILED": 0
       }
+    }
+  ],
+  "MakmashKl": [
+    {
+      "deviceId": "R03300R01_1",
+      "location": "צריפין",
+      "status": "תקין"
+    },
+    {
+      "deviceId": "R03300R01_1",
+      "location": "באר יעקב",
+      "status": "תקין"
+    },
+    {
+      "deviceId": "R03300R01_1",
+      "location": "רחובות",
+      "status": "תקין"
+    },
+    {
+      "deviceId": "R03300R01_1",
+      "location": "כפר סבא",
+      "status": "לא תקין"
+    },
+    {
+      "deviceId": "R03300R01_1",
+      "location": "אשקלון",
+      "status": "תקין"
+    },
+    {
+      "deviceId": "R03300R01_1",
+      "location": "ראשון לציון",
+      "status": "לא תקין"
+    },
+    {
+      "deviceId": "R03300R01_1",
+      "location": "הר קרן",
+      "status": "לא תקין"
     }
   ]
 }

@@ -16,6 +16,9 @@ import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import HeaderInfo from "./HeaderInfo";
 import { Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { setJwtToken, setRefreshToken } from "./TokenController";
+
 
 interface IProps {
   HeaderData: HeaderData;
@@ -28,9 +31,12 @@ type HeaderData = {
   pakalMonitored: string;
 };
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["פרופיל", "חשבון", "Dashboard", "יציאה"];
+
+
 
 const ResponsiveAppBar = (props: IProps) => {
+  const navigate = useNavigate();
   const { HeaderData } = props;
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -39,18 +45,17 @@ const ResponsiveAppBar = (props: IProps) => {
     null
   );
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting: string) => {
+    
+    if (setting=="יציאה") {
+      setJwtToken('')
+      setRefreshToken('')
+      navigate('/login-page');
+    }
     setAnchorElUser(null);
   };
 
@@ -92,7 +97,7 @@ const ResponsiveAppBar = (props: IProps) => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <Tooltip title="Open settings">
+          <Tooltip title="פתח הגדרות">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar alt="Remy Sharp" src="/static/images/avatar/" />
             </IconButton>
@@ -114,7 +119,7 @@ const ResponsiveAppBar = (props: IProps) => {
             onClose={handleCloseUserMenu}
           >
             {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
                 <Typography textAlign="center">{setting}</Typography>
               </MenuItem>
             ))}

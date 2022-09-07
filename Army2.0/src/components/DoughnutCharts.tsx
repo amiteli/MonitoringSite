@@ -2,6 +2,7 @@ import { Box, Grid, Paper, styled, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import DoughuntChart from "./DoughnutChart";
+import { getJwtToken } from "./TokenController";
 
 //********** Type **********//
 type IProps = { selectedUnit: string };
@@ -12,11 +13,11 @@ type dataParam = {
 };
 type arrayOfDataParam = {
   RcgwChartData: Array<dataParam>;
-  MakmashimChartData: Array<dataParam>;
-  CCUChartData: Array<dataParam>;
-  CCTChartData: Array<dataParam>;
-  YadbarChartData: Array<dataParam>;
-  SoftwareDistributionServerChartData: Array<dataParam>;
+  RadioStateChartData: Array<dataParam>;
+  CcuChartData: Array<dataParam>;
+  CctChartData: Array<dataParam>;
+  UvtChartData: Array<dataParam>;
+  SdsChartData: Array<dataParam>;
 };
 type RcgwDataObject = {
   dataStateArray: Array<string>;
@@ -67,7 +68,10 @@ const DoughnutCharts = (props: IProps) => {
     const res = await fetch(
       `${
         import.meta.env.VITE_SERVER_URL
-      }/api/charts/rcgw-chart-data/${selectedUnit}`
+      }/RoipMonitoring/Units/matzov/statistics`,
+      {
+        headers: { authorization: "Bearer " + getJwtToken() },
+      }
     );
     if (!res.ok) {
       console.log("error at fetching rcgw-chart-data");
@@ -76,6 +80,7 @@ const DoughnutCharts = (props: IProps) => {
       );
       throw new Error("Problem fetching data");
     }
+    console.log(res)
     return res.json();
   };
 
@@ -84,6 +89,7 @@ const DoughnutCharts = (props: IProps) => {
     fetchChartsData,
     {
       onSuccess: (data) => {
+        console.log(data)
         const statesArray: Array<string> = data?.RcgwChartData.map(
           (machine: dataParam) => {
             if (data) {
@@ -104,13 +110,13 @@ const DoughnutCharts = (props: IProps) => {
           chartTitle: `ישלק"ים`,
         });
         const MakmashimStatesArray: Array<string> =
-          data?.MakmashimChartData.map((machine: dataParam) => {
+          data?.RadioStateChartData.map((machine: dataParam) => {
             if (data) {
               return machine.state;
             } else return "";
           });
         const MakmashimNumbersArray: Array<number> =
-          data?.MakmashimChartData.map((machine: dataParam) => {
+          data?.RadioStateChartData.map((machine: dataParam) => {
             if (data) {
               return machine.number;
             } else return 0;
@@ -120,33 +126,34 @@ const DoughnutCharts = (props: IProps) => {
           dataNumberArray: MakmashimNumbersArray,
           chartTitle: `מקמ"שים`,
         });
-        const CCUStatesArray: Array<string> = data?.CCUChartData.map(
+        // const CCUStatesArray: Array<string> = data?.CcuChartData.map(
+        //   (machine: dataParam) => {
+        //     if (data) {
+        //       console.log(machine)
+        //       return machine.state;
+        //     } else return "";
+        //   }
+        // );
+        // const CCUNumbersArray: Array<number> = data?.CcuChartData.map(
+        //   (machine: dataParam) => {
+        //     if (data) {
+        //       return machine.number;
+        //     } else return 0;
+        //   }
+        // );
+        // setCCUDataStateArray({
+        //   dataStateArray: CCUStatesArray,
+        //   dataNumberArray: CCUNumbersArray,
+        //   chartTitle: `CCU`,
+        // });
+        const CCTStatesArray: Array<string> = data?.CctChartData.map(
           (machine: dataParam) => {
             if (data) {
               return machine.state;
             } else return "";
           }
         );
-        const CCUNumbersArray: Array<number> = data?.CCUChartData.map(
-          (machine: dataParam) => {
-            if (data) {
-              return machine.number;
-            } else return 0;
-          }
-        );
-        setCCUDataStateArray({
-          dataStateArray: CCUStatesArray,
-          dataNumberArray: CCUNumbersArray,
-          chartTitle: `CCU`,
-        });
-        const CCTStatesArray: Array<string> = data?.CCTChartData.map(
-          (machine: dataParam) => {
-            if (data) {
-              return machine.state;
-            } else return "";
-          }
-        );
-        const CCTNumbersArray: Array<number> = data?.CCTChartData.map(
+        const CCTNumbersArray: Array<number> = data?.CctChartData.map(
           (machine: dataParam) => {
             if (data) {
               return machine.number;
@@ -158,14 +165,14 @@ const DoughnutCharts = (props: IProps) => {
           dataNumberArray: CCTNumbersArray,
           chartTitle: `CCT`,
         });
-        const YadbarStatesArray: Array<string> = data?.YadbarChartData.map(
+        const YadbarStatesArray: Array<string> = data?.UvtChartData.map(
           (machine: dataParam) => {
             if (data) {
               return machine.state;
             } else return "";
           }
         );
-        const YadbarNumbersArray: Array<number> = data?.YadbarChartData.map(
+        const YadbarNumbersArray: Array<number> = data?.UvtChartData.map(
           (machine: dataParam) => {
             if (data) {
               return machine.number;
@@ -178,7 +185,7 @@ const DoughnutCharts = (props: IProps) => {
           chartTitle: `ידב"רים`,
         });
         const SoftwareDistributionServerStatesArray: Array<string> =
-          data?.SoftwareDistributionServerChartData.map(
+          data?.SdsChartData.map(
             (machine: dataParam) => {
               if (data) {
                 return machine.state;
@@ -186,13 +193,14 @@ const DoughnutCharts = (props: IProps) => {
             }
           );
         const SoftwareDistributionServerNumbersArray: Array<number> =
-          data?.SoftwareDistributionServerChartData.map(
+          data?.SdsChartData.map(
             (machine: dataParam) => {
               if (data) {
                 return machine.number;
               } else return 0;
             }
           );
+          console.log(SoftwareDistributionServerDataArrays)
         setSoftwareDistributionServerDataStateArray({
           dataStateArray: SoftwareDistributionServerStatesArray,
           dataNumberArray: SoftwareDistributionServerNumbersArray,
@@ -237,6 +245,7 @@ const DoughnutCharts = (props: IProps) => {
   if (isError) return <>"An error has occurred: " {errorText}</>;
 
   const donutsCharts: any = {
+    
     RCGW: (
       <DoughuntChart
         labels={RcgwDataStateArray}

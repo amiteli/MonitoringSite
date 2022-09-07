@@ -8,6 +8,7 @@ import DynamicSection from "../components/DynamicSection";
 import NetWorkChart from "../components/NetworkChart";
 import Stack from "@mui/material/Stack";
 import { useQuery } from "react-query";
+import MakmashKl from "../components/MakmashKl";
 
 type Props = { selectedUnit: string };
 
@@ -140,7 +141,7 @@ const StatisticsGraphs = (props: Props) => {
             >
               כשירות מקמ"שים כ"ל
             </Typography>
-            <ItemNetwork>כשירות מקמ"שים כ"ל</ItemNetwork>
+            <ItemNetwork><MakmashKl selectedUnit={selectedUnit}/></ItemNetwork>
           </Grid>
         </Grid>
       </Grid>

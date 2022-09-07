@@ -295,12 +295,11 @@ export default function MiniDrawer() {
             path="/login-page"
             element={
               <Dialog fullScreen open={true}>
-                  <SignIn
-                    setUsername={setUsername}
-                    setIsAdmin={setIsAdmin}
-                    setUnitAccess={setUnitAccess}
-                    setAccessToken={setAccessToken}
-                  />
+                <SignIn
+                  setUsername={setUsername}
+                  setIsAdmin={setIsAdmin}
+                  setUnitAccess={setUnitAccess}
+                />
               </Dialog>
             }
           />

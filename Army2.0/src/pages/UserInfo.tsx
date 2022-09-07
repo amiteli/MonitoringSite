@@ -24,6 +24,8 @@ import Radio from "../images/imagesUserInfo/Radio.png";
 import Chativa from "../images/imagesUserInfo/Chativa.png";
 import Platformot from "../images/imagesUserInfo/Platformot.png";
 import Divider from "@mui/material/Divider";
+import { useCookies } from "react-cookie";
+
 interface IProps {}
 
 const cardHeadersTitle: Array<string> = [
@@ -136,7 +138,7 @@ const FlipComponent = ({ index }: { index: number }) => {
               </Box>
             </CardContent>
           </Card>
-          <IconButton onClick={handleClick} sx={{mt:6,mb:5}}>
+          <IconButton onClick={handleClick} sx={{ mt: 6, mb: 5 }}>
             <ArrowBackIosOutlinedIcon />
           </IconButton>
         </div>
@@ -145,12 +147,6 @@ const FlipComponent = ({ index }: { index: number }) => {
   );
 };
 const UserInfo = (props: IProps) => {
-
-  const [isFlipped, setIsFlipped] = useState(false);
-
-
-
-
   return (
     <>
       <Box sx={{ width: "100%" }}>

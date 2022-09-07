@@ -13,6 +13,7 @@ import "../components/style/StylePureTable.css";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setData } from "../redux/filterTable";
+import { Stack } from "react-bootstrap";
 
 type RadioParams = {
   שם?: string;
@@ -87,7 +88,7 @@ const PureTable = (props: IProps) => {
   const [pageSize, setPageSize] = useState<number>(25);
 
   const editRows = rows.map((row:any) =>
-    Object.assign(row, { id: row["deviceId"] })
+    Object.assign(row, { id: row["מזהה"] })
   );
   const onFilterModelChange = (newFilterModel: any) => {
     if (change) {
@@ -138,6 +139,11 @@ const PureTable = (props: IProps) => {
         disableSelectionOnClick
         components={{
           Toolbar: CustomToolbar,
+          NoRowsOverlay: () => (
+            <Stack>
+              טוען...
+            </Stack>
+          ),
         }}
         componentsProps={{ columnsPanel: {} }}
         sx={{
