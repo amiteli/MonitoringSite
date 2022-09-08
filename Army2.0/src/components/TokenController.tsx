@@ -1,4 +1,5 @@
-import { useState } from "react";
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 export function getJwtToken() {
   return sessionStorage.getItem("jwt");
@@ -44,9 +45,7 @@ export const fetchData = async (api: string): Promise<any> => {
     });
     if (!res.ok) {
       if (res.status == 401) {
-        const newToken = fetchAccessToken();
-        console.log(newToken)
-        setJwtToken(newToken);
+        fetchAccessToken().then((val) => setJwtToken(val.access));
 
         throw new Error("Problem fetching data, Retrying...");
       } else {
@@ -56,6 +55,16 @@ export const fetchData = async (api: string): Promise<any> => {
         throw new Error("Problem fetching data");
       }
     }
+    // const navigate = useNavigate();
+    const accessTokenDate = jwt_decode(getJwtToken()!).exp*1000
+    const currentDate = new Date().getTime()
+    if (accessTokenDate - 1000 > currentDate) {
+      fetchAccessToken().then((val) => setJwtToken(val.access));
+    }
+    // const refreshTokenDate = jwt_decode(getRefreshToken()!).exp*1000
+    // if(refreshTokenDate - 1000 < currentDate) {
+    //   navigate("/login-page");
+    // }
     return res.json();
   } catch (err) {
     console.log(err);

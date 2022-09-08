@@ -18,7 +18,7 @@ import HeaderInfo from "./HeaderInfo";
 import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { setJwtToken, setRefreshToken } from "./TokenController";
-
+import logo from "../images/logo/logo.png";
 
 interface IProps {
   HeaderData: HeaderData;
@@ -32,8 +32,6 @@ type HeaderData = {
 };
 
 const settings = ["פרופיל", "חשבון", "Dashboard", "יציאה"];
-
-
 
 const ResponsiveAppBar = (props: IProps) => {
   const navigate = useNavigate();
@@ -50,11 +48,10 @@ const ResponsiveAppBar = (props: IProps) => {
   };
 
   const handleCloseUserMenu = (setting: string) => {
-    
-    if (setting=="יציאה") {
-      setJwtToken('')
-      setRefreshToken('')
-      navigate('/login-page');
+    if (setting == "יציאה") {
+      setJwtToken("");
+      setRefreshToken("");
+      navigate("/login-page");
     }
     setAnchorElUser(null);
   };
@@ -63,8 +60,17 @@ const ResponsiveAppBar = (props: IProps) => {
     <Container maxWidth={false}>
       <Toolbar disableGutters>
         <Box sx={{ flexGrow: 2 }}>
-          {/* add relevant icons right here */}
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Avatar
+            sx={{
+              m: 1,
+              bgcolor: "#2e3b55",
+              height: 50,
+              width: 50,
+              border: "2px #F0BC5F solid",
+            }}
+          >
+            <img src={logo} height={50} alt="logo" style={{ marginTop: 4 }} />
+          </Avatar>
         </Box>
 
         {Object.entries(HeaderData).map(([key, value]) => (
@@ -119,7 +125,10 @@ const ResponsiveAppBar = (props: IProps) => {
             onClose={handleCloseUserMenu}
           >
             {settings.map((setting) => (
-              <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
+              <MenuItem
+                key={setting}
+                onClick={() => handleCloseUserMenu(setting)}
+              >
                 <Typography textAlign="center">{setting}</Typography>
               </MenuItem>
             ))}

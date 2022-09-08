@@ -1,29 +1,18 @@
 import {
   Box,
-  Button,
   Grid,
-  Paper,
-  Stack,
   Typography,
   Tab,
   Tabs,
-  Switch,
 } from "@mui/material";
 import React from "react";
 import {
-  BrowserRouter,
-  Link,
-  Navigate,
-  Route,
-  Routes,
   useNavigate,
 } from "react-router-dom";
 import { ReactQueryDevtools } from "react-query/devtools";
 import MakmashTable from "../components/MakmashTable";
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import PageHeader from "../components/PageHeader";
-import InfoText from "../components/InfonText";
 
 interface IProps {
   // username: string;
@@ -144,9 +133,6 @@ const DevicesTablePage = (props: IProps) => {
     navigate(paths[newValue]);
   };
 
-  const handleClick = (): void => {
-    navigate("/show-by-page");
-  };
   const tabsPanelStyle = useStyles();
   return (
     <>
@@ -154,12 +140,6 @@ const DevicesTablePage = (props: IProps) => {
         <Grid item xs={12}>
           <ThemeProvider theme={theme}>
             <Box>
-              {/* <PageHeader
-                  // username={username}
-                  // isAdmin={isAdmin}
-                  selectedUnit={selectedUnit}
-                  // accessToken={accessToken}
-                /> */}
               <Box
                 sx={{
                   border: "1px solid #e0e0e0",

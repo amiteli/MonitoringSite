@@ -1,4 +1,4 @@
-import { Box, Checkbox, Tooltip } from "@mui/material";
+import { Box, Checkbox, Tooltip, Typography } from "@mui/material";
 import {
   DataGrid,
   GridToolbarContainer,
@@ -13,8 +13,7 @@ import "../components/style/StylePureTable.css";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setData } from "../redux/filterTable";
-import { Stack } from "react-bootstrap";
-
+import CircularProgress from "@mui/material/CircularProgress";
 type RadioParams = {
   שם?: string;
   ["שם משפחה"]?: string;
@@ -87,7 +86,7 @@ const PureTable = (props: IProps) => {
   const [change, setChange] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(25);
 
-  const editRows = rows.map((row:any) =>
+  const editRows = rows.map((row: any) =>
     Object.assign(row, { id: row["מזהה"] })
   );
   const onFilterModelChange = (newFilterModel: any) => {
@@ -140,9 +139,15 @@ const PureTable = (props: IProps) => {
         components={{
           Toolbar: CustomToolbar,
           NoRowsOverlay: () => (
-            <Stack>
-              טוען...
-            </Stack>
+            <>
+            <Box display={"flex"} justifyContent={"center"} marginTop={25}>
+              <CircularProgress sx={{m:"0 auto"}}/>        
+            </Box>
+            <Box display={"flex"} justifyContent={"center"} marginTop={5}>
+              <Typography>בטעינה...</Typography>  
+            </Box>
+            </>
+            
           ),
         }}
         componentsProps={{ columnsPanel: {} }}
