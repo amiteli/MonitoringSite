@@ -57,7 +57,7 @@ const HeaderData = {
   userName: "עמי ותמי",
   Permissions: "בית המכשפה",
   lastLogIn: "14:24 - 01/06/2022",
-  pakalMonitored: "b1g d",
+  pakalMonitored: "Amit The King",
 };
 
 const sideBarMenuList = [

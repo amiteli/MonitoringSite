@@ -89,7 +89,6 @@ const DoughnutCharts = (props: IProps) => {
     fetchChartsData,
     {
       onSuccess: (data) => {
-        console.log(data)
         const statesArray: Array<string> = data?.RcgwChartData.map(
           (machine: dataParam) => {
             if (data) {

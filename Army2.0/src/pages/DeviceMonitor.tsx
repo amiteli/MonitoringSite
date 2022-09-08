@@ -1,14 +1,6 @@
-import {
-  Box,
-  Grid,
-  Typography,
-  Tab,
-  Tabs,
-} from "@mui/material";
+import { Box, Grid, Typography, Tab, Tabs } from "@mui/material";
 import React from "react";
-import {
-  useNavigate,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ReactQueryDevtools } from "react-query/devtools";
 import MakmashTable from "../components/MakmashTable";
 import { makeStyles } from "@mui/styles";
@@ -99,9 +91,9 @@ function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
+          <Box sx={{ p: 3 }}>
+            <Typography component={"span"}>{children}</Typography>
+          </Box>
       )}
     </div>
   );
@@ -175,13 +167,15 @@ const DevicesTablePage = (props: IProps) => {
                 {deviceTableNameList &&
                   deviceTableNameList.map((deviceName, index) => {
                     return (
-                      <TabPanel value={value} index={index}>
-                        <MakmashTable
-                          selectedUnit={selectedUnit}
-                          table={deviceName}
-                          headerName={deviceHeaderNameList[value]}
-                        />
-                      </TabPanel>
+                      <React.Fragment key={index}>
+                        <TabPanel value={value} index={index}>
+                          <MakmashTable
+                            selectedUnit={selectedUnit}
+                            table={deviceName}
+                            headerName={deviceHeaderNameList[value]}
+                          />
+                        </TabPanel>
+                      </React.Fragment>
                     );
                   })}
               </Box>

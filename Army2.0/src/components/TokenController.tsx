@@ -1,6 +1,5 @@
 import jwt_decode from "jwt-decode";
-import { useNavigate } from "react-router-dom";
-
+import { Navigate, useNavigate } from "react-router-dom";
 export function getJwtToken() {
   return sessionStorage.getItem("jwt");
 }
@@ -36,9 +35,13 @@ export const fetchAccessToken = async (): Promise<any> => {
   return res.json();
 };
 
+
+function signIn(navigate: any) {
+  navigate("/login-page");
+}
 // fetching data
 
-export const fetchData = async (api: string): Promise<any> => {
+export const fetchData = async (api: string, navigate: any): Promise<any> => {
   try {
     const res = await fetch(`${import.meta.env.VITE_SERVER_URL}${api}`, {
       headers: { authorization: "Bearer " + getJwtToken() },
@@ -55,16 +58,19 @@ export const fetchData = async (api: string): Promise<any> => {
         throw new Error("Problem fetching data");
       }
     }
-    // const navigate = useNavigate();
-    const accessTokenDate = jwt_decode(getJwtToken()!).exp*1000
-    const currentDate = new Date().getTime()
+
+    const currentDate = new Date().getTime();
+    const refreshTokenDate = jwt_decode(getRefreshToken()!).exp * 1000;
+    if (refreshTokenDate < currentDate) {
+      // <Navigate to={"/login-page"}/>
+      signIn(navigate);
+    }
+
+    const accessTokenDate = jwt_decode(getJwtToken()!).exp * 1000;
     if (accessTokenDate - 1000 > currentDate) {
       fetchAccessToken().then((val) => setJwtToken(val.access));
     }
-    // const refreshTokenDate = jwt_decode(getRefreshToken()!).exp*1000
-    // if(refreshTokenDate - 1000 < currentDate) {
-    //   navigate("/login-page");
-    // }
+
     return res.json();
   } catch (err) {
     console.log(err);

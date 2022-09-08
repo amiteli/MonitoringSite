@@ -21,9 +21,16 @@ import { FormControl } from "react-bootstrap";
 import { FormHelperText, Paper, IconButton } from "@mui/material";
 import Particles from "react-tsparticles";
 import particlesConfig from "../config/configParticles";
-import  logo  from "../images/logo/logo.png"
-import {getJwtToken, setJwtToken, getRefreshToken, setRefreshToken} from './TokenController'
- 
+import logo from "../images/logo/logo.png";
+import MaziLogo from "../images/companies/Mazi.png";
+import HatalLogo from "../images/companies/Hatal.png";
+import {
+  getJwtToken,
+  setJwtToken,
+  getRefreshToken,
+  setRefreshToken,
+} from "./TokenController";
+
 interface IProps {
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -53,8 +60,7 @@ const cacheRtl = createCache({
   stylisPlugins: [rtlPlugin],
 });
 
-const SignIn = (props: IProps) => 
-{
+const SignIn = (props: IProps) => {
   // const [cookies, setCookie, removeCookie] = useCookies(["access", "refresh"]);
   const [changeUser, setChangeUser] = React.useState(null);
   const [changePass, setChangePass] = React.useState(null);
@@ -68,7 +74,7 @@ const SignIn = (props: IProps) =>
   const [passwordHelperText, setPasswordHelperText] = React.useState<
     string | undefined
   >(" ");
-// console.log(getJwtToken())
+  // console.log(getJwtToken())
   const navigate = useNavigate();
   const SendLoginRequest = async (
     username: string,
@@ -85,16 +91,20 @@ const SignIn = (props: IProps) =>
       setUsername(res.data.username);
       setIsAdmin(res.data.isAdmin);
       setUnitAccess(res.data.unitAccess);
-      setJwtToken(res.data.access)
-      setRefreshToken(res.data.refresh)
+      setJwtToken(res.data.access);
+      setRefreshToken(res.data.refresh);
       // setCookie("access", res.data.access);
       // setCookie("refresh", res.data.refresh);
 
-      
-
       navigate("/device-monitor");
     } catch (err) {
-      setPasswordHelperText("שם המשתמש או הסיסמה שגויים");
+      if (err instanceof Error) {
+        {
+          err.message
+            ? setPasswordHelperText("אין חיבור לאינטרנט")
+            : setPasswordHelperText("שם המשתמש או הסיסמה שגויים");
+        }
+      }
     }
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -132,16 +142,50 @@ const SignIn = (props: IProps) =>
                   pt: "28%",
                 }}
               >
-                <Avatar sx={{ m: 1, bgcolor: "#2e3b55",height:70, width:70, border:"4px #F0BC5F solid" }} >
-                    <img src={logo} height={70} alt="logo" style={{marginTop:5}}/>
-                </Avatar>
+                <Box display={"flex"}>
+                  <Avatar
+                    sx={{
+                      m: 1,
+                      height: 70,
+                      width: 70,
+                      border: "1px black solid",
+                    }}
+                  >
+                    <img src={logo} height={70} alt="logo" />
+                  </Avatar>
+                  <Avatar
+                    sx={{
+                      m: 1,
+                      bgcolor: "#2e3b55",
+                      height: 70,
+                      width: 70,
+                    }}
+                  >
+                    <img src={HatalLogo} height={70} alt="logo" />
+                  </Avatar>
+                  <Avatar
+                    sx={{
+                      m: 1,
+                      bgcolor: "#2e3b55",
+                      height: 70,
+                      width: 70,
+                    }}
+                  >
+                    <img
+                      src={MaziLogo}
+                      height={70}
+                      alt="logo"
+                    />
+                  </Avatar>
+                </Box>
+
                 <Typography
                   component="h1"
                   variant="h5"
                   fontWeight={"bold"}
                   color={"#2e3b55"}
                 >
-                  התחברות לינשוף
+                  כניסה למערכת
                 </Typography>
                 <Box
                   component="form"

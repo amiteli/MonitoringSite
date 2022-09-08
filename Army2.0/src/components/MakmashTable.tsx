@@ -8,6 +8,7 @@ import { useQuery, UseQueryResult } from "react-query";
 import { useSelector } from "react-redux";
 import PureComponent from "./PureTable";
 import { fetchData, getJwtToken, getRefreshToken, setJwtToken } from "../components/TokenController";
+import { useNavigate } from "react-router-dom";
 
 
 type IProps = {
@@ -109,12 +110,12 @@ const MakmashTable = (props: IProps) => {
       "LOCATION",
     ]
   }
-  
+  const navigate = useNavigate()
   const { selectedUnit, table, headerName} = props;
   const [tableData, setTableData] = useState<RadioParams[]>([]);
   const [tableHeader, setTableHeader] = useState<string[]>([]);
 
-  const fetchMakmash = () => fetchData('/RoipMonitoring/Units/matzov')
+  const fetchMakmash = () => fetchData('/RoipMonitoring/Units/matzov', navigate)
 
   const {
     data,

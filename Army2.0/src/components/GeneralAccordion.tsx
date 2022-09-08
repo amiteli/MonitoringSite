@@ -20,6 +20,8 @@ import { Box, fontWeight } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import { styled } from "@mui/material/styles";
+import { fetchData } from "./TokenController";
+import { useNavigate } from "react-router-dom";
 
 type IProps = {
   selectedUnit: string;
@@ -70,22 +72,10 @@ const GeneralAccordion = (props: IProps) => {
   const [stations, setStations] = useState<Array<oneBlock>>([]);
   const [amount, setAmount] = useState<number[]>([]);
   const [open, setOpen] = useState(false);
-
-  const fetchUnitDevicesData = async (): Promise<GeneralDataBlocks> => {
-    const res = await fetch(
-      `${
-        import.meta.env.VITE_SERVER_URL
-      }/api/charts/rcgw-chart-data/${selectedUnit}`
-    );
-    if (!res.ok) {
-      console.log("error at fetching headerList");
-      setErrorText(
-        `status code: ${res.status} status text: ${res.statusText} url: ${res.url}`
-      );
-
-      throw new Error("Problem fetching data at fetchUnitDevicesData function");
-    }
-    return res.json();
+  const navigate = useNavigate();
+  
+  const fetchUnitDevicesData = async (): Promise<any> => {
+    fetchData("/RoipMonitoring/Units/matzov/Rooms", navigate);
   };
 
   const { isLoading, isError } = useQuery<GeneralDataBlocks>(
