@@ -25,7 +25,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setData } from "../redux/filterTable";
 import { Box } from "@mui/system";
-
+import { fetchData } from "./TokenController";
 
 const theme = createTheme({
   direction: "rtl",
@@ -47,9 +47,9 @@ type HeaderParam = {
   devices: Array<DetailParam>;
 };
 type DetailParam = {
-  deviceId: string;
-  location: string;
-  status: string;
+  מזהה: string;
+  מיקום: string;
+  סטטוס: string;
 };
 
 const StatisticsAcordion = (props: IProps) => {
@@ -61,7 +61,8 @@ const StatisticsAcordion = (props: IProps) => {
 
   const selectColor = (number: number) => {
     if (number < 50) return "linear-gradient(to right, #ff416c, #ff4b2b)";
-    else if (number >= 50 && number <= 85) return "linear-gradient(to right, #f7971e, #ffd200)";
+    else if (number >= 50 && number <= 85)
+      return "linear-gradient(to right, #f7971e, #ffd200)";
     else return "linear-gradient(to right, #56ab2f, #a8e063)";
   };
   const precentsBar = (precents: number) => {
@@ -75,7 +76,7 @@ const StatisticsAcordion = (props: IProps) => {
           width: "20%",
           height: 26,
           borderRadius: 3,
-          marginLeft:5
+          marginLeft: 5,
         }}
       >
         <Grid
@@ -101,21 +102,8 @@ const StatisticsAcordion = (props: IProps) => {
       </Grid>
     );
   };
-  const fetchNetworkData = async (): Promise<any> => {
-    const res = await fetch(
-      `${
-        import.meta.env.VITE_SERVER_URL
-      }/api/charts/rcgw-chart-data/${selectedUnit}`
-    );
-    if (!res.ok) {
-      console.log("error at fetching headerList");
-      setErrorText(
-        `status code: ${res.status} status text: ${res.statusText} url: ${res.url}`
-      );
-
-      throw new Error("Problem fetching data at fetchUnitDevicesData function");
-    }
-    return res.json();
+  const fetchNetworkData = () => {
+    fetchData("/RoipMonitoring/Units/matzov/networkStatistics", navigate);
   };
 
   const { data, isLoading, isError } = useQuery<any>(
@@ -123,13 +111,14 @@ const StatisticsAcordion = (props: IProps) => {
     fetchNetworkData,
     {
       onSuccess: (data) => {
-        let dataNetwork = data.NetworkChartData;
+        console.log(data);
+        let dataNetwork = data;
         let tempArr: HeaderParam[] = [];
         dataNetwork.map((element: any, index: number) => {
           let obj: HeaderParam = {
             network: element.network,
             OK: element.statusNetwork.OK,
-            Fail: element.statusNetwork.Fail,
+            Fail: element.statusNetwork.FAILED,
             devicesLength: element.devices.length,
             devices: element.devices.map(
               (device: DetailParam, index: number) => {
@@ -242,13 +231,12 @@ const StatisticsAcordion = (props: IProps) => {
                         {header.network}
                       </Typography>
                     </Grid>
-                    <Tooltip title={
-                      `תקינים: ${header.OK}\n\n
-                      תקולים:  ${header.Fail}\n`
-                    }>
-                    {precentsBar(precents)}
+                    <Tooltip
+                      title={`תקינים: ${header.OK}\n\n
+                      תקולים:  ${header.Fail}\n`}
+                    >
+                      {precentsBar(precents)}
                     </Tooltip>
-                    
                   </Grid>
                 </AccordionSummary>
                 <AccordionDetails
@@ -272,7 +260,7 @@ const StatisticsAcordion = (props: IProps) => {
                     ) : (
                       header.devices.map(
                         (device: DetailParam, index: number) => {
-                          if (device.status == "fail") {
+                          if (device["סטטוס"] == "FAILED") {
                             return (
                               <ListItem
                                 sx={{
@@ -281,7 +269,7 @@ const StatisticsAcordion = (props: IProps) => {
                                   fontWeight: "bold",
                                 }}
                               >
-                                {device.deviceId} - {device.location}
+                                {device["מזהה"]} - {device["מיקום"]}
                               </ListItem>
                             );
                           }
@@ -307,7 +295,7 @@ const StatisticsAcordion = (props: IProps) => {
                     ) : (
                       header.devices.map(
                         (device: DetailParam, index: number) => {
-                          if (device.status !== "fail") {
+                          if (device["סטטוס"] !== "FAILED") {
                             return (
                               <ListItem
                                 sx={{
@@ -316,7 +304,7 @@ const StatisticsAcordion = (props: IProps) => {
                                   fontWeight: "bold",
                                 }}
                               >
-                                {device.deviceId} - {device.location}
+                                {device["מזהה"]} - {device["מיקום"]}
                               </ListItem>
                             );
                           }
