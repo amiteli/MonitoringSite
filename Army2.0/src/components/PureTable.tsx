@@ -52,9 +52,6 @@ const ColumnTypeDecider = (title: string) => {
   else return "string";
 };
 
-const ShowData = (data: any) => {
-  console.log(data);
-};
 let count = 1;
 
 function CustomToolbar() {

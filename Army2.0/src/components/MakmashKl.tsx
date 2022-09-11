@@ -13,14 +13,16 @@ import { useQuery } from "react-query";
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import rtlPlugin from "stylis-plugin-rtl";
+import { useNavigate } from "react-router-dom";
+import { fetchData } from "./TokenController";
 
 type IProps = {
   selectedUnit: string;
 };
 type oneMakmah = {
-  deviceId: string;
-  location: string;
-  status: string;
+  "מזהה": string;
+  "מיקום": string;
+  "סטטוס": string;
 };
 const theme = createTheme({
   direction: "rtl",
@@ -36,30 +38,17 @@ const MakmashKl = (props: IProps) => {
   const [dataMakmashKl, setDataMakmashKl] = useState<Array<oneMakmah>>([]);
   const [dataMakmash, setDataMakmash] = useState<Array<oneMakmah>>([]);
   const [value, setValue] = useState<string[]>();
-
-  const fetchNetworkData = async (): Promise<any> => {
-    const res = await fetch(
-      `${
-        import.meta.env.VITE_SERVER_URL
-      }/api/charts/rcgw-chart-data/${selectedUnit}`
-    );
-    if (!res.ok) {
-      console.log("error at fetching headerList");
-      setErrorText(
-        `status code: ${res.status} status text: ${res.statusText} url: ${res.url}`
-      );
-
-      throw new Error("Problem fetching data at fetchUnitDevicesData function");
-    }
-    return res.json();
-  };
+  const navigate = useNavigate();
+  const fetchMakmashKL = () =>
+    fetchData("/RoipMonitoring/Units/matzov/KLstatistics", navigate);
 
   const { data, isLoading, isError } = useQuery<any>(
     "MakmashKl",
-    fetchNetworkData,
+    fetchMakmashKL,
     {
       onSuccess: (data) => {
-        setDataMakmash(data.MakmashKl);
+        setDataMakmash(data)
+        console.log(dataMakmash)
       },
     }
   );
@@ -69,12 +58,12 @@ const MakmashKl = (props: IProps) => {
   if (isError) return <>"An error has occurred: " {errorText}</>;
   const makmashArr: string[] = [];
   dataMakmash.map((makmash: oneMakmah) => {
-    makmashArr.push(makmash.location);
+    makmashArr.push(makmash["מיקום"]);
   });
   const handleChange = (value: string[]) => {
     let arr: oneMakmah[] = [];
     dataMakmash.map((makmash: oneMakmah) => {
-      if (value.includes(makmash.location)) {
+      if (value.includes(makmash["מיקום"])) {
         arr.push(makmash);
       }
     });
@@ -101,7 +90,14 @@ const MakmashKl = (props: IProps) => {
             />
           </ThemeProvider>
         </CacheProvider>
-        <Box sx={{ display: "flex", justifyContent: "space-between",mr:3,ml:3 }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            mr: 3,
+            ml: 3,
+          }}
+        >
           <Typography variant="subtitle2" sx={{ display: "inline", p: 1 }}>
             מזהה
           </Typography>
@@ -109,7 +105,7 @@ const MakmashKl = (props: IProps) => {
             מיקום
           </Typography>
           <Typography variant="subtitle2" sx={{ display: "inline", p: 1 }}>
-            מצב
+            סטטוס
           </Typography>
         </Box>
       </Box>
@@ -131,7 +127,7 @@ const MakmashKl = (props: IProps) => {
         <List>
           {(dataMakmashKl.length == 0 ? dataMakmash : dataMakmashKl).map(
             (oneMakmash: oneMakmah) => {
-              return oneMakmash.status == "לא תקין" ? (
+              return oneMakmash["סטטוס"] == "FAIL" ? (
                 <ListItem
                   sx={{
                     color: "red",
@@ -140,13 +136,13 @@ const MakmashKl = (props: IProps) => {
                   }}
                 >
                   <Typography variant="subtitle2" color="inherit">
-                    {oneMakmash.deviceId}
+                    {oneMakmash["מזהה"]}
                   </Typography>
                   <Typography variant="subtitle2" color="inherit">
-                    {oneMakmash.location}
+                    {oneMakmash["מיקום"]}
                   </Typography>
                   <Typography variant="subtitle2" color="inherit">
-                    {oneMakmash.status}
+                    {oneMakmash["סטטוס"]}
                   </Typography>
                 </ListItem>
               ) : (
@@ -158,13 +154,13 @@ const MakmashKl = (props: IProps) => {
                   }}
                 >
                   <Typography variant="subtitle2" color="inherit">
-                    {oneMakmash.deviceId}
+                  {oneMakmash["מזהה"]}
                   </Typography>
                   <Typography variant="subtitle2" color="inherit">
-                    {oneMakmash.location}
+                  {oneMakmash["מיקום"]}
                   </Typography>
                   <Typography variant="subtitle2" color="inherit">
-                    {oneMakmash.status}
+                  {oneMakmash["סטטוס"]}
                   </Typography>
                 </ListItem>
               );

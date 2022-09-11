@@ -80,7 +80,6 @@ const DoughnutCharts = (props: IProps) => {
       );
       throw new Error("Problem fetching data");
     }
-    console.log(res)
     return res.json();
   };
 
@@ -128,7 +127,6 @@ const DoughnutCharts = (props: IProps) => {
         // const CCUStatesArray: Array<string> = data?.CcuChartData.map(
         //   (machine: dataParam) => {
         //     if (data) {
-        //       console.log(machine)
         //       return machine.state;
         //     } else return "";
         //   }
@@ -199,7 +197,6 @@ const DoughnutCharts = (props: IProps) => {
               } else return 0;
             }
           );
-          console.log(SoftwareDistributionServerDataArrays)
         setSoftwareDistributionServerDataStateArray({
           dataStateArray: SoftwareDistributionServerStatesArray,
           dataNumberArray: SoftwareDistributionServerNumbersArray,

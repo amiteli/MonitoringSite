@@ -70,7 +70,7 @@ export const fetchData = async (api: string, navigate: any): Promise<any> => {
     if (accessTokenDate - 1000 > currentDate) {
       fetchAccessToken().then((val) => setJwtToken(val.access));
     }
-
+    // console.log(res.json())
     return res.json();
   } catch (err) {
     console.log(err);

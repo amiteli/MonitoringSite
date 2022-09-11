@@ -2,13 +2,15 @@
 import React, { useState } from "react";
 import DoughuntCharts from "../components/DoughnutCharts";
 import { styled } from "@mui/material/styles";
-import { Box, Chip, Grid, Typography } from "@mui/material";
+import { Box, Chip, Divider, Grid, Tooltip, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import DynamicSection from "../components/DynamicSection";
 import NetWorkChart from "../components/NetworkChart";
 import Stack from "@mui/material/Stack";
 import { useQuery } from "react-query";
 import MakmashKl from "../components/MakmashKl";
+import { fetchData } from "../components/TokenController";
+import { useNavigate } from "react-router-dom";
 
 type Props = { selectedUnit: string };
 
@@ -37,8 +39,52 @@ const ItemLocal = styled(Paper)(({ theme }) => ({
   borderBottomRightRadius: 4,
   color: theme.palette.text.secondary,
 }));
+function chip(
+  name: string,
+  fail: number | string,
+  ok: number | string,
+  failText: string,
+  okText: string
+) {
+  let Fail = fail;
+  let OK = ok;
+  return (
+    <>
+      <Divider>{name}</Divider>
+      <Typography variant="subtitle2" color={"#FFB1C1"}>
+        {fail} {failText}
+      </Typography>
+      <Typography variant="subtitle2" color={"#A5DFDF"}>
+        {ok} {okText}
+      </Typography>
+    </>
+  );
+}
 
 const StatisticsGraphs = (props: Props) => {
+  const navigate = useNavigate();
+  const [okCCU, setOkCCU] = useState<number>(0);
+  const [failCCU, setFailCCU] = useState<number>(0);
+  const [okDeploy, setOkDeploy] = useState<string>("");
+  const [failDeploy, setFailDeploy] = useState<string>("");
+  const fetchSdsCcu = () =>
+    fetchData("/RoipMonitoring/Units/matzov/SdsCcuStatistics", navigate);
+
+  const { data, isLoading, isError } = useQuery<any>(
+    "SdsCcuData",
+    fetchSdsCcu,
+    {
+      onSuccess: (data) => {
+        setOkCCU(data["CCU"][0].number);
+        setFailCCU(data["CCU"][2].number);
+        setOkDeploy(data["SDS"])
+        if(okDeploy == ""){
+          setFailDeploy("אין תקינים") 
+        } 
+
+      },
+    }
+  );
   const { selectedUnit } = props;
   return (
     <>
@@ -69,15 +115,19 @@ const StatisticsGraphs = (props: Props) => {
               >
                 כשירות רכיבים
               </Typography>
-
               <Item>
                 <Stack
                   direction="row"
                   padding={1}
                   sx={{ display: "flex", justifyContent: "center" }}
                 >
-                  <Chip label="CCU" />
-                  <Chip label="Deploy" variant="outlined" />
+                  <Tooltip title={chip("CCU", failCCU, okCCU, "תקולים", "תקינים")}>
+                    <Chip label={"CCU"} />
+                  </Tooltip>
+                  <Tooltip title={chip("Deploy", "", "", failDeploy, okDeploy)}>
+                    <Chip label={"Deploy"} variant="outlined"/>
+                  </Tooltip>
+                  
                 </Stack>
                 <DoughuntCharts selectedUnit={selectedUnit} />
               </Item>
@@ -141,7 +191,9 @@ const StatisticsGraphs = (props: Props) => {
             >
               כשירות מקמ"שים כ"ל
             </Typography>
-            <ItemNetwork><MakmashKl selectedUnit={selectedUnit}/></ItemNetwork>
+            <ItemNetwork>
+              <MakmashKl selectedUnit={selectedUnit} />
+            </ItemNetwork>
           </Grid>
         </Grid>
       </Grid>

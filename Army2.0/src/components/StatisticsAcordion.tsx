@@ -59,6 +59,18 @@ const StatisticsAcordion = (props: IProps) => {
   const [headers, setHeaders] = useState<Array<HeaderParam>>([]);
   const [value, setValue] = useState<string[]>();
 
+  function tooltip(fail: number, ok: number) {
+    return (
+      <>
+        <Typography variant="subtitle2" color={"#FFB1C1"}>
+          {fail} תקולים
+        </Typography>
+        <Typography variant="subtitle2" color={"#A5DFDF"}>
+          {ok} תקינים
+        </Typography>
+      </>
+    );
+  }
   const selectColor = (number: number) => {
     if (number < 50) return "linear-gradient(to right, #ff416c, #ff4b2b)";
     else if (number >= 50 && number <= 85)
@@ -102,16 +114,14 @@ const StatisticsAcordion = (props: IProps) => {
       </Grid>
     );
   };
-  const fetchNetworkData = () => {
+  const fetchNetworkData = () =>
     fetchData("/RoipMonitoring/Units/matzov/networkStatistics", navigate);
-  };
 
   const { data, isLoading, isError } = useQuery<any>(
     "NetworkChartData",
     fetchNetworkData,
     {
       onSuccess: (data) => {
-        console.log(data);
         let dataNetwork = data;
         let tempArr: HeaderParam[] = [];
         dataNetwork.map((element: any, index: number) => {
@@ -231,11 +241,11 @@ const StatisticsAcordion = (props: IProps) => {
                         {header.network}
                       </Typography>
                     </Grid>
-                    <Tooltip
-                      title={`תקינים: ${header.OK}\n\n
-                      תקולים:  ${header.Fail}\n`}
-                    >
-                      {precentsBar(precents)}
+
+                    <Tooltip title={tooltip(header.Fail, header.OK)}>
+                      {header.devicesLength == 0
+                        ? precentsBar(0)
+                        : precentsBar(precents)}
                     </Tooltip>
                   </Grid>
                 </AccordionSummary>

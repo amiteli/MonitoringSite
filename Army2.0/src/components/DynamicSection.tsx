@@ -38,7 +38,6 @@ const DynamicSection = (props: IProps) => {
   const [stationsData, setStationsData] = useState<Array<dataParam>>([]);
 
   const fetchChartsData = async (): Promise<any> => {
-    console.log("fetchChartsData");
     const res = await fetch(
       `${
         import.meta.env.VITE_SERVER_URL

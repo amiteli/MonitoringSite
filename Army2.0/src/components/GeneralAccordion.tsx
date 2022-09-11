@@ -6,7 +6,6 @@ import {
   Dialog,
   Divider,
   IconButton,
-  Paper,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -26,32 +25,20 @@ import { useNavigate } from "react-router-dom";
 type IProps = {
   selectedUnit: string;
 };
-type oneDevice = {
-  device: string;
-  OK: number;
-  ERROR: number;
-  FAILED: number;
-};
 
 type oneBlock = {
-  id: number;
-  location: string;
-  type: string;
   devices: Array<oneDevice>;
-};
-
-type GeneralDataBlocks = {
-  WorkingStations: Array<oneBlock>;
-};
-
-type DevicePerems = {
+  deviceId: string;
+  name: string;
+  IP: string;
   location: string;
-  type: string;
-  device: string;
-  OK: number;
-  ERROR: number;
-  FAILED: number;
 };
+type oneDevice = {
+  OK: number;
+  Fail: number;
+  Error: number;
+};
+
 const MyButton = styled(Button)({
   border: "1px solid #2e3b55",
   borderRadius: 6,
@@ -73,35 +60,21 @@ const GeneralAccordion = (props: IProps) => {
   const [amount, setAmount] = useState<number[]>([]);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  
-  const fetchUnitDevicesData = async (): Promise<any> => {
+  let arr: number[] = [];
+  const fetchUnitDevicesData = () =>
     fetchData("/RoipMonitoring/Units/matzov/Rooms", navigate);
-  };
 
-  const { isLoading, isError } = useQuery<GeneralDataBlocks>(
+  const { data, isLoading, isError } = useQuery<any>(
     "FileData",
     fetchUnitDevicesData,
     {
-      onSuccess: (data) => {
-        console.log("GENERAL VIEW: ")
-        console.log(data)
-        let dataAmountOfStations = data.WorkingStations;
-        let tempArr: Array<string> = [];
-        let counterArr: Array<number> = [];
-        let index: number = 0,
-          c = 0;
-
-        for (let i = 0; i < dataAmountOfStations.length; i++) {
-          if (!tempArr.includes(dataAmountOfStations[i].type)) {
-            tempArr.push(dataAmountOfStations[i].type);
-            index++;
-            c = 0;
-          }
-          counterArr[index] = ++c;
+      onSuccess: (data: any) => {
+        setHeadersName(Object.keys(data));
+        setStations(Object.values(data));
+        for (let i = 0; i < stations.length; i++) {
+          arr.push(stations[i].length);
         }
-        setHeadersName(tempArr);
-        setAmount(counterArr);
-        setStations(data.WorkingStations);
+        setAmount(arr);
       },
     }
   );
@@ -149,13 +122,13 @@ const GeneralAccordion = (props: IProps) => {
                       fontWeight: "bold",
                     }}
                   >
-                    {amount[index + 1]} {header}
+                    {amount[index]} {header}
                   </Typography>
                   <Divider />
 
                   <Grid container direction="row">
                     {stations?.map((station, index) => {
-                      if (station.type === header) {
+                      // if (station.name === header) {
                         return (
                           <OneStation
                             key={index}
@@ -163,7 +136,7 @@ const GeneralAccordion = (props: IProps) => {
                             devices={station.devices}
                           />
                         );
-                      }
+                      // }
                     })}
                   </Grid>
                 </Box>
@@ -187,13 +160,13 @@ const GeneralAccordion = (props: IProps) => {
                 id={`panel-content ${index} header`}
               >
                 <Typography>
-                  {header} {<>({amount[index + 1]})</>}
+                  {header} {<>({amount[index]})</>}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <Grid container direction="row">
                   {stations?.map((station, index) => {
-                    if (station.type === header) {
+                    if (station.name === header) {
                       return (
                         <OneStation
                           key={index}

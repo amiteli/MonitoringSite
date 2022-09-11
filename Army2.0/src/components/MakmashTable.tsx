@@ -140,6 +140,7 @@ const MakmashTable = (props: IProps) => {
       }
       else {
         const sortData = data[table].map((machine: Other) => {
+          
           if (machine.state !== null) {
             return machine;
           }
