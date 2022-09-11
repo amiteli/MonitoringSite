@@ -16,7 +16,6 @@ type oneDevice = {
 
 const OneStation = (props: IProps) => {
   const { location, devices } = props;
-  
   return (
     <Grid item>
       <Box
